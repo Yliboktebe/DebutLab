@@ -109,8 +109,14 @@ export function createChessgroundBoard(opts: {
         const move = chess.move({ from, to, promotion });
         if (move) {
           currentFen = chess.fen();
-          ground.move(from as Key, to as Key);
-          syncBoard({ lastMove: [from, to] });
+          // Просто обновляем позицию и последний ход, НЕ вызываем syncBoard
+          // чтобы не перезаписать dests
+          ground.set({ 
+            fen: currentFen, 
+            lastMove: [from, to],
+            turnColor: whoMoves(),
+            check: chess.inCheck() ? whoMoves() : false
+          });
         }
       } catch (error) {
         console.error('Error playing UCI move:', error);
@@ -218,7 +224,8 @@ export function createChessgroundBoard(opts: {
       movable: {
         ...ground.state.movable,
         color: whoMoves(),
-        dests: opts.allowedMoves || computeDests(),
+        // НЕ перезаписываем dests здесь - они должны обновляться только через setAllowedMoves
+        // dests: opts.allowedMoves || computeDests(),
       },
       highlight: {
         ...ground.state.highlight,

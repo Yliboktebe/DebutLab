@@ -148,9 +148,10 @@ export function useStudyEngine(debut: Debut) {
     }
     
     // 3) ТОЛЬКО ТЕПЕРЬ — пересчитать стрелку и dests (на свежем FEN)
-    requestAnimationFrame(() => {
+    // Добавляем небольшую задержку, чтобы chessground успел обработать автоответ
+    setTimeout(() => {
       updateArrowAndDests(); // внутри: boardApi.showArrow(...); boardApi.setAllowedMoves(...)
-    });
+    }, 50); // 50ms должно быть достаточно
     
     return true; // доска оставит ход
   }, [state.currentBranch, updateArrowAndDests]);
