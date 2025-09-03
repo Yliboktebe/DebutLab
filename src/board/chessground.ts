@@ -86,7 +86,7 @@ export function createChessgroundBoard(opts: {
     },
     // НОВЫЕ МЕТОДЫ
     setAllowedMoves(dests: Map<string, string[]>) {
-      // берём текущее состояние movable и поверх подменяем ТОЛЬКО dests
+      // ЕДИНСТВЕННОЕ место, где меняем dests - сохраняем текущие события/цвет
       const m = ground.state.movable;
       ground.set({ movable: { ...m, dests } });
     },
@@ -101,6 +101,7 @@ export function createChessgroundBoard(opts: {
       ground.setAutoShapes(shapes);
     },
     playUci(uci: string) {
+      // применяем в локальном chess адаптера
       const from = uci.slice(0, 2);
       const to = uci.slice(2, 4);
       const promotion = uci.length > 4 ? uci[4] as any : undefined;
@@ -109,10 +110,10 @@ export function createChessgroundBoard(opts: {
         const move = chess.move({ from, to, promotion });
         if (move) {
           currentFen = chess.fen();
-          // Просто обновляем позицию и последний ход, НЕ вызываем syncBoard
-          // чтобы не перезаписать dests
-          ground.set({ 
-            fen: currentFen, 
+          
+          // ВАЖНО: тут НЕ трогаем movable/dests!
+          ground.set({
+            fen: currentFen,
             lastMove: [from, to],
             turnColor: whoMoves(),
             check: chess.inCheck() ? whoMoves() : false
@@ -160,13 +161,13 @@ export function createChessgroundBoard(opts: {
                 const accepted = opts.onTryMove?.(uci) ?? false;
                 
                 if (!accepted) {
-                  // ROLLBACK: вернуть FEN до попытки и убрать подсветки
+                  // ROLLBACK: вернуть FEN до попытки
                   ground.cancelMove();
                   ground.set({ fen: currentFen, lastMove: undefined });
                   return;
                 }
                 
-                // ПРИНЯТО: синхронизируем внутренний chess и fen адаптера
+                // ПРИНЯТО: фиксируем ход ученика в адаптере
                 try {
                   const move = chess.move({ from: orig, to: dest, promotion: 'q' });
                   if (move) {

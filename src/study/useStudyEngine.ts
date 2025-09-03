@@ -78,7 +78,7 @@ export function useStudyEngine(debut: Debut) {
     
     // Логи для верификации
     console.debug('FEN', studyEngine.getState().currentFen, 'expected', expectedUci);
-    console.debug('dests', Array.from(allowedMoves.entries()));
+    console.debug('[BOARD]', 'setAllowedMoves', Array.from(allowedMoves.entries()));
     
     console.log('useStudyEngine: Updated arrow and dests:', {
       expectedUci,
@@ -98,6 +98,12 @@ export function useStudyEngine(debut: Debut) {
     
     const result: ApplyResult = studyEngine.applyUserMove(uci);
     console.log('useStudyEngine: onMove result:', result);
+    
+    // Логи для отладки автоответа
+    console.debug('[ENGINE]', { 
+      exp: studyEngine.currentExpectedUci(), 
+      opp: result.opponentUci 
+    });
     
     if (!result.accepted) {
       // Ход отклонён - показываем сообщение об ошибке
@@ -147,11 +153,10 @@ export function useStudyEngine(debut: Debut) {
       }
     }
     
-    // 3) ТОЛЬКО ТЕПЕРЬ — пересчитать стрелку и dests (на свежем FEN)
-    // Добавляем небольшую задержку, чтобы chessground успел обработать автоответ
-    setTimeout(() => {
+    // 3) И ТОЛЬКО ПОТОМ — стрелка и dests (на СВЕЖЕМ FEN)
+    queueMicrotask(() => {            // или requestAnimationFrame
       updateArrowAndDests(); // внутри: boardApi.showArrow(...); boardApi.setAllowedMoves(...)
-    }, 50); // 50ms должно быть достаточно
+    });
     
     return true; // доска оставит ход
   }, [state.currentBranch, updateArrowAndDests]);
