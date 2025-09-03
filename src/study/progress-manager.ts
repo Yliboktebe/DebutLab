@@ -127,6 +127,64 @@ export class ProgressManager {
     }
     this.saveToStorage();
   }
+
+  // НОВЫЙ: получить ID следующей ветки для изучения
+  getNextBranchId(debutId: string, branches: any[], now = Date.now()): string {
+    const debutProgress = this.getDebutProgress(debutId);
+    
+    // 1. Собрать due ветки (status in ["Review","Relearn","Mastered"] и nextReviewAt <= now)
+    const dueBranches = branches.filter(branch => {
+      const progress = debutProgress[branch.id];
+      if (!progress) return false;
+      
+      return (progress.status === 'Review' || progress.status === 'Relearn' || progress.status === 'Mastered') &&
+             progress.nextReviewAt && progress.nextReviewAt <= now;
+    });
+    
+    if (dueBranches.length > 0) {
+      // Возвращаем первую due ветку
+      return dueBranches[0].id;
+    }
+    
+    // 2. Вернуть первую status="New" из type="main_line"
+    const newMainLineBranches = branches.filter(branch => {
+      const progress = debutProgress[branch.id];
+      return (!progress || progress.status === 'New') && branch.type === 'main_line';
+    });
+    
+    if (newMainLineBranches.length > 0) {
+      return newMainLineBranches[0].id;
+    }
+    
+    // 3. Иначе — первую status="New" из type="alternative"
+    const newAlternativeBranches = branches.filter(branch => {
+      const progress = debutProgress[branch.id];
+      return (!progress || progress.status === 'New') && branch.type === 'alternative';
+    });
+    
+    if (newAlternativeBranches.length > 0) {
+      return newAlternativeBranches[0].id;
+    }
+    
+    // 4. Fallback — любую Review с ближайшим dueAt
+    const reviewBranches = branches.filter(branch => {
+      const progress = debutProgress[branch.id];
+      return progress && progress.status === 'Review' && progress.nextReviewAt;
+    });
+    
+    if (reviewBranches.length > 0) {
+      // Сортируем по ближайшему dueAt
+      reviewBranches.sort((a, b) => {
+        const aProgress = debutProgress[a.id];
+        const bProgress = debutProgress[b.id];
+        return (aProgress?.nextReviewAt || 0) - (bProgress?.nextReviewAt || 0);
+      });
+      return reviewBranches[0].id;
+    }
+    
+    // Если ничего не найдено, возвращаем первую ветку
+    return branches[0]?.id || '';
+  }
 }
 
 export const progressManager = ProgressManager.getInstance();

@@ -48,6 +48,8 @@ export interface BranchProgress {
   nextReviewAt?: number;
   lastAttemptAt?: number;
   learnedMoves?: string[];
+  stage?: number; // SRS stage: 0, 1, 2, 3
+  completedAt?: number; // Timestamp when branch was completed
 }
 
 export type DebutProgress = Record<string, BranchProgress>;
@@ -67,4 +69,5 @@ export interface StudyState {
   currentStepIndex: number;
   errors: number;
   learnedMoves: Set<string>;
+  stage?: number; // Current SRS stage
 }

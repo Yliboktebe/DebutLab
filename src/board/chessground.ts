@@ -1,62 +1,132 @@
 import { Chess } from 'chess.js';
+// @ts-ignore
 import { Chessground } from '@lichess-org/chessground';
 
 // Определяем типы локально, используя правильные типы из пакета
 type Key = string;
-type DrawShape = { orig: Key; dest?: Key; brush?: string };
+type DrawShape = { orig: Key; dest: Key; brush?: string };
 
-// Пример: внешний «деревянный» контракт автоответа за чёрных.
-// Ключ — FEN позиции ПЕРЕД ходом чёрных, значение — SAN или пара from/to.
-type BlackReplyDict = Record<string, string | { from: Key; to: Key }>;
+  // ===== Публичный API адаптера =====
+  export interface ChessBoardApi {
+    // Нарисовать зелёную стрелку (можно массивом)
+    drawGreenArrow(from: Key, to: Key): void;
+    clearArrows(): void;
+    // Установить FEN извне
+    setFen(fen: string): void;
+    // Получить текущий FEN
+    getFen(): string;
+    // Повернуть доску
+    toggleOrientation(): void;
+    // НОВЫЙ: установить ориентацию и обновить movable.color
+    setOrientation(orientation: 'white' | 'black'): void;
+    // Принудительно перерисовать (например, после ресайза контейнера)
+    redraw(): void;
+    // Уничтожить (при размонтировании страницы/вкладки)
+    destroy(): void;
+    // НОВЫЕ МЕТОДЫ: обновление разрешенных ходов и стрелки
+    setAllowedMoves(dests: Map<string, string[]>): void;
+    showArrow(uciOrNull: string | null): void;
+    playUci(uci: string): void;
+  }
 
-// ===== Публичный API адаптера =====
 export function createChessgroundBoard(opts: {
   el: HTMLElement;
   orientation?: 'white' | 'black';
   initialFen?: string;                          // опционально: старт не с начальной позиции
-  blackReplies?: BlackReplyDict;                // автоответ чёрных по ветке дебюта (по FEN)
-  onUserMove?: (san: string, from: Key, to: Key) => void; // для аналитики/прогресса
+  onTryMove?: (uci: string) => boolean;         // НОВЫЙ: UI решает принять или отклонить ход
+  allowedMoves?: Map<string, string[]>;         // разрешенные ходы только из ветки
 }) {
   const chess = new Chess(opts.initialFen);
-  const ground = Chessground(opts.el, buildConfig() as any);
+  let currentFen = chess.fen();
+  const ground = Chessground(opts.el, buildConfig());
 
   // ——— Публичные методы ———
   return {
     // Нарисовать зелёную стрелку (можно массивом)
     drawGreenArrow(from: Key, to: Key) {
       const shapes: DrawShape[] = [{ orig: from, dest: to, brush: 'green' }];
-      (ground as any).setAutoShapes(shapes); // «авто-шэйпы» перерисовываются при апдейтах
+      ground.setAutoShapes(shapes); // «авто-шэйпы» перерисовываются при апдейтах
     },
     clearArrows() {
-      (ground as any).setAutoShapes([]);
+      ground.setAutoShapes([]);
     },
     // Установить FEN извне
     setFen(fen: string) {
       chess.load(fen);
+      currentFen = fen;
       syncBoard({ highlightLast: false }); // внешний импорт — без «последнего хода»
     },
     // Получить текущий FEN
     getFen(): string {
-      return (ground as any).getFen();
+      return currentFen;
     },
     // Повернуть доску
     toggleOrientation() {
-      (ground as any).toggleOrientation();
+      // TODO: реализовать поворот доски
+      console.log('toggleOrientation not implemented yet');
+    },
+    
+    // НОВЫЙ: установить ориентацию и обновить movable.color
+    setOrientation(orientation: 'white' | 'black') {
+      ground.set({
+        orientation,
+        movable: {
+          ...ground.state.movable,
+          color: orientation
+        }
+      });
     },
     // Принудительно перерисовать (например, после ресайза контейнера)
     redraw() {
-      (ground as any).redrawAll();
+      ground.redrawAll();
     },
     // Уничтожить (при размонтировании страницы/вкладки)
     destroy() {
-      (ground as any).destroy();
+      ground.destroy();
+    },
+    // НОВЫЕ МЕТОДЫ
+    setAllowedMoves(dests: Map<string, string[]>) {
+      ground.set({
+        movable: {
+          ...ground.state.movable,
+          dests: dests
+        }
+      });
+    },
+    showArrow(uciOrNull: string | null) {
+      if (!uciOrNull) {
+        ground.setAutoShapes([]);
+        return;
+      }
+      const from = uciOrNull.slice(0, 2);
+      const to = uciOrNull.slice(2, 4);
+      const shapes: DrawShape[] = [{ orig: from, dest: to, brush: 'green' }];
+      ground.setAutoShapes(shapes);
+    },
+    playUci(uci: string) {
+      const from = uci.slice(0, 2);
+      const to = uci.slice(2, 4);
+      const promotion = uci.length > 4 ? uci[4] as any : undefined;
+      
+      try {
+        const move = chess.move({ from, to, promotion });
+        if (move) {
+          currentFen = chess.fen();
+          ground.move(from as Key, to as Key);
+          syncBoard({ lastMove: [from, to] });
+        }
+      } catch (error) {
+        console.error('Error playing UCI move:', error);
+      }
     }
   };
 
   // ===== Реализация =====
 
   function buildConfig() {
-    return {
+    console.log('chessground: buildConfig called with allowedMoves:', opts.allowedMoves);
+    
+    const config = {
       // Базовое положение и ориентация
       fen: chess.fen(),                                     // Chessground умеет читать/писать FEN
       orientation: opts.orientation ?? 'white',
@@ -73,25 +143,40 @@ export function createChessgroundBoard(opts: {
       selectable: { enabled: true },                        // tap-tap
       draggable:  { enabled: true, autoDistance: true, showGhost: true },
 
-      // Легальные ходы и эвенты после хода
-      movable: {
-        color: whoMoves(),                                  // 'white' | 'black'
-        dests: computeDests(),                              // Map<from, string[]>
-        showDests: true,
-        rookCastle: true,
-        events: {
-          after: (orig: Key, dest: Key) => {
-            // Применяем ход в движке (с дефолт-превращением в ферзя)
-            const move = chess.move({ from: orig, to: dest, promotion: 'q' });
-            if (!move) return cancelAndResync();
-
-            opts.onUserMove?.(move.san, orig, dest);
-            syncBoard({ lastMove: [orig, dest] });
-
-            // === Автоответ чёрных по ветке дебюта ===
-            maybeAutoReplyAsBlack();
-          },
-        },
+                           // Легальные ходы и эвенты после хода
+        movable: {
+          color: opts.orientation ?? 'white',                  // НОВЫЙ: только сторона дебюта может ходить
+          free: false,                                         // НОВЫЙ: ограничиваем DnD только стороной ученика
+          dests: opts.allowedMoves || computeDests(),         // Используем разрешенные ходы из ветки или все легальные
+          showDests: true,
+          rookCastle: true,
+                                       events: {
+              after: (orig: Key, dest: Key) => {
+                // НОВЫЙ ПОДХОД: не применяем ход автоматически, спрашиваем UI
+                const uci = orig + dest;
+                const accepted = opts.onTryMove?.(uci) ?? false;
+                
+                if (!accepted) {
+                  // ROLLBACK: вернуть FEN до попытки и убрать подсветки
+                  ground.cancelMove();
+                  ground.set({ fen: currentFen, lastMove: undefined });
+                  return;
+                }
+                
+                // ПРИНЯТО: синхронизируем внутренний chess и fen адаптера
+                try {
+                  const move = chess.move({ from: orig, to: dest, promotion: 'q' });
+                  if (move) {
+                    currentFen = chess.fen();
+                    ground.set({ fen: currentFen, lastMove: [orig, dest] });
+                  }
+                } catch (error) {
+                  console.error('Error applying accepted move:', error);
+                  ground.cancelMove();
+                  ground.set({ fen: currentFen, lastMove: undefined });
+                }
+              },
+            },
       },
 
       // Премувы (клик или перетаскивание заранее)
@@ -117,36 +202,35 @@ export function createChessgroundBoard(opts: {
       // Глобальные события (произвольные хуки)
       events: {
         change: () => { /* каждый апдейт стейта */ },
-        move:   (from: Key, to: Key) => { /* каждый «переезд» фигуры */ },
-        select: (sq: Key) => { /* выбор клетки tap-tap */ },
+        move:   (_from: Key, _to: Key) => { /* каждый «переезд» фигуры */ },
+        select: (_sq: Key) => { /* выбор клетки tap-tap */ },
       }
-    } as const;
+    };
+    
+    console.log('chessground: Final config movable.dests:', config.movable.dests);
+    return config;
   }
 
   function syncBoard(opts2: { lastMove?: [Key, Key]; highlightLast?: boolean } = {}) {
     const last = opts2.lastMove ?? getLastMovePair();
-    (ground as any).set({
-      fen: chess.fen(),
+    ground.set({
+      fen: currentFen,
       turnColor: whoMoves(),
       check: chess.inCheck() ? whoMoves() : false,
       lastMove: last,
       movable: {
-        ...(ground as any).state.movable,
+        ...ground.state.movable,
         color: whoMoves(),
-        dests: computeDests(),
+        dests: opts.allowedMoves || computeDests(),
       },
       highlight: {
-        ...(ground as any).state.highlight,
+        ...ground.state.highlight,
         lastMove: opts2.highlightLast ?? true,
       },
     });
     // Если был премув — можно попытаться выполнить его
-    (ground as any).playPremove();
-  }
-
-  function cancelAndResync() {
-    (ground as any).cancelMove();
-    syncBoard();
+    // TODO: реализовать playPremove
+    // ground.playPremove();
   }
 
   function whoMoves() {
@@ -169,29 +253,5 @@ export function createChessgroundBoard(opts: {
     if (!h.length) return undefined;
     const last = h[h.length - 1];
     return [last.from, last.to];
-  }
-
-  // Автоответ чёрных: ищем подготовленный ответ по FEN и делаем ход в один тик
-  function maybeAutoReplyAsBlack() {
-    if (whoMoves() !== 'black') return;
-    const reply = opts.blackReplies?.[chess.fen()];
-    if (!reply) return;
-
-    // Разрешены оба формата: SAN или from/to
-    let applied = false;
-    if (typeof reply === 'string') {
-      const mv = chess.move(reply);     // SAN из словаря
-      if (mv) {
-        (ground as any).move(mv.from as Key, mv.to as Key);
-        applied = true;
-      }
-    } else {
-      const mv = chess.move({ from: reply.from, to: reply.to, promotion: 'q' });
-      if (mv) {
-        (ground as any).move(mv.from as Key, mv.to as Key);
-        applied = true;
-      }
-    }
-    if (applied) syncBoard({ lastMove: getLastMovePair() });
   }
 }

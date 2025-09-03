@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { contentLoader } from '@/content/loader';
 import { Debut } from '@/content/types';
-import { StudyView } from './StudyView';
+import StudyView from './StudyView';
 import './DebutPage.css';
 
 export function DebutPage() {
@@ -85,7 +85,7 @@ export function DebutPage() {
         </div>
       </div>
 
-      <StudyView debut={debut} />
+      <StudyView />
     </div>
   );
 }

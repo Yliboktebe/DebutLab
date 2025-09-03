@@ -1,281 +1,449 @@
 import { Chess } from 'chess.js';
-import { Debut, Branch, StudyMode, Side } from '@/content/types';
-import { getStartFen, isStudentTurn, getStudentMoveIndices } from './utils';
-import { progressManager } from './progress-manager';
-import { SRS } from './srs';
+import type { Branch, Debut } from '@/content/types';
+import { ProgressManager } from './progress-manager';
+import { nextReviewAt, type SrsStage } from './srs';
+
+export type StudyMode = 'GUIDED' | 'TEST' | 'REVIEW';
+
+export type ModeTransition = "GUIDED_TO_TEST" | "COMPLETED";
+
+export interface ApplyResult {
+  accepted: boolean;
+  errorMessage?: string;
+  opponentUci?: string | null;
+  branchFinished?: boolean;
+  modeTransition?: ModeTransition;
+}
 
 export interface StudyState {
   mode: StudyMode;
   currentDebut: Debut | null;
   currentBranch: Branch | null;
-  currentStepIndex: number;
+  studentIndex: number;           // НОВЫЙ: индекс следующего хода ученика в branch.ucis
   currentFen: string;
   errors: number;
   learnedMoves: Set<string>;
+  learningMode: 'withHints' | 'noHints';
+  currentComment: string;
+  showHint: boolean;
+  stage: number;                  // НОВЫЙ: текущий SRS stage
 }
 
 export class StudyEngine {
   private state: StudyState;
   private chess: Chess;
-  private onStateChange?: (state: StudyState) => void;
+  private progressManager: ProgressManager;
+  private stateChangeCallback?: () => void;
+  private studentStart: 0 | 1 = 0;  // НОВЫЙ: начальный индекс ученика (0 для белых, 1 для черных)
 
   constructor() {
     this.state = {
-      mode: 'IDLE',
+      mode: 'GUIDED',
       currentDebut: null,
       currentBranch: null,
-      currentStepIndex: 0,
-      currentFen: '',
+      studentIndex: 0,            // НОВЫЙ: будет установлен в start()
+      currentFen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
       errors: 0,
-      learnedMoves: new Set()
+      learnedMoves: new Set(),
+      learningMode: 'withHints',
+      currentComment: '',
+      showHint: false,
+      stage: 0                    // НОВЫЙ: начальный SRS stage
     };
     this.chess = new Chess();
+    this.progressManager = ProgressManager.getInstance(); // НОВЫЙ: используем singleton
   }
 
-  setStateChangeCallback(callback: (state: StudyState) => void): void {
-    this.onStateChange = callback;
-  }
-
-  private updateState(updates: Partial<StudyState>): void {
-    this.state = { ...this.state, ...updates };
-    this.onStateChange?.(this.state);
-  }
-
-  start(debut: Debut): void {
-    this.updateState({
-      mode: 'LOAD',
-      currentDebut: debut,
-      currentBranch: null,
-      currentStepIndex: 0,
-      errors: 0,
-      learnedMoves: new Set(progressManager.getLearnedMoves(debut.id))
-    });
-
-    this.pickNextBranch();
-  }
-
-  pickNextBranch(): void {
-    if (!this.state.currentDebut) return;
-
-    const { currentDebut } = this.state;
-    const dueBranches = progressManager.getDueBranches(currentDebut.id);
-    
-    // Priority: SRS-due > new branches (main_line first, then alternative)
-    let nextBranch: Branch | null = null;
-    
-    // First, check due branches
-    for (const branchId of dueBranches) {
-      const branch = currentDebut.branches.find(b => b.id === branchId);
-      if (branch) {
-        nextBranch = branch;
-        break;
-      }
-    }
-    
-    // If no due branches, pick new ones in order
-    if (!nextBranch) {
-      const newBranches = currentDebut.branches.filter(branch => 
-        progressManager.getBranchStatus(currentDebut.id, branch.id) === 'New'
-      );
-      
-      if (newBranches.length > 0) {
-        // Sort: main_line first, then alternative
-        nextBranch = newBranches.sort((a, b) => {
-          if (a.type === 'main_line' && b.type === 'alternative') return -1;
-          if (a.type === 'alternative' && b.type === 'main_line') return 1;
-          return 0;
-        })[0];
-      }
-    }
-
-    if (nextBranch) {
-      this.loadBranch(nextBranch);
-    } else {
-      // All branches completed
-      this.updateState({ mode: 'COMPLETE' });
-    }
-  }
-
-  private loadBranch(branch: Branch): void {
-    const startFen = getStartFen(branch.startFen);
-    this.chess = new Chess(startFen);
-    
-    this.updateState({
-      mode: 'GUIDED',
-      currentBranch: branch,
-      currentStepIndex: 0,
-      currentFen: startFen,
-      errors: 0
-    });
-  }
-
-  currentExpectedUci(): string | null {
-    const { currentBranch, currentStepIndex, currentDebut } = this.state;
-    
-    console.log('StudyEngine.currentExpectedUci:', {
-      currentBranch: currentBranch?.id,
-      currentStepIndex,
-      currentDebut: currentDebut?.id,
-      side: currentDebut?.side,
-      ucis: currentBranch?.ucis
-    });
-    
-    if (!currentBranch || !currentDebut) {
-      console.log('StudyEngine: No currentBranch or currentDebut');
-      return null;
-    }
-    
-    // Check if this is a student's turn
-    const isStudent = isStudentTurn(currentDebut.side, currentStepIndex);
-    console.log('StudyEngine: isStudentTurn:', isStudent, 'for step', currentStepIndex, 'side', currentDebut.side);
-    
-    if (!isStudent) {
-      console.log('StudyEngine: Not student turn');
-      return null;
-    }
-    
-    // Check if move is already learned
-    const expectedUci = currentBranch.ucis[currentStepIndex];
-    console.log('StudyEngine: Expected UCI:', expectedUci, 'at step', currentStepIndex);
-    
-    if (this.state.learnedMoves.has(expectedUci)) {
-      console.log('StudyEngine: Move already learned');
-      return null; // No arrow for learned moves
-    }
-    
-    console.log('StudyEngine: Returning expected UCI:', expectedUci);
-    return expectedUci;
-  }
-
-  applyUserMove(uci: string): boolean {
-    const { currentBranch, currentStepIndex, currentDebut } = this.state;
-    
-    if (!currentBranch || !currentDebut) return false;
-    
-    // Check if this is student's turn
-    if (!isStudentTurn(currentDebut.side, currentStepIndex)) {
-      return false;
-    }
-    
-    const expectedUci = currentBranch.ucis[currentStepIndex];
-    
-    if (uci === expectedUci) {
-      // Correct move
-      this.handleCorrectMove(uci);
-      return true;
-    } else {
-      // Wrong move
-      this.handleWrongMove(expectedUci);
-      return false;
-    }
-  }
-
-  private handleCorrectMove(uci: string): void {
-    const { currentBranch, currentStepIndex, currentDebut } = this.state;
-    if (!currentBranch || !currentDebut) return;
-
-    console.log('StudyEngine: Handling correct move:', uci);
-
-    // Add to learned moves
-    this.state.learnedMoves.add(uci);
-    
-    // Execute the move
-    this.chess.move({ from: uci.slice(0, 2), to: uci.slice(2, 4), promotion: uci[4] as any });
-    console.log('StudyEngine: Student move executed, FEN after:', this.chess.fen());
-    
-    // Check if opponent has a response
-    const nextStepIndex = currentStepIndex + 1;
-    if (nextStepIndex < currentBranch.ucis.length) {
-      const opponentUci = currentBranch.ucis[nextStepIndex];
-      console.log('StudyEngine: Opponent has response:', opponentUci);
-      
-      // Auto-play opponent move
-      this.chess.move({ from: opponentUci.slice(0, 2), to: opponentUci.slice(2, 4), promotion: opponentUci[4] as any });
-      const afterOpponentFen = this.chess.fen();
-      console.log('StudyEngine: Opponent move executed, FEN after:', afterOpponentFen);
-      
-      this.updateState({
-        currentStepIndex: nextStepIndex + 1,
-        currentFen: afterOpponentFen
-      });
-      
-      // Check if branch is complete
-      if (nextStepIndex + 1 >= currentBranch.ucis.length) {
-        this.completeBranch();
-      }
-    } else {
-      // Branch complete
-      this.completeBranch();
-    }
-  }
-
-  private handleWrongMove(expectedUci: string): void {
-    this.updateState({
-      errors: this.state.errors + 1
-    });
-    
-    // In GUIDED mode, wrong moves are not allowed
-    if (this.state.mode === 'GUIDED') {
-      return;
-    }
-    
-    // In TEST mode, show error but don't advance
-    console.log(`Ожидался ход: ${expectedUci}`);
-  }
-
-  private completeBranch(): void {
-    const { currentBranch, currentDebut, errors } = this.state;
-    if (!currentBranch || !currentDebut) return;
-
-    // Determine next status based on errors
-    let nextStatus: 'Mastered' | 'Review' | 'Relearn';
-    let nextReviewAt: number | undefined;
-    
-    if (errors === 0) {
-      nextStatus = 'Mastered';
-      const srsInterval = SRS.calculateNextReview(0);
-      nextReviewAt = srsInterval.nextReviewAt;
-      
-      // Add learned moves to progress
-      const studentMoves = this.getStudentMovesFromBranch(currentBranch, currentDebut.side);
-      progressManager.addLearnedMoves(currentDebut.id, studentMoves);
-    } else if (errors <= 2) {
-      nextStatus = 'Review';
-      const srsInterval = SRS.calculateNextReview(errors);
-      nextReviewAt = srsInterval.nextReviewAt;
-    } else {
-      nextStatus = 'Relearn';
-      const srsInterval = SRS.calculateNextReview(errors);
-      nextReviewAt = srsInterval.nextReviewAt;
-    }
-    
-    // Update progress
-    progressManager.updateBranch(currentDebut.id, currentBranch.id, {
-      status: nextStatus,
-      errors,
-      nextReviewAt
-    });
-    
-    // Move to next branch
-    this.pickNextBranch();
-  }
-
-  private getStudentMovesFromBranch(branch: Branch, side: Side): string[] {
-    const studentIndices = getStudentMoveIndices(side);
-    return studentIndices
-      .filter(index => index < branch.ucis.length)
-      .map(index => branch.ucis[index]);
+  setStateChangeCallback(callback: () => void): void {
+    this.stateChangeCallback = callback;
   }
 
   getState(): StudyState {
     return { ...this.state };
   }
 
-  restart(): void {
+  start(debut: Debut): void {
+    this.state.currentDebut = debut;
+    this.state.currentBranch = debut.branches[0];
+    
+    // НОВЫЙ: определяем начальный индекс ученика по стороне дебюта
+    this.studentStart = debut.side === 'white' ? 0 : 1;
+    this.state.studentIndex = this.studentStart;
+    
+    this.state.currentFen = this.getStartFen(debut.branches[0].startFen);
+    this.state.errors = 0;
+    this.state.learnedMoves.clear();
+    this.state.mode = 'GUIDED'; // НОВЫЙ: всегда начинаем с GUIDED
+    
+    // Определяем режим обучения на основе прогресса
+    const branchProgress = this.progressManager.getDebutProgress(debut.id)[debut.branches[0].id];
+    this.state.learningMode = branchProgress?.status === 'Mastered' ? 'noHints' : 'withHints';
+    this.state.stage = branchProgress?.stage || 0;
+    
+    // Инициализируем комментарий для первого шага
+    if (this.state.currentBranch) {
+      this.state.currentComment = this.getStepComment(this.state.currentBranch, this.state.studentIndex);
+      this.state.showHint = this.state.learningMode === 'withHints';
+    }
+    
+    this.chess = new Chess(this.state.currentFen);
+    this.updateState();
+  }
+
+  private getStartFen(startFen: string): string {
+    if (startFen === 'startpos') {
+      return 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+    }
+    return startFen;
+  }
+
+  loadBranch(branch: Branch): void {
+    this.state.currentBranch = branch;
+    
+    // НОВЫЙ: определяем начальный индекс ученика по стороне дебюта
     if (this.state.currentDebut) {
-      this.start(this.state.currentDebut);
+      this.studentStart = this.state.currentDebut.side === 'white' ? 0 : 1;
+      this.state.studentIndex = this.studentStart;
+    }
+    
+    this.state.currentFen = this.getStartFen(branch.startFen);
+    this.state.errors = 0;
+    this.state.learnedMoves.clear();
+    this.state.mode = 'GUIDED'; // НОВЫЙ: всегда начинаем с GUIDED
+    
+    // Определяем режим обучения
+    const branchProgress = this.progressManager.getDebutProgress(this.state.currentDebut!.id)[branch.id];
+    this.state.learningMode = branchProgress?.status === 'Mastered' ? 'noHints' : 'withHints';
+    this.state.stage = branchProgress?.stage || 0;
+    
+    // Инициализируем комментарий
+    this.state.currentComment = this.getStepComment(branch, this.state.studentIndex);
+    this.state.showHint = this.state.learningMode === 'withHints';
+    
+    this.chess = new Chess(this.state.currentFen);
+    this.updateState();
+  }
+
+  // НОВЫЙ: переименован и изменена сигнатура
+  applyUserMove(uci: string): ApplyResult {
+    const expectedUci = this.currentExpectedUci();
+    
+    if (!expectedUci) {
+      return { accepted: false, errorMessage: "Ветка завершена", branchFinished: true };
+    }
+    
+    if (uci !== expectedUci) {
+      this.state.errors++;
+      const sanExp = this.uciToSan(expectedUci);
+      return { 
+        accepted: false, 
+        errorMessage: `Ожидался ход ${sanExp}` 
+      };
+    }
+
+    // Приняли ход ученика
+    try {
+      const move = this.chess.move({ 
+        from: uci.slice(0, 2), 
+        to: uci.slice(2, 4), 
+        promotion: uci.length > 4 ? uci[4] as any : undefined 
+      });
+      
+      if (!move) {
+        return { accepted: false, errorMessage: "Недопустимый ход" };
+      }
+      
+      // 1) применяем ход ученика в движке
+      this.state.currentFen = this.chess.fen();
+      
+      // 2) СЧИТАЕМ ОТВЕТ ДО ИНКРЕМЕНТА!
+      const opponentUci = this.currentOpponentUci();
+      
+      // 3) если он есть — применяем в движке
+      if (opponentUci) {
+        try {
+          const from = opponentUci.slice(0, 2);
+          const to = opponentUci.slice(2, 4);
+          let promotion = opponentUci.length > 4 ? opponentUci[4] as any : undefined;
+          
+          // НОВЫЙ: добавляем промоушен q по умолчанию для продвижения на последнюю линию
+          if (!promotion && this.isPawnPromotion(from, to)) {
+            promotion = 'q';
+          }
+          
+          const opponentMove = this.chess.move({ from, to, promotion });
+          
+          if (opponentMove) {
+            this.state.currentFen = this.chess.fen();
+          }
+        } catch (error) {
+          console.error('Error applying opponent move:', error);
+        }
+      }
+      
+      // 4) теперь можно сдвинуться на два полухода
+      this.state.studentIndex += 2;
+      
+      // Проверяем, завершена ли ветка
+      const finished = this.state.studentIndex >= (this.state.currentBranch?.ucis.length || 0);
+      
+      if (finished) {
+        if (this.state.mode === 'GUIDED') {
+          // Переход в TEST режим
+          this.resetToStart('TEST');
+          return { 
+            accepted: true, 
+            opponentUci, 
+            branchFinished: true, 
+            modeTransition: "GUIDED_TO_TEST" 
+          };
+        } else {
+          // TEST закончился - обновляем прогресс и learnedMoves
+          this.handleBranchCompleted();
+          return { 
+            accepted: true, 
+            opponentUci, 
+            branchFinished: true, 
+            modeTransition: "COMPLETED" 
+          };
+        }
+      }
+      
+      // Обновляем комментарий для следующего шага
+      if (this.state.currentBranch) {
+        this.state.currentComment = this.getStepComment(this.state.currentBranch, this.state.studentIndex);
+        this.state.showHint = this.state.learningMode === 'withHints';
+      }
+      
+      this.updateState();
+      return { accepted: true, opponentUci, branchFinished: false };
+      
+    } catch (error) {
+      console.error('Error applying user move:', error);
+      return { accepted: false, errorMessage: "Ошибка применения хода" };
+    }
+  }
+
+  // НОВЫЙ: приватный метод для сброса к началу ветки
+  private resetToStart(nextMode: StudyMode) {
+    this.state.mode = nextMode;
+    this.state.studentIndex = this.studentStart;
+    this.state.errors = 0;
+    this.state.stage = 0; // Сбрасываем stage при переходе в TEST
+    
+    if (this.state.currentBranch) {
+      this.state.currentFen = this.getStartFen(this.state.currentBranch.startFen);
+      this.state.currentComment = this.getStepComment(this.state.currentBranch, this.state.studentIndex);
+      this.state.showHint = nextMode === 'GUIDED' && this.state.learningMode === 'withHints';
+    }
+    
+    this.chess = new Chess(this.state.currentFen);
+    this.updateState();
+  }
+
+  // НОВЫЙ: текущий ожидаемый ход ученика
+  currentExpectedUci(): string | null {
+    if (this.state.currentBranch && this.state.studentIndex < this.state.currentBranch.ucis.length) {
+      return this.state.currentBranch.ucis[this.state.studentIndex];
+    }
+    return null;
+  }
+
+  // НОВЫЙ: текущий ожидаемый ответ соперника
+  currentOpponentUci(): string | null {
+    if (this.state.currentBranch && this.state.studentIndex + 1 < this.state.currentBranch.ucis.length) {
+      return this.state.currentBranch.ucis[this.state.studentIndex + 1];
+    }
+    return null;
+  }
+
+  // НОВЫЙ: разрешенные ходы (только ожидаемый ход ученика)
+  getAllowedMoves(): Map<string, string[]> {
+    const expectedUci = this.currentExpectedUci();
+    if (!expectedUci) {
+      console.log('StudyEngine: getAllowedMoves - no expected UCI');
+      return new Map();
+    }
+    
+    const from = expectedUci.slice(0, 2);
+    const to = expectedUci.slice(2, 4);
+    
+    console.log('StudyEngine: getAllowedMoves - expected move:', expectedUci, 'from:', from, 'to:', to);
+    
+    // Возвращаем только один разрешенный ход
+    const allowedMoves = new Map<string, string[]>();
+    allowedMoves.set(from, [to]);
+    
+    console.log('StudyEngine: getAllowedMoves - returning:', allowedMoves);
+    return allowedMoves;
+  }
+
+  // НОВЫЙ: прокрутить ответы соперника до первого хода ученика (при старте ветки/режима)
+  prerollToStudentTurn(): string[] {
+    if (!this.state.currentBranch) return [];
+    
+    const autos: string[] = [];
+    
+    // Проигрываем все ходы соперника от начала до первого хода ученика
+    for (let i = 0; i < this.state.studentIndex; i++) {
+      const uci = this.state.currentBranch.ucis[i];
+      if (uci) {
+        try {
+          // НОВЫЙ: добавляем промоушен q по умолчанию для продвижения на последнюю линию
+          const from = uci.slice(0, 2);
+          const to = uci.slice(2, 4);
+          let promotion = uci.length > 4 ? uci[4] as any : undefined;
+          
+          // Если продвижение на последнюю линию и промоушен не указан, добавляем q
+          if (!promotion && this.isPawnPromotion(from, to)) {
+            promotion = 'q';
+          }
+          
+          const move = this.chess.move({ from, to, promotion });
+          
+          if (move) {
+            autos.push(uci);
+            this.state.currentFen = this.chess.fen();
+          }
+        } catch (error) {
+          console.error('Error prerolling move:', uci, error);
+        }
+      }
+    }
+    
+    console.log('StudyEngine: Prerolled moves:', autos, 'currentFen:', this.state.currentFen);
+    return autos;
+  }
+
+  // НОВЫЙ: проверка, является ли ход продвижением пешки
+  private isPawnPromotion(from: string, to: string): boolean {
+    // Проверяем, что это пешка (вторая координата 2 или 7) и ход на последнюю линию (8 или 1)
+    const fromRank = from[1];
+    const toRank = to[1];
+    
+    // Белая пешка с 2-й линии на 8-ю
+    if (fromRank === '2' && toRank === '8') return true;
+    // Чёрная пешка с 7-й линии на 1-ю
+    if (fromRank === '7' && toRank === '1') return true;
+    
+    return false;
+  }
+
+  getCurrentExpectedMove(): { from: string; to: string } | null {
+    const expectedUci = this.currentExpectedUci();
+    if (!expectedUci) return null;
+    
+    return {
+      from: expectedUci.slice(0, 2),
+      to: expectedUci.slice(2, 4)
+    };
+  }
+
+  private getStepComment(branch: Branch, stepIndex: number): string {
+    if (stepIndex >= branch.ucis.length) return '';
+    
+    const move = branch.ucis[stepIndex];
+    const san = this.uciToSan(move);
+    
+    // Простые комментарии для первых ходов
+    if (stepIndex === 0 && move === 'e2e4') {
+      return 'e4 — белые занимают центр и открывают линию для слона и ферзя';
+    }
+    if (stepIndex === 2 && move === 'g1f3') {
+      return 'Nf3 — развитие коня и контроль центральных полей';
+    }
+    if (stepIndex === 4 && move === 'f1b5') {
+      return 'Bb5 — испанская партия, атака на коня c6';
+    }
+    
+    return `${san} — следующий ход в теории`;
+  }
+
+  private uciToSan(uci: string): string {
+    if (!uci || uci.length < 4) return '';
+    
+    try {
+      // Используем chess.js для конвертации UCI в SAN
+      const tempChess = new Chess(this.state.currentFen);
+      const move = tempChess.move({ 
+        from: uci.slice(0, 2), 
+        to: uci.slice(2, 4), 
+        promotion: uci.length > 4 ? uci[4] as any : undefined 
+      });
+      
+      if (move) {
+        return move.san;
+      }
+    } catch (error) {
+      console.error('Error converting UCI to SAN:', error);
+    }
+    
+    // Fallback для простых случаев
+    const from = uci.slice(0, 2);
+    const to = uci.slice(2, 4);
+    
+    if (from === 'e2' && to === 'e4') return 'e4';
+    if (from === 'e7' && to === 'e5') return 'e5';
+    if (from === 'g1' && to === 'f3') return 'Nf3';
+    if (from === 'b8' && to === 'c6') return 'Nc6';
+    if (from === 'f1' && to === 'b5') return 'Bb5';
+    if (from === 'a7' && to === 'a6') return 'a6';
+    if (from === 'b5' && to === 'a4') return 'Ba4';
+    if (from === 'g8' && to === 'f6') return 'Nf6';
+    
+    return `${from}-${to}`;
+  }
+
+  // НОВЫЙ: обработка завершения ветки
+  private handleBranchCompleted(): void {
+    if (!this.state.currentBranch || !this.state.currentDebut) return;
+    
+    const branchId = this.state.currentBranch.id;
+    const debutId = this.state.currentDebut.id;
+    
+    // 1. Обновляем статус ветки на 'Mastered'
+    this.progressManager.updateBranch(debutId, branchId, {
+      status: 'Mastered',
+      errors: this.state.errors,
+      completedAt: Date.now()
+    });
+    
+    // 2. Добавляем все ученические UCI ходы в learnedMoves
+    const studentMoves: string[] = [];
+    for (let i = this.studentStart; i < this.state.currentBranch.ucis.length; i += 2) {
+      const move = this.state.currentBranch.ucis[i];
+      if (move) {
+        studentMoves.push(move);
+      }
+    }
+    this.progressManager.addLearnedMoves(debutId, studentMoves);
+    
+    // 3. Вызываем nextReviewAt и сохраняем dueAt
+    const currentStage = (this.state.stage || 0) as SrsStage;
+    const { dueAt, nextStage } = nextReviewAt(this.state.errors, currentStage);
+    this.progressManager.updateBranch(debutId, branchId, {
+      nextReviewAt: dueAt,
+      stage: nextStage
+    });
+    
+    // 4. Обновляем stage в состоянии
+    this.state.stage = nextStage;
+    
+    console.log('StudyEngine: Branch completed, progress updated:', {
+      branchId,
+      errors: this.state.errors,
+      studentMoves,
+      nextReviewAt: dueAt,
+      nextStage
+    });
+  }
+
+  private updateState(): void {
+    if (this.stateChangeCallback) {
+      this.stateChangeCallback();
     }
   }
 }
 
+// Singleton экземпляр
 export const studyEngine = new StudyEngine();
