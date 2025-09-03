@@ -1,0 +1,36 @@
+{
+  "schema": "debutlab.catalog.v1",
+  "updatedAt": "2025-01-02T00:00:00Z",
+  "debuts": [
+    {
+      "id": "sicilian",
+      "name": "Сицилианская защита",
+      "side": "black",
+      "tags": ["black", "popular", "vs-e4"],
+      "file": "demo/sicilian.v1.json",
+      "hash": "sha256-demo",
+      "branches": 2,
+      "approxSizeKB": 2
+    },
+    {
+      "id": "ruy-lopez",
+      "name": "Испанская партия",
+      "side": "white",
+      "tags": ["white", "classical", "vs-e5"],
+      "file": "demo/ruy-lopez.v1.json",
+      "hash": "sha256-demo",
+      "branches": 2,
+      "approxSizeKB": 2
+    },
+    {
+      "id": "queens-gambit",
+      "name": "Ферзевый гамбит",
+      "side": "white",
+      "tags": ["white", "classical", "vs-d5"],
+      "file": "demo/queens-gambit.v1.json",
+      "hash": "sha256-demo",
+      "branches": 2,
+      "approxSizeKB": 2
+    }
+  ]
+}

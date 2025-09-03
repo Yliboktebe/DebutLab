@@ -1,0 +1,25 @@
+{
+  "schema": "debutlab.debut.v1",
+  "id": "ruy-lopez",
+  "name": "Испанская партия",
+  "side": "white",
+  "tags": ["white", "classical", "vs-e5"],
+  "branches": [
+    {
+      "id": "ruy-lopez-0001",
+      "type": "main_line",
+      "name": "1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6",
+      "startFen": "startpos",
+      "ucis": ["e2e4", "e7e5", "g1f3", "b8c6", "f1b5", "a7a6", "b5a4", "g8f6"],
+      "minPly": 8
+    },
+    {
+      "id": "ruy-lopez-0002",
+      "type": "alternative",
+      "name": "1.e4 e5 2.Nf3 Nc6 3.Bb5 f5 4.d3 fxe4",
+      "startFen": "startpos",
+      "ucis": ["e2e4", "e7e5", "g1f3", "b8c6", "f1b5", "f7f5", "d2d3", "f5e4"],
+      "minPly": 8
+    }
+  ]
+}

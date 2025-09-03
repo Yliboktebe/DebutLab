@@ -1,0 +1,95 @@
+.debut-catalog {
+  margin-top: 2rem;
+}
+
+.debut-catalog h3 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.debut-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.debut-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.debut-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border-color: #007bff;
+}
+
+.debut-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.debut-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  flex: 1;
+}
+
+.side-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.side-white {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.side-black {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.debut-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  background: #f8f9fa;
+  color: #6c757d;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.debut-stats {
+  display: flex;
+  justify-content: space-between;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}

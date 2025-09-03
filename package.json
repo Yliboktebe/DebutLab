@@ -1,0 +1,33 @@
+{
+  "name": "debutlab",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -noEmit",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@lichess-org/chessground": "^9.6.0",
+    "chess.js": "^1.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@types/chess.js": "^0.13.7",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@vitejs/plugin-react": "^4.1.1",
+    "jsdom": "^23.0.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}

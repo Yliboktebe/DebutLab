@@ -1,0 +1,25 @@
+{
+  "schema": "debutlab.debut.v1",
+  "id": "queens-gambit",
+  "name": "Ферзевый гамбит",
+  "side": "white",
+  "tags": ["white", "classical", "vs-d5"],
+  "branches": [
+    {
+      "id": "queens-gambit-0001",
+      "type": "main_line",
+      "name": "1.d4 d5 2.c4 dxc4 3.e3 e6 4.Bxc4 Nf6",
+      "startFen": "startpos",
+      "ucis": ["d2d4", "d7d5", "c2c4", "d5c4", "e2e3", "e7e6", "f1c4", "g8f6"],
+      "minPly": 8
+    },
+    {
+      "id": "queens-gambit-0002",
+      "type": "alternative",
+      "name": "1.d4 d5 2.c4 c6 3.Nc3 dxc4 4.e3 b5",
+      "startFen": "startpos",
+      "ucis": ["d2d4", "d7d5", "c2c4", "c7c6", "b1c3", "d5c4", "e2e3", "b7b5"],
+      "minPly": 8
+    }
+  ]
+}
