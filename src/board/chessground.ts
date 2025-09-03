@@ -26,7 +26,7 @@ type DrawShape = { orig: Key; dest: Key; brush?: string };
     // НОВЫЕ МЕТОДЫ: обновление разрешенных ходов и стрелки
     setAllowedMoves(dests: Map<string, string[]>): void;
     showArrow(uciOrNull: string | null): void;
-    playUci(uci: string): void;
+    playUci(uci: string, nextFen?: string): void;  // ← добавили nextFen
   }
 
 export function createChessgroundBoard(opts: {
@@ -100,27 +100,31 @@ export function createChessgroundBoard(opts: {
       const shapes: DrawShape[] = [{ orig: from, dest: to, brush: 'green' }];
       ground.setAutoShapes(shapes);
     },
-    playUci(uci: string) {
-      // применяем в локальном chess адаптера
+    playUci(uci: string, nextFen?: string) {
       const from = uci.slice(0, 2);
       const to = uci.slice(2, 4);
-      const promotion = uci.length > 4 ? uci[4] as any : undefined;
-      
-      try {
-        const move = chess.move({ from, to, promotion });
-        if (move) {
-          currentFen = chess.fen();
-          
-          // ВАЖНО: тут НЕ трогаем movable/dests!
-          ground.set({
-            fen: currentFen,
-            lastMove: [from, to],
-            turnColor: whoMoves(),
-            check: chess.inCheck() ? whoMoves() : false
-          });
+
+      if (nextFen) {
+        // Истина — fen от движка после обоих ходов
+        currentFen = nextFen;
+        ground.set({ 
+          fen: currentFen, 
+          lastMove: [from, to],
+          turnColor: whoMoves(),
+          check: chess.inCheck() ? whoMoves() : false
+        });
+      } else {
+        // fallback: визуально сдвинем фигуру и сами пересчитаем fen на temp-чессе
+        ground.move(from as Key, to as Key);
+        try {
+          const temp = new Chess(currentFen);
+          const promotion = uci.length > 4 ? uci[4] as any : undefined;
+          temp.move({ from, to, promotion });
+          currentFen = temp.fen();
+        } catch {
+          // в худшем случае остаёмся на старом fen, но UI всё равно синхронизирует позже
+          console.warn('Fallback FEN calculation failed for move:', uci);
         }
-      } catch (error) {
-        console.error('Error playing UCI move:', error);
       }
     }
   };

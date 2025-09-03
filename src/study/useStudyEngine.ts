@@ -113,7 +113,9 @@ export function useStudyEngine(debut: Debut) {
     
     // 1) автоответ соперника — сразу на доску
     if (result.opponentUci && boardApiRef.current) {
-      boardApiRef.current.playUci(result.opponentUci);
+      // ВАЖНО: берём истинный fen у движка ПОСЛЕ применения обоих ходов
+      const fenAfterBoth = studyEngine.getCurrentFen();
+      boardApiRef.current.playUci(result.opponentUci, fenAfterBoth);
     }
     
     // 2) если был переход режима — сначала сброс позиции/преролл, потом подсказки

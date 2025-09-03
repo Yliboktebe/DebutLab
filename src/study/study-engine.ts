@@ -62,6 +62,11 @@ export class StudyEngine {
     return { ...this.state };
   }
 
+  // НОВЫЙ: получить текущий FEN от движка
+  getCurrentFen(): string {
+    return this.chess.fen();
+  }
+
   start(debut: Debut): void {
     this.state.currentDebut = debut;
     this.state.currentBranch = debut.branches[0];
