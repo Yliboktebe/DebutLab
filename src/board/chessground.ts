@@ -89,6 +89,9 @@ export function createChessgroundBoard(opts: {
       // ЕДИНСТВЕННОЕ место, где меняем dests - сохраняем текущие события/цвет
       const m = ground.state.movable;
       ground.set({ movable: { ...m, dests } });
+      
+      // Логи для отладки
+      console.debug('[BOARD] dests', Array.from(dests.entries()));
     },
     showArrow(uciOrNull: string | null) {
       if (!uciOrNull) {
@@ -104,8 +107,11 @@ export function createChessgroundBoard(opts: {
       const from = uci.slice(0, 2);
       const to = uci.slice(2, 4);
 
+      // Логи для отладки
+      console.debug('[BOARD] playUci', uci, 'fen?', !!nextFen);
+
       if (nextFen) {
-        // Истина — fen от движка после обоих ходов
+        // Истина — fen от движка ПОСЛЕ хода
         currentFen = nextFen;
         ground.set({ 
           fen: currentFen, 
@@ -114,17 +120,8 @@ export function createChessgroundBoard(opts: {
           check: chess.inCheck() ? whoMoves() : false
         });
       } else {
-        // fallback: визуально сдвинем фигуру и сами пересчитаем fen на temp-чессе
-        ground.move(from as Key, to as Key);
-        try {
-          const temp = new Chess(currentFen);
-          const promotion = uci.length > 4 ? uci[4] as any : undefined;
-          temp.move({ from, to, promotion });
-          currentFen = temp.fen();
-        } catch {
-          // в худшем случае остаёмся на старом fen, но UI всё равно синхронизирует позже
-          console.warn('Fallback FEN calculation failed for move:', uci);
-        }
+        // fallback (не идеален, но безопасен)
+        ground.move(from as any, to as any);
       }
     }
   };
@@ -158,10 +155,10 @@ export function createChessgroundBoard(opts: {
           dests: opts.allowedMoves || computeDests(),         // Используем разрешенные ходы из ветки или все легальные
           showDests: true,
           rookCastle: true,
-                                       events: {
+                                                                               events: {
               after: (orig: Key, dest: Key) => {
                 // НОВЫЙ ПОДХОД: не применяем ход автоматически, спрашиваем UI
-                const uci = orig + dest;
+                const uci = toUci(orig, dest);
                 const accepted = opts.onTryMove?.(uci) ?? false;
                 
                 if (!accepted) {
@@ -262,5 +259,20 @@ export function createChessgroundBoard(opts: {
     if (!h.length) return undefined;
     const last = h[h.length - 1];
     return [last.from, last.to];
+  }
+
+  // НОВЫЙ: правильное формирование UCI с проверкой промоушена
+  function toUci(orig: string, dest: string): string {
+    // определяем фигуру на orig из внутреннего chess адаптера
+    const piece = chess.get(orig as any); // chess.js: { type: 'p'|'n'|'b'|'r'|'q'|'k', color: 'w'|'b' } | null
+    const isPawn = piece?.type === 'p';
+    const destRank = dest[1];
+
+    let promo = '';
+    if (isPawn && (destRank === '8' || destRank === '1')) {
+      promo = 'q'; // дефолтный промоушен
+    }
+
+    return `${orig}${dest}${promo}`;
   }
 }

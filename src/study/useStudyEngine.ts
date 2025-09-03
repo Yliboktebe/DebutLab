@@ -102,7 +102,8 @@ export function useStudyEngine(debut: Debut) {
     // Логи для отладки автоответа
     console.debug('[ENGINE]', { 
       exp: studyEngine.currentExpectedUci(), 
-      opp: result.opponentUci 
+      opp: result.opponentUci,
+      fen: studyEngine.getCurrentFen()
     });
     
     if (!result.accepted) {
@@ -111,14 +112,13 @@ export function useStudyEngine(debut: Debut) {
       return false; // доска откатит ход
     }
     
-    // 1) автоответ соперника — сразу на доску
+    // 1) автоответ соперника СРАЗУ, без rAF/timeout
     if (result.opponentUci && boardApiRef.current) {
-      // ВАЖНО: берём истинный fen у движка ПОСЛЕ применения обоих ходов
-      const fenAfterBoth = studyEngine.getCurrentFen();
+      const fenAfterBoth = studyEngine.getCurrentFen(); // добавьте геттер в движке, если нет
       boardApiRef.current.playUci(result.opponentUci, fenAfterBoth);
     }
-    
-    // 2) если был переход режима — сначала сброс позиции/преролл, потом подсказки
+
+    // 2) переходы режимов (GUIDED→TEST/COMPLETED): reset + preroll для side='black' — как у вас
     if (result.modeTransition === "GUIDED_TO_TEST") {
       console.log('useStudyEngine: Transitioning to TEST mode');
       if (boardApiRef.current && state.currentBranch) {
@@ -154,11 +154,9 @@ export function useStudyEngine(debut: Debut) {
         }
       }
     }
-    
-    // 3) И ТОЛЬКО ПОТОМ — стрелка и dests (на СВЕЖЕМ FEN)
-    queueMicrotask(() => {            // или requestAnimationFrame
-      updateArrowAndDests(); // внутри: boardApi.showArrow(...); boardApi.setAllowedMoves(...)
-    });
+
+    // 3) только после этого — подсказка и доступные ходы
+    updateArrowAndDests();
     
     return true; // доска оставит ход
   }, [state.currentBranch, updateArrowAndDests]);
