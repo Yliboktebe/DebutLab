@@ -101,9 +101,10 @@ export function useStudyEngine(debut: Debut) {
     
     // Логи для отладки автоответа
     console.debug('[ENGINE]', { 
-      exp: studyEngine.currentExpectedUci(), 
+      uci, 
       opp: result.opponentUci, 
-      fen: studyEngine.getCurrentFen() 
+      fenAfterUser: !!result.fenAfterUser, 
+      fenAfterBoth: !!result.fenAfterBoth 
     });
     
     if (!result.accepted) {
@@ -112,9 +113,14 @@ export function useStudyEngine(debut: Debut) {
       return false; // доска откатит ход
     }
     
-    // 1) автоответ – сразу и по fen истины
-    if (result.opponentUci && boardApiRef.current) {
-      boardApiRef.current.playUci(result.opponentUci, studyEngine.getCurrentFen());
+    // 1) закрепляем ход ученика по fen истины
+    if (boardApiRef.current && result.fenAfterUser) {
+      boardApiRef.current.playUci(uci, result.fenAfterUser);
+    }
+
+    // 2) тут же рисуем автоответ соперника (если есть) — тоже по fen истины
+    if (boardApiRef.current && result.opponentUci && result.fenAfterBoth) {
+      boardApiRef.current.playUci(result.opponentUci, result.fenAfterBoth);
     }
 
     // 2) переходы режима (reset/preroll) – если были
@@ -154,7 +160,7 @@ export function useStudyEngine(debut: Debut) {
       }
     }
 
-    // 3) только теперь — стрелка и dests
+    // 4) стрелка и dests — ТОЛЬКО теперь (позиция уже после ответа)
     updateArrowAndDests();
     
     return true; // доска оставит ход

@@ -41,6 +41,13 @@ export function createChessgroundBoard(opts: {
   let currentFen = chess.fen();
   const ground = Chessground(opts.el, buildConfig());
 
+  function turnFromFen(fen: string): 'white' | 'black' {
+    // FEN: "pieces side castle enpassant halfmove fullmove"
+    // side = 'w' | 'b'
+    const side = fen.split(' ')[1] === 'w' ? 'white' : 'black';
+    return side;
+  }
+
   // ——— Публичные методы ———
   return {
     // Нарисовать зелёную стрелку (можно массивом)
@@ -108,11 +115,19 @@ export function createChessgroundBoard(opts: {
       const from = uci.slice(0, 2), to = uci.slice(2, 4);
       
       // Логи для отладки
-      console.debug('[BOARD playUci]', uci, 'withFen', !!nextFen);
+      console.debug('[BOARD playUci]', uci, 'hasFen', !!nextFen);
       
       if (nextFen) {
-        currentFen = nextFen; // fen ИСТИНЫ от StudyEngine после применённых ходов
-        ground.set({ fen: currentFen, lastMove: [from, to] });
+        currentFen = nextFen;
+        // держим локальный chess в актуальном состоянии (на будущее)
+        try { chess.load(currentFen); } catch {}
+        const turn = turnFromFen(currentFen);
+        ground.set({
+          fen: currentFen,
+          lastMove: [from, to],
+          turnColor: turn,
+          movable: { ...ground.state.movable, color: turn }, // ← КТО реально ходит
+        });
       } else {
         // fallback: визуальный сдвиг (без пересчёта fen здесь)
         // @ts-ignore

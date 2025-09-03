@@ -7,8 +7,8 @@ export interface ChessBoardProps {
   startFen: string;
   orientation: 'white' | 'black';
   onTryMove: (uci: string) => boolean;  // НОВЫЙ: возвращает boolean
-  allowedMoves?: Map<string, string[]>;
-  expectedUci?: string | null;          // НОВЫЙ: для отрисовки стрелки
+  // allowedMoves,      // ← больше не используем пропсы для управления
+  // expectedUci,
   onBoardMounted?: (api: ChessBoardApi) => void;  // НОВЫЙ: callback при монтировании доски
 }
 
@@ -16,8 +16,8 @@ export default function ChessBoard({
   startFen, 
   orientation, 
   onTryMove, 
-  allowedMoves,
-  expectedUci,
+  // allowedMoves,      // ← больше не используем пропсы для управления
+  // expectedUci,
   onBoardMounted
 }: ChessBoardProps) {
   const boardRef = useRef<HTMLDivElement>(null);
@@ -27,14 +27,14 @@ export default function ChessBoard({
   useEffect(() => {
     if (!initializedRef.current && boardRef.current) {
       initializedRef.current = true;
-      console.log('ChessBoard: initializing with allowedMoves:', allowedMoves);
+      console.log('ChessBoard: initializing board');
       
       const api = createChessgroundBoard({
         el: boardRef.current,
         initialFen: startFen,
         orientation,
-        onTryMove,
-        allowedMoves
+        onTryMove
+        // allowedMoves      // ← больше не используем пропсы для управления
       });
       
       apiRef.current = api;
@@ -44,27 +44,13 @@ export default function ChessBoard({
         onBoardMounted(api);
       }
     }
-  }, [startFen, orientation, onTryMove, allowedMoves]);
+  }, [startFen, orientation, onTryMove]);
 
-  // НОВЫЙ: обновление стрелки при смене expectedUci
-  useEffect(() => {
-    if (apiRef.current && expectedUci !== undefined) {
-      console.log('ChessBoard: updating arrow to:', expectedUci);
-      apiRef.current.showArrow(expectedUci);
-    }
-  }, [expectedUci]);
-
-  // НОВЫЙ: обновление разрешенных ходов
-  useEffect(() => {
-    if (apiRef.current && allowedMoves) {
-      console.log('ChessBoard: updating allowedMoves:', allowedMoves);
-      apiRef.current.setAllowedMoves(allowedMoves);
-    }
-  }, [allowedMoves]);
+  // Стрелка и доступные ходы теперь управляются ТОЛЬКО через boardApi из useStudyEngine
 
   return (
     <div className="chess-board">
-      <div id="board" ref={boardRef} className="cg-wrap board"></div>
+      <div id="board" ref={boardRef} className="cg-wrap board" />
     </div>
   );
 }

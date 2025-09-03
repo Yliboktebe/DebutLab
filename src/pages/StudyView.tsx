@@ -41,8 +41,8 @@ function StudyContent({ debut }: { debut: Debut }) {
     currentFen, 
     learningMode, 
     currentComment, 
-    allowedMoves,
-    expectedUci,            // НОВЫЙ: ожидаемый ход для стрелки
+    // allowedMoves,      // ← больше не используем пропсы для управления
+    // expectedUci,       // ← стрелка управляется через boardApi
     onMove,                 // НОВЫЙ: добавляем onMove
     setBoardApi,            // НОВЫЙ: для установки ссылки на API доски
     updateArrowAndDests     // НОВЫЙ: для принудительного обновления
@@ -84,8 +84,6 @@ function StudyContent({ debut }: { debut: Debut }) {
             startFen={currentFen}
             orientation={debut.side}  // НОВЫЙ: используем сторону дебюта
             onTryMove={handleMove}
-            allowedMoves={allowedMoves}
-            expectedUci={expectedUci}  // НОВЫЙ: передаем ожидаемый ход для стрелки
             onBoardMounted={handleBoardMounted}  // НОВЫЙ: callback при монтировании
           />
         </div>

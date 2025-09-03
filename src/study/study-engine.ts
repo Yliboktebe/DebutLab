@@ -13,6 +13,8 @@ export interface ApplyResult {
   opponentUci?: string | null;
   branchFinished?: boolean;
   modeTransition?: ModeTransition;
+  fenAfterUser?: string;       // <— NEW
+  fenAfterBoth?: string;       // <— NEW (если есть автоответ)
 }
 
 export interface StudyState {
@@ -159,12 +161,13 @@ export class StudyEngine {
       }
       
       // 1) применяем ход ученика в движке
-      this.state.currentFen = this.chess.fen();
+      const fenAfterUser = this.chess.fen();
       
       // 2) СЧИТАЕМ ОТВЕТ ДО ИНКРЕМЕНТА!
       const opponentUci = this.currentOpponentUci();
       
       // 3) если он есть — применяем в движке
+      let fenAfterBoth: string | undefined;
       if (opponentUci) {
         try {
           const from = opponentUci.slice(0, 2);
@@ -179,7 +182,8 @@ export class StudyEngine {
           const opponentMove = this.chess.move({ from, to, promotion });
           
           if (opponentMove) {
-            this.state.currentFen = this.chess.fen();
+            fenAfterBoth = this.chess.fen();
+            this.state.currentFen = fenAfterBoth;
           }
         } catch (error) {
           console.error('Error applying opponent move:', error);
@@ -200,7 +204,9 @@ export class StudyEngine {
             accepted: true, 
             opponentUci, 
             branchFinished: true, 
-            modeTransition: "GUIDED_TO_TEST" 
+            modeTransition: "GUIDED_TO_TEST",
+            fenAfterUser,
+            fenAfterBoth
           };
         } else {
           // TEST закончился - обновляем прогресс и learnedMoves
@@ -209,7 +215,9 @@ export class StudyEngine {
             accepted: true, 
             opponentUci, 
             branchFinished: true, 
-            modeTransition: "COMPLETED" 
+            modeTransition: "COMPLETED",
+            fenAfterUser,
+            fenAfterBoth
           };
         }
       }
@@ -221,7 +229,7 @@ export class StudyEngine {
       }
       
       this.updateState();
-      return { accepted: true, opponentUci, branchFinished: false };
+      return { accepted: true, opponentUci, branchFinished: false, fenAfterUser, fenAfterBoth };
       
     } catch (error) {
       console.error('Error applying user move:', error);
