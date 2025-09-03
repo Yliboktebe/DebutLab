@@ -76,6 +76,10 @@ export function useStudyEngine(debut: Debut) {
       }
     }, 0);
     
+    // Логи для верификации
+    console.debug('FEN', studyEngine.getState().currentFen, 'expected', expectedUci);
+    console.debug('dests', Array.from(allowedMoves.entries()));
+    
     console.log('useStudyEngine: Updated arrow and dests:', {
       expectedUci,
       shouldShowArrow,
@@ -101,13 +105,12 @@ export function useStudyEngine(debut: Debut) {
       return false; // доска откатит ход
     }
     
-    // 1) автоответ соперника — СЕЙЧАС
+    // 1) автоответ соперника — сразу на доску
     if (result.opponentUci && boardApiRef.current) {
-      // иногда полезно дать кадр на фиксацию пользовательского хода:
-      requestAnimationFrame(() => boardApiRef.current!.playUci(result.opponentUci!));
+      boardApiRef.current.playUci(result.opponentUci);
     }
     
-    // 2) переходы режимов
+    // 2) если был переход режима — сначала сброс позиции/преролл, потом подсказки
     if (result.modeTransition === "GUIDED_TO_TEST") {
       console.log('useStudyEngine: Transitioning to TEST mode');
       if (boardApiRef.current && state.currentBranch) {
@@ -144,8 +147,10 @@ export function useStudyEngine(debut: Debut) {
       }
     }
     
-    // 3) и только теперь пересчитать стрелку/доступные ходы
-    updateArrowAndDests();
+    // 3) ТОЛЬКО ТЕПЕРЬ — пересчитать стрелку и dests (на свежем FEN)
+    requestAnimationFrame(() => {
+      updateArrowAndDests(); // внутри: boardApi.showArrow(...); boardApi.setAllowedMoves(...)
+    });
     
     return true; // доска оставит ход
   }, [state.currentBranch, updateArrowAndDests]);

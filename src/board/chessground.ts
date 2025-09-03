@@ -86,12 +86,9 @@ export function createChessgroundBoard(opts: {
     },
     // НОВЫЕ МЕТОДЫ
     setAllowedMoves(dests: Map<string, string[]>) {
-      ground.set({
-        movable: {
-          ...ground.state.movable,
-          dests: dests
-        }
-      });
+      // берём текущее состояние movable и поверх подменяем ТОЛЬКО dests
+      const m = ground.state.movable;
+      ground.set({ movable: { ...m, dests } });
     },
     showArrow(uciOrNull: string | null) {
       if (!uciOrNull) {
