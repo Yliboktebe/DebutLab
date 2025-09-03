@@ -1,6 +1,7 @@
 import { Chess } from 'chess.js';
 // @ts-ignore
 import { Chessground } from '@lichess-org/chessground';
+import { toUci } from './uci';
 
 // Определяем типы локально, используя правильные типы из пакета
 type Key = string;
@@ -91,7 +92,7 @@ export function createChessgroundBoard(opts: {
       ground.set({ movable: { ...m, dests } });
       
       // Логи для отладки
-      console.debug('[BOARD] dests', Array.from(dests.entries()));
+      console.debug('[BOARD dests]', Array.from(dests.entries()), 'movableColor', ground.state.movable.color, 'turn', ground.state.turnColor);
     },
     showArrow(uciOrNull: string | null) {
       if (!uciOrNull) {
@@ -107,7 +108,7 @@ export function createChessgroundBoard(opts: {
       const from = uci.slice(0, 2), to = uci.slice(2, 4);
       
       // Логи для отладки
-      console.debug('[BOARD] playUci', uci, 'with nextFen?', !!nextFen);
+      console.debug('[BOARD playUci]', uci, 'withFen', !!nextFen);
       
       if (nextFen) {
         currentFen = nextFen; // fen ИСТИНЫ от StudyEngine после применённых ходов
@@ -152,7 +153,9 @@ export function createChessgroundBoard(opts: {
                                                                                events: {
               after: (orig: Key, dest: Key) => {
                 // НОВЫЙ ПОДХОД: не применяем ход автоматически, спрашиваем UI
-                const uci = toUci(orig, dest);
+                // @ts-ignore – у cg state есть pieces Map<Key, { role, color }>
+                const role = ground?.state?.pieces?.get?.(orig)?.role as any; // 'pawn' | 'knight' ...
+                const uci = toUci(orig, dest, role);
                 const accepted = opts.onTryMove?.(uci) ?? false;
                 
                 if (!accepted) {
@@ -167,7 +170,7 @@ export function createChessgroundBoard(opts: {
                 // а истинный fen придет позже через boardApi.playUci(..., nextFen) от движка.
                 
                 // Логи для отладки
-                console.debug('[BOARD] user move', uci);
+                console.debug('[CG move]', {uci, turn: ground.state.turnColor, movable: ground.state.movable.color});
               },
             },
       },
@@ -249,16 +252,5 @@ export function createChessgroundBoard(opts: {
     return [last.from, last.to];
   }
 
-  // НОВЫЙ: правильное формирование UCI с проверкой промоушена
-  function toUci(orig: string, dest: string): string {
-    // определяем фигуру на orig из состояния chessground
-    // у @lichess-org/chessground есть состояние pieces: Map<square, { role: 'pawn'|'knight'|..., color }>
-    // @ts-ignore – если нет типов на pieces
-    const piece = ground?.state?.pieces?.get?.(orig);
-    const isPawn = piece?.role === 'pawn';
-    const destRank = dest[1];
-    const needPromo = isPawn && (destRank === '8' || destRank === '1');
-    const promo = needPromo ? 'q' : '';
-    return `${orig}${dest}${promo}`;
-  }
+
 }

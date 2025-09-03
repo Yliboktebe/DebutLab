@@ -102,8 +102,8 @@ export function useStudyEngine(debut: Debut) {
     // Логи для отладки автоответа
     console.debug('[ENGINE]', { 
       exp: studyEngine.currentExpectedUci(), 
-      opp: result.opponentUci,
-      fen: studyEngine.getCurrentFen()
+      opp: result.opponentUci, 
+      fen: studyEngine.getCurrentFen() 
     });
     
     if (!result.accepted) {
@@ -112,26 +112,26 @@ export function useStudyEngine(debut: Debut) {
       return false; // доска откатит ход
     }
     
-    // 1) автоответ соперника СРАЗУ и по fen ИСТИНЫ
+    // 1) автоответ – сразу и по fen истины
     if (result.opponentUci && boardApiRef.current) {
       boardApiRef.current.playUci(result.opponentUci, studyEngine.getCurrentFen());
     }
 
-    // 2) переходы режимов (GUIDED→TEST/COMPLETED): reset + preroll для side='black' — как у вас
+    // 2) переходы режима (reset/preroll) – если были
     if (result.modeTransition === "GUIDED_TO_TEST") {
       console.log('useStudyEngine: Transitioning to TEST mode');
       if (boardApiRef.current && state.currentBranch) {
         boardApiRef.current.showArrow(null);
-        
-        // Проигрываем преролл
-        const autos = studyEngine.prerollToStudentTurn();
-        autos.forEach(uci => boardApiRef.current!.playUci(uci));
         
         // Сбрасываем позицию к началу ветки
         const startFen = state.currentBranch.startFen === 'startpos' 
           ? 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
           : state.currentBranch.startFen;
         boardApiRef.current.setFen(startFen);
+        
+        // Проигрываем преролл
+        const autos = studyEngine.prerollToStudentTurn();
+        autos.forEach(uci => boardApiRef.current!.playUci(uci, studyEngine.getCurrentFen()));
       }
     }
     
@@ -147,14 +147,14 @@ export function useStudyEngine(debut: Debut) {
             studyEngine.loadBranch(nextBranch);
             // Проигрываем преролл и обновляем UI
             const autos = studyEngine.prerollToStudentTurn();
-            autos.forEach(uci => boardApiRef.current!.playUci(uci));
+            autos.forEach(uci => boardApiRef.current!.playUci(uci, studyEngine.getCurrentFen()));
             updateArrowAndDests();
           }
         }
       }
     }
 
-    // 3) только после этого — подсказка и доступные ходы
+    // 3) только теперь — стрелка и dests
     updateArrowAndDests();
     
     return true; // доска оставит ход
