@@ -112,10 +112,9 @@ export function useStudyEngine(debut: Debut) {
       return false; // доска откатит ход
     }
     
-    // 1) автоответ соперника СРАЗУ, без rAF/timeout
+    // 1) автоответ соперника СРАЗУ и по fen ИСТИНЫ
     if (result.opponentUci && boardApiRef.current) {
-      const fenAfterBoth = studyEngine.getCurrentFen(); // добавьте геттер в движке, если нет
-      boardApiRef.current.playUci(result.opponentUci, fenAfterBoth);
+      boardApiRef.current.playUci(result.opponentUci, studyEngine.getCurrentFen());
     }
 
     // 2) переходы режимов (GUIDED→TEST/COMPLETED): reset + preroll для side='black' — как у вас

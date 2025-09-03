@@ -104,24 +104,18 @@ export function createChessgroundBoard(opts: {
       ground.setAutoShapes(shapes);
     },
     playUci(uci: string, nextFen?: string) {
-      const from = uci.slice(0, 2);
-      const to = uci.slice(2, 4);
-
+      const from = uci.slice(0, 2), to = uci.slice(2, 4);
+      
       // Логи для отладки
-      console.debug('[BOARD] playUci', uci, 'fen?', !!nextFen);
-
+      console.debug('[BOARD] playUci', uci, 'with nextFen?', !!nextFen);
+      
       if (nextFen) {
-        // Истина — fen от движка ПОСЛЕ хода
-        currentFen = nextFen;
-        ground.set({ 
-          fen: currentFen, 
-          lastMove: [from, to],
-          turnColor: whoMoves(),
-          check: chess.inCheck() ? whoMoves() : false
-        });
+        currentFen = nextFen; // fen ИСТИНЫ от StudyEngine после применённых ходов
+        ground.set({ fen: currentFen, lastMove: [from, to] });
       } else {
-        // fallback (не идеален, но безопасен)
-        ground.move(from as any, to as any);
+        // fallback: визуальный сдвиг (без пересчёта fen здесь)
+        // @ts-ignore
+        ground.move(from, to);
       }
     }
   };
@@ -168,18 +162,12 @@ export function createChessgroundBoard(opts: {
                   return;
                 }
                 
-                // ПРИНЯТО: фиксируем ход ученика в адаптере
-                try {
-                  const move = chess.move({ from: orig, to: dest, promotion: 'q' });
-                  if (move) {
-                    currentFen = chess.fen();
-                    ground.set({ fen: currentFen, lastMove: [orig, dest] });
-                  }
-                } catch (error) {
-                  console.error('Error applying accepted move:', error);
-                  ground.cancelMove();
-                  ground.set({ fen: currentFen, lastMove: undefined });
-                }
+                // ВАЖНО: ничего не «применяем» здесь.
+                // Пользовательский drag уже отрисован самим chessground,
+                // а истинный fen придет позже через boardApi.playUci(..., nextFen) от движка.
+                
+                // Логи для отладки
+                console.debug('[BOARD] user move', uci);
               },
             },
       },
@@ -263,16 +251,14 @@ export function createChessgroundBoard(opts: {
 
   // НОВЫЙ: правильное формирование UCI с проверкой промоушена
   function toUci(orig: string, dest: string): string {
-    // определяем фигуру на orig из внутреннего chess адаптера
-    const piece = chess.get(orig as any); // chess.js: { type: 'p'|'n'|'b'|'r'|'q'|'k', color: 'w'|'b' } | null
-    const isPawn = piece?.type === 'p';
+    // определяем фигуру на orig из состояния chessground
+    // у @lichess-org/chessground есть состояние pieces: Map<square, { role: 'pawn'|'knight'|..., color }>
+    // @ts-ignore – если нет типов на pieces
+    const piece = ground?.state?.pieces?.get?.(orig);
+    const isPawn = piece?.role === 'pawn';
     const destRank = dest[1];
-
-    let promo = '';
-    if (isPawn && (destRank === '8' || destRank === '1')) {
-      promo = 'q'; // дефолтный промоушен
-    }
-
+    const needPromo = isPawn && (destRank === '8' || destRank === '1');
+    const promo = needPromo ? 'q' : '';
     return `${orig}${dest}${promo}`;
   }
 }
