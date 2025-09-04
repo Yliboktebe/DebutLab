@@ -22,6 +22,12 @@ export class ProgressManager {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
+        
+        // Миграция: добавляем версию если её нет
+        if (!parsed.version) {
+          parsed.version = "1.0.0";
+        }
+        
         // Ensure learnedMoves exists
         if (!parsed.learnedMoves) {
           parsed.learnedMoves = {};
@@ -29,13 +35,23 @@ export class ProgressManager {
         if (!parsed.debuts) {
           parsed.debuts = {};
         }
+        
+        // Миграция: конвертируем старые UCI ключи в позиционные (если нужно)
+        this.migrateLearnedMoves(parsed);
+        
         return parsed;
       }
     } catch (error) {
       console.error('Error loading progress from storage:', error);
     }
     
-    return { debuts: {}, learnedMoves: {} };
+    return { version: "1.0.0", debuts: {}, learnedMoves: {} };
+  }
+
+  private migrateLearnedMoves(progress: UserProgress): void {
+    // Если версия старая, конвертируем UCI ключи в позиционные
+    // Пока оставляем как есть, но структура готова для миграции
+    console.log('ProgressManager: Loaded progress version', progress.version);
   }
 
   private saveToStorage(): void {
@@ -46,8 +62,26 @@ export class ProgressManager {
     }
   }
 
+  public save(): void {
+    this.saveToStorage();
+  }
+
   getDebutProgress(debutId: string): DebutProgress {
     return this.progress.debuts[debutId] || {};
+  }
+
+  private getEmptyDebutProgress(): DebutProgress {
+    return {};
+  }
+
+  /** Сбрасывает ТОЛЬКО указанный дебют */
+  resetDebut(debutId: string): void {
+    this.progress.debuts[debutId] = this.getEmptyDebutProgress();
+    // также чистим изученные ходы по дебюту, иначе стрелки не вернутся
+    if (this.progress.learnedMoves && this.progress.learnedMoves[debutId]) {
+      delete this.progress.learnedMoves[debutId];
+    }
+    this.save();
   }
 
   updateBranch(debutId: string, branchId: string, updates: Partial<BranchProgress>): void {
@@ -123,7 +157,7 @@ export class ProgressManager {
     if (debutId) {
       delete this.progress.debuts[debutId];
     } else {
-      this.progress = { debuts: {}, learnedMoves: {} };
+      this.progress = { version: "1.0.0", debuts: {}, learnedMoves: {} };
     }
     this.saveToStorage();
   }

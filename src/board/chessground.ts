@@ -27,7 +27,7 @@ type DrawShape = { orig: Key; dest: Key; brush?: string };
     // НОВЫЕ МЕТОДЫ: обновление разрешенных ходов и стрелки
     setAllowedMoves(dests: Map<string, string[]>): void;
     showArrow(uciOrNull: string | null): void;
-    playUci(uci: string, nextFen?: string): void;  // ← добавили nextFen
+    playUci(uci: string, nextFen?: string): Promise<void>;  // ← добавили nextFen
   }
 
 export function createChessgroundBoard(opts: {
@@ -111,7 +111,7 @@ export function createChessgroundBoard(opts: {
       const shapes: DrawShape[] = [{ orig: from, dest: to, brush: 'green' }];
       ground.setAutoShapes(shapes);
     },
-    playUci(uci: string, nextFen?: string) {
+    async playUci(uci: string, nextFen?: string) {
       const from = uci.slice(0, 2), to = uci.slice(2, 4);
       
       // Логи для отладки
@@ -133,6 +133,9 @@ export function createChessgroundBoard(opts: {
         // @ts-ignore
         ground.move(from, to);
       }
+      
+      // подождём 2 кадра, чтобы CG перестроил state и DOM
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
     }
   };
 

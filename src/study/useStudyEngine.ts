@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Debut } from '@/content/types';
 import { studyEngine, StudyState, ApplyResult } from './study-engine';
-import { progressManager } from './progress-manager';
+import { progressManager, ProgressManager } from './progress-manager';
 import type { ChessBoardApi } from '@/board/chessground';
+
+type UiMsg = { text: string; kind: "success" | "info"; until: number } | null;
 
 // Примечание: studyEngine и progressManager - это singleton экземпляры
 // studyEngine экспортируется как: export const studyEngine = new StudyEngine();
@@ -12,41 +14,69 @@ export function useStudyEngine(debut: Debut) {
   const [state, setState] = useState<StudyState>(studyEngine.getState());
   const boardApiRef = useRef<ChessBoardApi | null>(null);
   const didInitialSyncRef = useRef(false);
+  const [uiMsg, setUiMsg] = useState<UiMsg>(null);
 
   // ⬇️ ОБЪЯВЛЕНИЕ ВВЕРХУ (HOISTED)
   function updateArrowAndDests() {
     if (!boardApiRef.current) return;
 
-    const expectedUci = studyEngine.currentExpectedUci();
-    const allowedMoves = studyEngine.getAllowedMoves();
-    
-    // В GUIDED показываем стрелку на ожидаемый ход (если не в learnedMoves[debutId])
-    // В TEST стрелок нет
-    const shouldShowArrow = state.mode === 'GUIDED' && 
-                           expectedUci && 
-                           !progressManager.getLearnedMoves(debut.id).includes(expectedUci);
-    
-    // НОВЫЙ: сначала позиция/стрелка, потом allowedMoves (порядок важен!)
-    boardApiRef.current.showArrow(shouldShowArrow ? expectedUci : null);
-    
-    // Всегда обновляем allowedMoves последними, иначе cg иногда применяет старые dests
-    setTimeout(() => {
-      if (boardApiRef.current) {
-        boardApiRef.current.setAllowedMoves(allowedMoves);
-      }
-    }, 0);
-    
-    // Логи для верификации
-    console.debug('FEN', studyEngine.getState().currentFen, 'expected', expectedUci);
-    console.debug('[BOARD]', 'setAllowedMoves', Array.from(allowedMoves.entries()));
+    const u = studyEngine.currentExpectedUci();
+    const showArrow = studyEngine.getState().mode === "GUIDED" && u && !studyEngine.isMoveLearned(u);
+
+    const dests = u
+      ? new Map([[u.slice(0,2), [u.slice(2,4)]]])
+      : new Map<string, string[]>();
+
+    boardApiRef.current.setAllowedMoves(dests);
+    boardApiRef.current.showArrow(showArrow ? u : null);
     
     console.log('useStudyEngine: Updated arrow and dests:', {
-      expectedUci,
-      shouldShowArrow,
-      allowedMoves,
-      mode: state.mode
+      expectedUci: u,
+      shouldShowArrow: showArrow,
+      dests: Array.from(dests.entries()),
+      mode: studyEngine.getState().mode
     });
   }
+
+  const showUiMsg = (m?: { kind: "success" | "info"; text: string; ttlMs?: number }) => {
+    if (!m) return;
+    const ttl = m.ttlMs ?? 1000;
+    setUiMsg({ text: m.text, kind: m.kind, until: Date.now() + ttl });
+    // автоочистка
+    setTimeout(() => setUiMsg((cur) => (cur && Date.now() >= cur.until ? null : cur)), ttl + 50);
+  };
+
+  const resetCurrentDebut = useCallback(() => {
+    // 1) чистим persistent
+    const pm = ProgressManager.getInstance();
+    pm.resetDebut(debut.id);
+
+    // 2) перечитать прогресс в движке (иначе останутся старые learnedMoves)
+    studyEngine.reloadProgressForCurrentDebut();
+
+    // 3) жёстко сбросить состояние движка на первую ветку (GUIDED)
+    studyEngine.hardResetCurrentDebutToFirstBranch();
+
+    // 4) синхронизировать доску и подсказки
+    const fen = studyEngine.getCurrentFen();
+    const expectedUci = studyEngine.currentExpectedUci(); // первый ход ученика
+    const dests = expectedUci
+      ? new Map([[expectedUci.slice(0, 2), [expectedUci.slice(2, 4)]]])
+      : new Map();
+
+    // аккуратно, чтобы не было гонок: сначала fen, затем dests и стрелка
+    if (boardApiRef.current) {
+      boardApiRef.current.setFen(fen);
+      boardApiRef.current.setAllowedMoves(dests);
+      boardApiRef.current.showArrow(expectedUci ?? null);
+    }
+
+    // Сбрасываем флаг синхронизации для принудительной пересинхронизации
+    didInitialSyncRef.current = false;
+
+    // короткое зелёное сообщение в блок подсказок
+    showUiMsg({ kind: "success", text: "Прогресс сброшен. Начинаем заново!", ttlMs: 900 });
+  }, [debut.id, showUiMsg]);
 
   useEffect(() => {
     // Проверяем, не загружен ли уже этот дебют
@@ -115,19 +145,11 @@ export function useStudyEngine(debut: Debut) {
     updateArrowAndDests();
   }, [state.studentIndex, state.mode]);
 
-  const onMove = useCallback((uci: string): boolean => {
+  const onMove = useCallback(async (uci: string): Promise<boolean> => {
     console.log('useStudyEngine: onMove called with UCI:', uci);
     
     const result: ApplyResult = studyEngine.applyUserMove(uci);
     console.log('useStudyEngine: onMove result:', result);
-    
-    // Логи для отладки автоответа
-    console.debug('[ENGINE]', { 
-      uci, 
-      opp: result.opponentUci, 
-      fenAfterUser: !!result.fenAfterUser, 
-      fenAfterBoth: !!result.fenAfterBoth 
-    });
     
     if (!result.accepted) {
       // Ход отклонён - показываем сообщение об ошибке
@@ -135,46 +157,55 @@ export function useStudyEngine(debut: Debut) {
       return false; // доска откатит ход
     }
     
-    // 1) закрепляем ход ученика по fen истины
-    if (boardApiRef.current && result.fenAfterUser) {
-      boardApiRef.current.playUci(uci, result.fenAfterUser);
+    // если был автоответ — двигаем доску с FEN реальности
+    if (result.opponentUci && boardApiRef.current) {
+      await boardApiRef.current.playUci(result.opponentUci, studyEngine.getCurrentFen());
     }
 
-    // 2) тут же рисуем автоответ соперника (если есть) — тоже по fen истины
-    if (boardApiRef.current && result.opponentUci && result.fenAfterBoth) {
-      boardApiRef.current.playUci(result.opponentUci, result.fenAfterBoth);
-    }
+    // теперь обновляем стрелку и разрешённые ходы
+    updateArrowAndDests();
 
-    // 2) переходы режима (reset/preroll) – если были
+    // показать временное сообщение (если есть)
+    showUiMsg(result.uiMessage);
+
+    // обработка переходов
     if (result.modeTransition === "GUIDED_TO_TEST") {
       console.log('useStudyEngine: Transitioning to TEST mode');
-      // Синхронизация произойдет автоматически через useEffect
+      // лёгкая задержка для UX
+      setTimeout(updateArrowAndDests, 50);
+    } else if (result.modeTransition === "COMPLETED") {
+      await handleBranchCompletedAndMaybeGoNext();
     }
-    
-    if (result.modeTransition === "COMPLETED") {
-      console.log('useStudyEngine: Branch completed');
-      // НОВЫЙ: автоматически загружаем следующую ветку
-      if (boardApiRef.current && state.currentDebut) {
-        const nextBranchId = progressManager.getNextBranchId(state.currentDebut.id, state.currentDebut.branches);
-        if (nextBranchId && nextBranchId !== state.currentBranch?.id) {
-          console.log('useStudyEngine: Loading next branch:', nextBranchId);
-          const nextBranch = state.currentDebut.branches.find(b => b.id === nextBranchId);
-          if (nextBranch) {
-            studyEngine.loadBranch(nextBranch);
-          }
-        }
-      }
-    }
-
-    // 4) стрелка и dests — ТОЛЬКО теперь (позиция уже после ответа)
-    updateArrowAndDests();
     
     return true; // доска оставит ход
   }, [state.currentBranch]);
 
-  const onNextBranch = useCallback(() => {
-    // TODO: реализовать переход к следующей ветке
-    console.log('useStudyEngine: onNextBranch called');
+  // НОВЫЙ: обработка завершения ветки и переход к следующей
+  const handleBranchCompletedAndMaybeGoNext = useCallback(async () => {
+    const nextId = studyEngine.getNextBranchId();
+
+    if (!nextId) {
+      showUiMsg({ kind: "success", text: "Все ветки дебюта изучены. 👍", ttlMs: 1200 });
+      return;
+    }
+
+    await studyEngine.loadBranchById(nextId);
+    studyEngine.resetToStart("GUIDED");
+
+    // первый ход за белых при обучении чёрных «прокрутится» внутри resetToStart
+    // теперь обновляем доску и стрелку
+    boardApiRef.current?.setFen(studyEngine.getCurrentFen());
+    updateArrowAndDests();
+  }, []);
+
+  const onNextBranch = useCallback(async () => {
+    const nextId = studyEngine.getNextBranchId();
+    if (!nextId) return; // всё пройдено
+    
+    await studyEngine.loadBranchById(nextId);
+    // всегда стартуем новую ветку в режиме GUIDED
+    studyEngine.setMode("GUIDED");
+    await updateArrowAndDests();
   }, []);
 
   const onRestart = useCallback(() => {
@@ -217,6 +248,8 @@ export function useStudyEngine(debut: Debut) {
     onNextBranch,
     onRestart,
     setBoardApi, // НОВЫЙ: для установки ссылки на API доски
-    updateArrowAndDests // НОВЫЙ: для принудительного обновления стрелки и dests
+    updateArrowAndDests, // НОВЫЙ: для принудительного обновления стрелки и dests
+    uiMsg, // НОВЫЙ: для отображения временных сообщений
+    resetCurrentDebut // НОВЫЙ: для сброса прогресса текущего дебюта
   };
 }

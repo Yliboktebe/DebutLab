@@ -45,7 +45,9 @@ function StudyContent({ debut }: { debut: Debut }) {
     // expectedUci,       // ← стрелка управляется через boardApi
     onMove,                 // НОВЫЙ: добавляем onMove
     setBoardApi,            // НОВЫЙ: для установки ссылки на API доски
-    updateArrowAndDests     // НОВЫЙ: для принудительного обновления
+    updateArrowAndDests,    // НОВЫЙ: для принудительного обновления
+    uiMsg,                  // НОВЫЙ: для отображения временных сообщений
+    resetCurrentDebut       // НОВЫЙ: для сброса прогресса текущего дебюта
   } = useStudyEngine(debut);
 
   const handleMove = useCallback((uci: string): boolean => {
@@ -53,6 +55,12 @@ function StudyContent({ debut }: { debut: Debut }) {
     // Вызываем onMove из useStudyEngine
     return onMove(uci);
   }, [onMove]);
+
+  const onResetClick = () => {
+    if (window.confirm(`Сбросить прогресс по дебюту «${debut.name}»? Это НЕ затронет другие дебюты.`)) {
+      resetCurrentDebut();
+    }
+  };
 
   // НОВЫЙ: устанавливаем ссылку на API доски при монтировании
   const handleBoardMounted = useCallback((api: ChessBoardApi) => {
@@ -73,9 +81,18 @@ function StudyContent({ debut }: { debut: Debut }) {
     <div className="study-view">
       <div className="study-header">
         <h1>{debut.name}</h1>
-        <span className={`learning-mode-badge ${learningMode}`}>
-          {learningMode === 'withHints' ? 'С подсказками' : 'Без подсказок'}
-        </span>
+        <div className="study-header-actions">
+          <span className={`learning-mode-badge ${learningMode}`}>
+            {learningMode === 'withHints' ? 'С подсказками' : 'Без подсказок'}
+          </span>
+          <button
+            className="reset-btn"
+            onClick={onResetClick}
+            title="Сбросит только прогресс этого дебюта"
+          >
+            Сбросить прогресс
+          </button>
+        </div>
       </div>
       
       <div className="study-content">
@@ -95,6 +112,11 @@ function StudyContent({ debut }: { debut: Debut }) {
             <p>Ход: {studentIndex % 2 === 0 ? 'Белые' : 'Черные'}</p>
           </div>
           
+          {uiMsg && (
+            <div className={`hint-msg ${uiMsg.kind === "success" ? "hint-success" : "hint-info"}`}>
+              {uiMsg.text}
+            </div>
+          )}
           {currentComment && (
             <div className="step-comment">
               <div className="comment-header">

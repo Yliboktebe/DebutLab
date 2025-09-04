@@ -55,8 +55,9 @@ export interface BranchProgress {
 export type DebutProgress = Record<string, BranchProgress>;
 
 export interface UserProgress {
+  version: string; // версия схемы прогресса
   debuts: Record<string, DebutProgress>;
-  learnedMoves: Record<string, string[]>;
+  learnedMoves: Record<string, string[]>; // теперь содержит позиционные ключи "fen#uci"
 }
 
 // Study state
