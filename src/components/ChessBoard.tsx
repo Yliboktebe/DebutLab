@@ -46,11 +46,20 @@ export default function ChessBoard({
     }
   }, [startFen, orientation, onTryMove]);
 
+  // Добавляем cleanup при размонтировании
+  useEffect(() => {
+    return () => {
+      apiRef.current?.destroy();
+      apiRef.current = null;
+      initializedRef.current = false;
+    };
+  }, []);
+
   // Стрелка и доступные ходы теперь управляются ТОЛЬКО через boardApi из useStudyEngine
 
   return (
     <div className="chess-board">
-      <div id="board" ref={boardRef} className="cg-wrap board" />
+      <div ref={boardRef} className="cg-wrap board" />
     </div>
   );
 }

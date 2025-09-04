@@ -81,6 +81,7 @@ function StudyContent({ debut }: { debut: Debut }) {
       <div className="study-content">
         <div className="chessboard-container">
           <ChessBoard
+            key={debut.id}          // ← форсируем новый React-инстанс на другую страницу
             startFen={currentFen}
             orientation={debut.side}  // НОВЫЙ: используем сторону дебюта
             onTryMove={handleMove}

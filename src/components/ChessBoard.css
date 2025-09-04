@@ -11,7 +11,7 @@
 }
 
 /* Контейнер для доски согласно инструкции chessground.md */
-#board {
+.board {
   width: 560px;
   height: 560px;
   min-width: 320px;
@@ -20,14 +20,14 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  #board {
+  .board {
     width: 400px;
     height: 400px;
   }
 }
 
 @media (max-width: 480px) {
-  #board {
+  .board {
     width: 320px;
     height: 320px;
   }

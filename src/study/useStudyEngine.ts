@@ -11,50 +11,10 @@ import type { ChessBoardApi } from '@/board/chessground';
 export function useStudyEngine(debut: Debut) {
   const [state, setState] = useState<StudyState>(studyEngine.getState());
   const boardApiRef = useRef<ChessBoardApi | null>(null);
+  const didInitialSyncRef = useRef(false);
 
-  useEffect(() => {
-    // Проверяем, не загружен ли уже этот дебют
-    const currentDebut = studyEngine.getState().currentDebut;
-    if (currentDebut?.id === debut.id) {
-      console.log('StudyEngine: Debut already loaded, skipping start');
-      return;
-    }
-
-    console.log('StudyEngine: Starting new debut:', debut.id);
-    studyEngine.setStateChangeCallback(() => setState(studyEngine.getState()));
-    studyEngine.start(debut);
-    
-    // НОВЫЙ: после старта вызываем preroll если есть boardApi
-    if (boardApiRef.current) {
-      const autos = studyEngine.prerollToStudentTurn();
-      autos.forEach(uci => boardApiRef.current!.playUci(uci));
-      updateArrowAndDests();
-    }
-    
-    return () => {
-      studyEngine.setStateChangeCallback(() => {});
-    };
-  }, [debut.id]); // Изменяем зависимость на debut.id вместо всего объекта debut
-
-  // Debug: логируем изменения состояния
-  useEffect(() => {
-    console.log('useStudyEngine: State changed:', {
-      mode: state.mode,
-      studentIndex: state.studentIndex,
-      currentFen: state.currentFen,
-      currentBranch: state.currentBranch?.id,
-      learningMode: state.learningMode,
-      currentComment: state.currentComment
-    });
-  }, [state]);
-
-  // НОВЫЙ: устанавливаем ссылку на API доски
-  const setBoardApi = useCallback((api: ChessBoardApi) => {
-    boardApiRef.current = api;
-  }, []);
-
-  // НОВЫЙ: обновляем стрелку и разрешенные ходы
-  const updateArrowAndDests = useCallback(() => {
+  // ⬇️ ОБЪЯВЛЕНИЕ ВВЕРХУ (HOISTED)
+  function updateArrowAndDests() {
     if (!boardApiRef.current) return;
 
     const expectedUci = studyEngine.currentExpectedUci();
@@ -86,12 +46,74 @@ export function useStudyEngine(debut: Debut) {
       allowedMoves,
       mode: state.mode
     });
-  }, [state.mode, debut.id]);
+  }
+
+  useEffect(() => {
+    // Проверяем, не загружен ли уже этот дебют
+    const currentDebut = studyEngine.getState().currentDebut;
+    if (currentDebut?.id === debut.id) {
+      console.log('StudyEngine: Debut already loaded, skipping start');
+      return;
+    }
+
+    console.log('StudyEngine: Starting new debut:', debut.id);
+    studyEngine.setStateChangeCallback(() => setState(studyEngine.getState()));
+    studyEngine.start(debut);
+    
+    return () => {
+      studyEngine.setStateChangeCallback(() => {});
+    };
+  }, [debut.id]); // Изменяем зависимость на debut.id вместо всего объекта debut
+
+  // Debug: логируем изменения состояния
+  useEffect(() => {
+    console.log('useStudyEngine: State changed:', {
+      mode: state.mode,
+      studentIndex: state.studentIndex,
+      currentFen: state.currentFen,
+      currentBranch: state.currentBranch?.id,
+      learningMode: state.learningMode,
+      currentComment: state.currentComment
+    });
+  }, [state]);
+
+  // НОВЫЙ: устанавливаем ссылку на API доски
+  const setBoardApi = useCallback((api: ChessBoardApi) => {
+    boardApiRef.current = api;
+  }, []);
+
+  // Синхронизация борда с движком при монтировании
+  useEffect(() => {
+    // условия: есть борд, есть активная ветка/дебют, и мы ещё не синхронизировались
+    if (!boardApiRef.current) return;
+    if (!state.currentBranch) return;
+    if (didInitialSyncRef.current) return;
+
+    didInitialSyncRef.current = true;
+
+    // 1) выставляем стартовый FEN из движка (он уже set'нут в start())
+    boardApiRef.current.setFen(studyEngine.getCurrentFen());
+
+    // 2) прероллим до очереди ученика (для чёрных это белые ходы),
+    //    каждый полуход отрисуем на борде ПО FEN ИСТИНЫ
+    const autos = studyEngine.prerollToStudentTurn();
+    for (const u of autos) {
+      boardApiRef.current.playUci(u, studyEngine.getCurrentFen());
+    }
+
+    // 3) только теперь выставляем стрелку и единственный доступный ход
+    updateArrowAndDests();
+  }, [boardApiRef.current, state.currentBranch?.id]);
+
+  // Сбрасываем флаг при смене дебюта/ветки
+  useEffect(() => {
+    didInitialSyncRef.current = false;
+  }, [debut.id, state.currentBranch?.id]);
 
   // НОВЫЙ: обновляем стрелку и dests при изменении состояния
   useEffect(() => {
     updateArrowAndDests();
-  }, [state.studentIndex, state.mode, updateArrowAndDests]);
+  }, [state.studentIndex, state.mode]);
 
   const onMove = useCallback((uci: string): boolean => {
     console.log('useStudyEngine: onMove called with UCI:', uci);
@@ -126,19 +148,7 @@ export function useStudyEngine(debut: Debut) {
     // 2) переходы режима (reset/preroll) – если были
     if (result.modeTransition === "GUIDED_TO_TEST") {
       console.log('useStudyEngine: Transitioning to TEST mode');
-      if (boardApiRef.current && state.currentBranch) {
-        boardApiRef.current.showArrow(null);
-        
-        // Сбрасываем позицию к началу ветки
-        const startFen = state.currentBranch.startFen === 'startpos' 
-          ? 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-          : state.currentBranch.startFen;
-        boardApiRef.current.setFen(startFen);
-        
-        // Проигрываем преролл
-        const autos = studyEngine.prerollToStudentTurn();
-        autos.forEach(uci => boardApiRef.current!.playUci(uci, studyEngine.getCurrentFen()));
-      }
+      // Синхронизация произойдет автоматически через useEffect
     }
     
     if (result.modeTransition === "COMPLETED") {
@@ -151,10 +161,6 @@ export function useStudyEngine(debut: Debut) {
           const nextBranch = state.currentDebut.branches.find(b => b.id === nextBranchId);
           if (nextBranch) {
             studyEngine.loadBranch(nextBranch);
-            // Проигрываем преролл и обновляем UI
-            const autos = studyEngine.prerollToStudentTurn();
-            autos.forEach(uci => boardApiRef.current!.playUci(uci, studyEngine.getCurrentFen()));
-            updateArrowAndDests();
           }
         }
       }
@@ -164,7 +170,7 @@ export function useStudyEngine(debut: Debut) {
     updateArrowAndDests();
     
     return true; // доска оставит ход
-  }, [state.currentBranch, updateArrowAndDests]);
+  }, [state.currentBranch]);
 
   const onNextBranch = useCallback(() => {
     // TODO: реализовать переход к следующей ветке
