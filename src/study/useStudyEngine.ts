@@ -18,8 +18,18 @@ export function useStudyEngine(debut: Debut) {
 
   // ⬇️ ОБЪЯВЛЕНИЕ ВВЕРХУ (HOISTED)
   function updateArrowAndDests() {
+    // если ветка ещё не загружена — ничего не делаем
+    if (!studyEngine.getCurrentBranch?.()) return;
     if (!boardApiRef.current) return;
 
+    // Если сейчас не очередь ученика — не подсказываем (без shapes/dests)
+    const fen = studyEngine.getState().currentFen;
+    const turn = fen.includes(' w ') ? 'white' : 'black';
+    if (turn !== studyEngine.getStudentColor()) {
+      boardApiRef.current.setAllowedMoves(new Map());
+      boardApiRef.current.showArrow(null);
+      return;
+    }
     const u = studyEngine.currentExpectedUci();
     const showArrow = studyEngine.getState().mode === "GUIDED" && u && !studyEngine.isMoveLearned(u);
 
@@ -88,7 +98,13 @@ export function useStudyEngine(debut: Debut) {
 
     console.log('StudyEngine: Starting new debut:', debut.id);
     studyEngine.setStateChangeCallback(() => setState(studyEngine.getState()));
-    studyEngine.start(debut);
+    
+    (async () => {
+      // старт дебюта/ветки (как у вас сделано)
+      await studyEngine.startDebutIfNeeded(debut.id);
+      studyEngine.start(debut);
+      updateArrowAndDests();
+    })();
     
     return () => {
       studyEngine.setStateChangeCallback(() => {});
@@ -124,12 +140,7 @@ export function useStudyEngine(debut: Debut) {
     // 1) выставляем стартовый FEN из движка (он уже set'нут в start())
     boardApiRef.current.setFen(studyEngine.getCurrentFen());
 
-    // 2) прероллим до очереди ученика (для чёрных это белые ходы),
-    //    каждый полуход отрисуем на борде ПО FEN ИСТИНЫ
-    const autos = studyEngine.prerollToStudentTurn();
-    for (const u of autos) {
-      boardApiRef.current.playUci(u, studyEngine.getCurrentFen());
-    }
+    // 2) преролл уже выполнен внутри studyEngine.start(); здесь больше НИЧЕГО не докручиваем
 
     // 3) только теперь выставляем стрелку и единственный доступный ход
     updateArrowAndDests();
@@ -170,9 +181,12 @@ export function useStudyEngine(debut: Debut) {
 
     // обработка переходов
     if (result.modeTransition === "GUIDED_TO_TEST") {
-      console.log('useStudyEngine: Transitioning to TEST mode');
-      // лёгкая задержка для UX
-      setTimeout(updateArrowAndDests, 50);
+      console.log('useStudyEngine: Transitioning to TEST mode (sync board)');
+      // движок уже в TEST и уже прероллил белых внутри resetToStart('TEST')
+      if (boardApiRef.current) {
+        boardApiRef.current.setFen(studyEngine.getCurrentFen());
+      }
+      updateArrowAndDests();  // TEST: стрелок не будет, но ход ученика должен быть разрешён
     } else if (result.modeTransition === "COMPLETED") {
       await handleBranchCompletedAndMaybeGoNext();
     }
@@ -190,22 +204,19 @@ export function useStudyEngine(debut: Debut) {
     }
 
     await studyEngine.loadBranchById(nextId);
-    studyEngine.resetToStart("GUIDED");
-
-    // первый ход за белых при обучении чёрных «прокрутится» внутри resetToStart
-    // теперь обновляем доску и стрелку
-    boardApiRef.current?.setFen(studyEngine.getCurrentFen());
+    studyEngine.setMode('GUIDED');      // первый проход следующей ветки
+    // движок уже стоит в стартовой позиции ветки и прероллит белых сам
+    if (boardApiRef.current) {
+      boardApiRef.current.setFen(studyEngine.getCurrentFen());
+    }
     updateArrowAndDests();
   }, []);
 
   const onNextBranch = useCallback(async () => {
-    const nextId = studyEngine.getNextBranchId();
-    if (!nextId) return; // всё пройдено
-    
+    const nextId = studyEngine.getNextBranchId?.();
+    if (!nextId) return;                // дебют завершён
     await studyEngine.loadBranchById(nextId);
-    // всегда стартуем новую ветку в режиме GUIDED
-    studyEngine.setMode("GUIDED");
-    await updateArrowAndDests();
+    studyEngine.setMode('GUIDED');      // первый проход следующей ветки
   }, []);
 
   const onRestart = useCallback(() => {

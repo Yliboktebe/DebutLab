@@ -38,7 +38,6 @@ export class StudyEngine {
   private progressManager: ProgressManager;
   private stateChangeCallback?: () => void;
   private studentStart: 0 | 1 = 0;         // 0 — учимся за белых, 1 — за чёрных
-  private studentIndex = 0;                // номер шага ученика: 0,1,2...
   // nextHalfMove больше не храним — вычисляем при необходимости
 
   constructor() {
@@ -78,7 +77,7 @@ export class StudyEngine {
     
     // в start(debut) / loadBranch(branch):
     this.studentStart = debut.side === 'black' ? 1 : 0;
-    this.studentIndex = 0;
+    this.state.studentIndex = 0;
     
     this.state.currentFen = this.getStartFen(debut.branches[0].startFen);
     this.state.errors = 0;
@@ -97,7 +96,7 @@ export class StudyEngine {
     
     // Инициализируем комментарий для первого шага
     if (this.state.currentBranch) {
-      this.state.currentComment = this.getStepComment(this.state.currentBranch, this.studentIndex);
+      this.state.currentComment = this.getStepComment(this.state.currentBranch, this.state.studentIndex);
       this.state.showHint = this.state.learningMode === 'withHints';
     }
     
@@ -118,7 +117,7 @@ export class StudyEngine {
     if (this.state.currentDebut) {
       this.studentStart = this.state.currentDebut.side === 'black' ? 1 : 0;
     }
-    this.studentIndex = 0;
+    this.state.studentIndex = 0;
     
     this.state.currentFen = this.getStartFen(branch.startFen);
     this.state.errors = 0;
@@ -136,7 +135,7 @@ export class StudyEngine {
     this.prerollToStudentTurn();  // вернёт массив uci, уже применённых в this.chess
     
     // Инициализируем комментарий
-    this.state.currentComment = this.getStepComment(branch, this.studentIndex);
+    this.state.currentComment = this.getStepComment(branch, this.state.studentIndex);
     this.state.showHint = this.state.learningMode === 'withHints';
     
     this.updateState();
@@ -173,7 +172,10 @@ export class StudyEngine {
       const fenAfterUser = this.chess.fen();
 
       // автоответ соперника (ровно один ход)
-      const opp = this.state.currentBranch!.ucis[this.studentIndex + 1] ?? null;
+      const br = this.state.currentBranch!;
+      const curStudentHalfMove = this.studentStart + this.state.studentIndex * 2;
+      const oppIndex = curStudentHalfMove + 1; // сразу после хода ученика
+      const opp = br.ucis[oppIndex] ?? null;
       if (opp) {
         try {
           const from = opp.slice(0, 2);
@@ -195,10 +197,11 @@ export class StudyEngine {
       }
       const fenAfterBoth = this.chess.fen();
 
-      // перейти к следующему ученическому шагу
-      this.studentIndex += 2;
+      // перейти к следующему ШАГУ ученика (0,1,2...)
+      this.state.studentIndex += 1;
 
-      const branchFinished = this.studentIndex >= this.state.currentBranch!.ucis.length;
+      const nextStudentHalfMove = this.studentStart + this.state.studentIndex * 2;
+      const branchFinished = nextStudentHalfMove >= br.ucis.length;
       let modeTransition: "GUIDED_TO_TEST" | "COMPLETED" | undefined;
       
       if (branchFinished && this.state.mode === 'GUIDED') {
@@ -211,7 +214,7 @@ export class StudyEngine {
       
       // Обновляем комментарий для следующего шага
       if (this.state.currentBranch) {
-        this.state.currentComment = this.getStepComment(this.state.currentBranch, this.studentIndex);
+        this.state.currentComment = this.getStepComment(this.state.currentBranch, this.state.studentIndex);
         this.state.showHint = this.state.learningMode === 'withHints';
       }
       
@@ -252,13 +255,13 @@ export class StudyEngine {
   // НОВЫЙ: приватный метод для сброса к началу ветки
   private resetToStart(nextMode: StudyMode) {
     this.state.mode = nextMode;
-    this.studentIndex = 0;
+    this.state.studentIndex = 0;
     this.state.errors = 0;
     this.state.stage = 0; // Сбрасываем stage при переходе в TEST
     
     if (this.state.currentBranch) {
       this.state.currentFen = this.getStartFen(this.state.currentBranch.startFen);
-      this.state.currentComment = this.getStepComment(this.state.currentBranch, this.studentIndex);
+      this.state.currentComment = this.getStepComment(this.state.currentBranch, this.state.studentIndex);
       this.state.showHint = nextMode === 'GUIDED' && this.state.learningMode === 'withHints';
     }
     
@@ -271,18 +274,21 @@ export class StudyEngine {
   }
 
   // ── ожидаемый ход ученика в текущей позиции ───────────────────────────────────
+  /** Ход, который должен сделать УЧЕНИК на текущем шаге. */
   public currentExpectedUci(): string | null {
-    const list = this.state.currentBranch?.ucis;
-    if (!list) return null;
-    return list[this.studentIndex] ?? null; // ВАЖНО: после +2 укажет следующий ученический ход
+    const br = this.state.currentBranch;
+    if (!br || !br.ucis?.length) return null;
+    // ученик ходит на полуходах: studentStart (0 для белых, 1 для чёрных), затем через каждые 2
+    const idx = this.studentStart + this.state.studentIndex * 2;
+    return br.ucis[idx] ?? null;
   }
 
   // НОВЫЙ: текущий ожидаемый ответ соперника
   currentOpponentUci(): string | null {
-    if (this.state.currentBranch && this.state.studentIndex + 1 < this.state.currentBranch.ucis.length) {
-      return this.state.currentBranch.ucis[this.state.studentIndex + 1];
-    }
-    return null;
+    const br = this.state.currentBranch;
+    if (!br) return null;
+    const idx = this.studentStart + this.state.studentIndex * 2 + 1;
+    return br.ucis[idx] ?? null;
   }
 
   // ── getAllowedMoves: карта ходов только для expectedUci ───────────────────────
@@ -294,40 +300,22 @@ export class StudyEngine {
     return new Map([[from, [to]]]);
   }
 
-  // ── преролл полуходов оппонента до очереди ученика ────────────────────────────
+  /** Преролл: сыграть РОВНО ОДИН первый полуход соперника, если сейчас не очередь ученика (идемпотентно). */
   public prerollToStudentTurn(): string[] {
     if (!this.state.currentBranch) return [];
-    
-    const played: string[] = [];
-    let halfMoveIndex = 0;
-    
-    // крутим пока глобальный индекс не совпадёт по чётности со стороной ученика
-    while (
-      halfMoveIndex < this.state.currentBranch.ucis.length &&
-      (halfMoveIndex % 2) !== this.studentStart
-    ) {
-      const uci = this.state.currentBranch.ucis[halfMoveIndex++];
-      try {
-        const from = uci.slice(0, 2);
-        const to = uci.slice(2, 4);
-        let promotion = uci.length > 4 ? uci[4] as any : undefined;
-        
-        // Если продвижение на последнюю линию и промоушен не указан, добавляем q
-        if (!promotion && this.isPawnPromotion(from, to)) {
-          promotion = 'q';
-        }
-        
-        const move = this.chess.move({ from, to, promotion });
-        if (move) {
-          played.push(uci);
-          this.state.currentFen = this.chess.fen();
-        }
-      } catch (error) {
-        console.error('Error prerolling move:', uci, error);
-      }
-    }
-    // здесь на очереди ход ученика; studentIndex остаётся 0
-    return played;
+    const student = this.getStudentColor() === 'white' ? 'w' : 'b';
+    // работаем с "истинным" движком, а не с временной копией
+    if (this.chess.turn() === student) return []; // уже очередь ученика
+    const uci = this.state.currentBranch.ucis?.[0];
+    if (!uci) return [];
+    const legal = new Set(this.chess.moves({ verbose: true }).map(m => m.from + m.to + (m.promotion ?? '')));
+    if (!legal.has(uci)) return [];
+    const from = uci.slice(0, 2), to = uci.slice(2, 4);
+    let promotion = uci.length > 4 ? (uci[4] as any) : undefined;
+    if (!promotion && this.isPawnPromotion(from, to)) promotion = 'q';
+    this.chess.move({ from, to, promotion });
+    this.state.currentFen = this.chess.fen();
+    return [uci];
   }
 
   // НОВЫЙ: проверка, является ли ход продвижением пешки
@@ -409,16 +397,15 @@ export class StudyEngine {
       const keys: string[] = [];
       let fen = this.getStartFen(this.state.currentBranch.startFen);
       
-      for (const uci of this.state.currentBranch.ucis) {
-        // ученик ходит на полуходах studentStart, соперник — на остальных
-        const uciIndex = this.uciIndexOf(uci);
-        const isStudentMove = ((this.studentStart + uciIndex) % 2) === this.studentStart;
+      this.state.currentBranch.ucis.forEach((uci, uciIndex) => {
+        // ученик ходит на полуходах с индексом %2 === studentStart (0 — белые, 1 — чёрные)
+        const isStudentMove = (uciIndex % 2) === this.studentStart;
         
         if (isStudentMove) {
           keys.push(this.buildMoveKey(fen, uci));
         }
         fen = this.applyUciToFen(fen, uci);
-      }
+      });
       
       this.progressManager.addLearnedMoves(debutId, keys);
     }
@@ -460,8 +447,7 @@ export class StudyEngine {
     this.state.mode = "GUIDED";
     this.state.errors = 0;
     this.studentStart = this.state.currentDebut.side === "white" ? 0 : 1;
-    this.studentIndex = this.studentStart;
-    this.state.studentIndex = this.studentIndex;
+    this.state.studentIndex = 0; // номер шага УЧЕНИКА, всегда с нуля
 
     // первая ветка дебюта
     const first = this.state.currentDebut.branches[0];
@@ -477,9 +463,7 @@ export class StudyEngine {
       const to = whiteUci.slice(2, 4);
       let promotion = whiteUci.length > 4 ? whiteUci[4] as any : undefined;
       this.chess.move({ from, to, promotion });
-      // теперь очередь ученика (чёрных)
-      this.studentIndex = 1;
-      this.state.studentIndex = 1;
+      // У ученика теперь первый шаг (0) ещё впереди, индекс шага НЕ меняем
     }
 
     this.state.currentFen = this.chess.fen();
@@ -556,6 +540,25 @@ export class StudyEngine {
   setMode(mode: StudyMode): void {
     this.state.mode = mode;
     this.updateState();
+  }
+
+  /** Текущая ветка, если загружена */
+  getCurrentBranch() {
+    return this.state?.currentBranch;
+  }
+
+  /** Получить цвет ученика */
+  getStudentColor(): 'white' | 'black' {
+    return this.state.currentDebut?.side || 'white';
+  }
+
+  /** Запустить дебют, если он ещё не загружен */
+  async startDebutIfNeeded(debutId: string): Promise<void> {
+    if (this.state.currentDebut?.id === debutId) {
+      return; // уже загружен
+    }
+    // В текущей реализации дебют передается напрямую в useStudyEngine
+    // Этот метод пока что заглушка для совместимости с новым API
   }
 
   private updateState(): void {

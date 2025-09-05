@@ -66,14 +66,7 @@ function StudyContent({ debut }: { debut: Debut }) {
   const handleBoardMounted = useCallback((api: ChessBoardApi) => {
     console.log('StudyView: Board API mounted');
     setBoardApi(api);
-    
-    // НОВЫЙ: после монтирования вызываем preroll и обновляем UI
-    setTimeout(() => {
-      const autos = studyEngine.prerollToStudentTurn();
-      autos.forEach((uci: string) => api.playUci(uci));
-      updateArrowAndDests();
-    }, 100);
-  }, [setBoardApi, updateArrowAndDests]);
+  }, [setBoardApi]);
 
 
 
