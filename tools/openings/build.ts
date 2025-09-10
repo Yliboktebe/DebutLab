@@ -21,6 +21,19 @@ async function main() {
       ? applyMoves("startpos", op.seed.ucis)
       : applyMoves(op.seed.startFen, op.seed.ucis);
 
+    // Настройка preferByFen для central в coach mode
+    if (op.id === "central" && op.coach?.enabled) {
+      op.coach.our.preferByFen ??= {};
+
+      // FEN после ...exd4 (ход чёрных на 2-м ходу)
+      const fenAfterExd4 = applyMoves(seedFen, ["e5d4"]);
+      op.coach.our.preferByFen[`afterFen:${fenAfterExd4}`] = ["d1d4"]; // 3.Qxd4
+
+      // FEN после ...Nc6 (после 3.Qxd4)
+      const fenAfterNc6 = applyMoves(fenAfterExd4, ["d1d4","b8c6"]); // белый сходил Qxd4, чёрный Nc6
+      op.coach.our.preferByFen[`afterFen:${fenAfterNc6}`] = ["d4e3"]; // 4.Qe3 (Berger)
+    }
+
     const branches = await generateBranches({
       g: cfg.global,
       side: op.side,
@@ -28,7 +41,8 @@ async function main() {
       seedFen,
       seedPath: op.seed.ucis,
       rootBuckets: op.buckets,
-      repertoire: op.repertoire
+      repertoire: op.repertoire,
+      coach: op.coach // <— добавлено
     });
 
     await writeUiFile(OUT, op.id, op.side, branches, cfg.global, {

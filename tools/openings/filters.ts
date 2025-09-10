@@ -49,3 +49,8 @@ export function applyMotifGuard(
     return !bannedUcIs.includes(m.uci);
   });
 }
+
+/** Возвращает true, если cp (оценка за сторону, которой предстоит ходить) >= порога */
+export function isBigBlunderCp(cp: number|undefined, threshold: number): boolean {
+  return typeof cp === "number" && cp >= threshold;
+}

@@ -35,10 +35,24 @@
       "side": "white",
       "seed": { "startFen": "startpos", "ucis": ["e2e4","e7e5","d2d4"] },
       "buckets": [
-        { "label": "Accepted (…exd4)", "matchUcIs": ["e5d4"], "min": 2, "max": 3, "depthBonus": 2 },
+        { "label": "Accepted (…exd4)", "matchUcIs": ["e5d4"], "min": 1, "max": 1, "depthBonus": 2 },
         { "label": "…Nc6",              "matchUcIs": ["b8c6"], "min": 1, "max": 1 },
-        { "label": "…d6 / …d5",         "matchUcIs": ["d7d6","d7d5"], "min": 1, "max": 1 }
+        { "label": "…d5",               "matchUcIs": ["d7d5"], "min": 1, "max": 1 },
+        { "label": "…d6",               "matchUcIs": ["d7d6"], "min": 1, "max": 1 }
       ],
+      "coach": {
+        "enabled": true,
+        "side": "white",
+        "our": {
+          "priority": "prefer>engine>data",
+          "preferByFen": {}
+        },
+        "opp": {
+          "coverage": 0.9,
+          "topN": 3,
+          "traps": { "enable": true, "blunderCp": 180, "minGames": 20 }
+        }
+      },
       "repertoire": {
         "allowedRepliesByFen": {}
       }

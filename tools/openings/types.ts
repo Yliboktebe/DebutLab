@@ -29,6 +29,8 @@ export interface OpeningConfig {
   buckets?: FamilyBucket[];
   /** Предпочтения репертуара (наши ходы) */
   repertoire?: RepertoirePrefs;
+  /** Новое: режим тренера */
+  coach?: CoachMode;
 }
 
 export interface RootConfig {
@@ -89,26 +91,52 @@ export interface RepertoirePrefs {
   allowedRepliesByFen?: Record<string, string[]>;
 }
 
+// === Coach-mode: детерминированный "наш" ход, ветвление на ответах соперника ===
+export interface CoachOurMovePolicy {
+  /** Приоритеты выбора: "prefer>engine>data" | "engine>data>prefer" | "data>engine>prefer" */
+  priority?: "prefer>engine>data" | "engine>data>prefer" | "data>engine>prefer";
+  /** Явные предпочтения по конкретным позициям (ключ: "afterFen:<FEN>") — массив UCI по убыв. приоритета */
+  preferByFen?: Record<string, string[]>;
+}
+
+export interface CoachOpponentPolicy {
+  /** Покрытие ответов соперника (0..1), напр. 0.85..0.9 */
+  coverage?: number;
+  /** Жёсткий верхний предел вариантов на узле соперника */
+  topN?: number;
+  /** Пороги по глубине для допустимого минимума партий (если не задано — берём из global) */
+  minGamesByDepth?: number[];
+  /** Включать ли ловушки (ошибки соперника) сверх покрытия */
+  traps?: {
+    enable: boolean;
+    /** cp-порог преимущества для нашей стороны (после хода соперника), напр. 180 */
+    blunderCp?: number;
+    /** минимум партий для такого хода соперника, чтобы считать его «инструктивным» */
+    minGames?: number;
+  };
+}
+
+export interface CoachMode {
+  enabled: boolean;
+  /** Наша сторона: "white"|"black" */
+  side: "white"|"black";
+  our: CoachOurMovePolicy;
+  opp: CoachOpponentPolicy;
+}
+
 // === Новое: постобработка ===
 export interface PostProcessParams {
-  /** Длина префикса UCI для дедупликации */
-  dedupePrefixLen?: number; // напр. 12
-  /** Табиные условия остановки (эвристики) */
+  dedupePrefixLen?: number;
   tabiya?: {
-    /** Мин. число выведенных лёгких фигур у каждой стороны */
-    minDevelopedEachSide?: number; // напр. 2
-    /** Останавливать ли при рокировке любой стороны */
+    minDevelopedEachSide?: number;
     stopOnAnyCastling?: boolean;
   };
-  /** Guard на «мусорные» мотивы в дебюте */
   moveGuards?: {
-    /** Запрещённые UCI до указанного ply (если они не в whitelist) */
-    bannedUcIs?: string[];         // по умолчанию ["h2h4","a2a4","h7h5","a7a5"]
-    bannedBeforePly?: number;      // напр. 6
+    bannedUcIs?: string[];
+    bannedBeforePly?: number;
   };
-  /** Формирование имён веток */
   naming?: {
     useExplorerName?: boolean;
-    enableCenterGameLabels?: boolean; // специальные лейблы для id=central
+    enableCenterGameLabels?: boolean;
   };
 }

@@ -3,254 +3,7 @@
   "side": "white",
   "branches": [
     {
-      "id": "mfdupyzw-6",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f3d4",
-        "f8c5",
-        "c1e3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Classical Variation"
-    },
-    {
-      "id": "mfduq095-b",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f3d4",
-        "f8c5",
-        "d4c6",
-        "b7c6",
-        "f1d3",
-        "d7d6",
-        "b1c3",
-        "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6 — Scotch Game: Classical Variation"
-    },
-    {
-      "id": "mfduq458-e",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f3d4",
-        "f8c5",
-        "d4c6",
-        "d8f6",
-        "d1f3",
-        "d7c6",
-        "b1c3",
-        "f6f3",
-        "g2f3",
-        "g8f6",
-        "c1e3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Classical Variation, Intermezzo Variation"
-    },
-    {
-      "id": "mfduqb06-g",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f3d4",
-        "f8c5",
-        "d4c6",
-        "d8f6",
-        "d1f3",
-        "f6f3",
-        "g2f3",
-        "d7c6",
-        "c1e3",
-        "c5e3",
-        "f2e3",
-        "g8f6",
-        "b1c3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Classical Variation, Intermezzo Variation"
-    },
-    {
-      "id": "mfduqylj-c",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f3d4",
-        "f8c5",
-        "d4c6",
-        "d8f6",
-        "d1d2",
-        "d7c6",
-        "b1c3",
-        "c8d7",
-        "f1d3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Classical Variation, Intermezzo Variation"
-    },
-    {
-      "id": "mfdur74v-c",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f3d4",
-        "f8c5",
-        "d4c6",
-        "d8f6",
-        "d1d2",
-        "f6c6",
-        "b1c3",
-        "g8f6",
-        "f1d3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Classical Variation, Intermezzo Variation"
-    },
-    {
-      "id": "mfdurbkj-g",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f3d4",
-        "g8f6",
-        "d4c6",
-        "b7c6",
-        "e4e5",
-        "d8e7",
-        "d1e2",
-        "f6d5",
-        "c2c4",
-        "c8a6",
-        "b2b3",
-        "g7g6",
-        "c1b2"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Mieses Variation"
-    },
-    {
-      "id": "mfdurbl3-g",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f3d4",
-        "g8f6",
-        "d4c6",
-        "b7c6",
-        "e4e5",
-        "f6d5",
-        "c2c4",
-        "d5b6",
-        "b1c3",
-        "d7d5",
-        "e5d6",
-        "c7d6",
-        "f1d3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d5 — Scotch Game: Mieses Variation"
-    },
-    {
-      "id": "mfdurixi-6",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f3d4",
-        "g8f6",
-        "b1c3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Schmidt Variation"
-    },
-    {
-      "id": "mfdurj4w-5",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f1c4",
-        "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Scotch Gambit"
-    },
-    {
-      "id": "mfdurj4w-5",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "g1f3",
-        "b8c6",
-        "f1c4",
-        "f8c5"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Scotch Gambit"
-    },
-    {
-      "id": "mfdurj4z-8",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "d1d4",
-        "b8c6",
-        "d4e3",
-        "g8f6",
-        "b1c3",
-        "f8b4",
-        "c1d2"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game: Berger Variation"
-    },
-    {
-      "id": "mfdurj4z-8",
+      "id": "b-e637e21e8a78",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -268,411 +21,336 @@
       "name": "Center Game: Accepted (Qxd4) — Center Game: Berger Variation"
     },
     {
-      "id": "mfdurj54-9",
+      "id": "b-d6afffca1251",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
         "e7e5",
         "d2d4",
+        "e5d4",
+        "d1d4",
         "b8c6",
-        "d4d5",
-        "c6e7",
-        "g1f3",
-        "e7g6",
-        "h2h4",
-        "h7h5",
-        "c1g5",
-        "g8f6"
+        "d4e3",
+        "g8f6",
+        "c1d2",
+        "b7b6",
+        "b1c3"
       ],
-      "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation"
+      "name": "Center Game: Accepted (Qxd4) — Center Game: Berger Variation"
     },
     {
-      "id": "mfdurj55-9",
+      "id": "b-c7e75d5ec77e",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
         "e7e5",
         "d2d4",
+        "e5d4",
+        "d1d4",
         "b8c6",
-        "d4d5",
-        "c6e7",
-        "g1f3",
-        "e7g6",
-        "h2h4",
-        "h7h5",
+        "d4e3",
+        "g8f6",
+        "c1d2",
+        "f8b4",
+        "a2a3",
+        "b4d2",
+        "b1d2",
+        "d7d6",
+        "h2h3"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6 — Center Game: Berger Variation"
+    },
+    {
+      "id": "b-34e7a8262ea6",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "g8f6",
+        "c1d2",
+        "f8b4",
+        "a2a3",
+        "b4a5",
+        "d2a5",
+        "c6a5",
+        "b1c3"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: Berger Variation"
+    },
+    {
+      "id": "b-c75236076757",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "d7d6",
         "b1c3",
-        "g8f6"
+        "g8f6",
+        "c1d2"
       ],
-      "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation"
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6 — Center Game: Paulsen Attack Variation"
     },
     {
-      "id": "mfdurj55-9",
+      "id": "b-1af3b2338397",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "d7d6",
+        "b1c3",
+        "c8e6",
+        "g1e2"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6 — Center Game: Paulsen Attack Variation"
+    },
+    {
+      "id": "b-ec813a7bf287",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "d7d6",
+        "b1c3",
+        "f8e7",
+        "c1d2"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6 — Center Game: Paulsen Attack Variation"
+    },
+    {
+      "id": "b-b3af0cbae074",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "b7b6",
+        "b1c3",
+        "f8c5",
+        "e3g3",
+        "d8f6",
+        "c3d5",
+        "f6d6",
+        "d5c7",
+        "e8d8",
+        "g3d6",
+        "c5d6",
+        "c7a8"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: Paulsen Attack Variation"
+    },
+    {
+      "id": "b-8de8cf7300e1",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "b7b6",
+        "b1c3",
+        "f8c5",
+        "e3g3",
+        "g7g6",
+        "c3d5",
+        "c5d6",
+        "c1f4"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: Paulsen Attack Variation"
+    },
+    {
+      "id": "b-15b08a77694d",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "b7b6",
+        "b1c3",
+        "f8c5",
+        "e3g3",
+        "c5d4",
+        "g1e2"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: Paulsen Attack Variation"
+    },
+    {
+      "id": "b-f3e66b1760ca",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "b7b6",
+        "b1c3",
+        "f8c5",
+        "e3g3",
+        "c5f8",
+        "c1f4",
+        "d7d6"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6 — Center Game: Paulsen Attack Variation"
+    },
+    {
+      "id": "b-22a0a8f07412",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "b7b6",
+        "b1c3",
+        "f8c5",
+        "e3g3",
+        "c5d6",
+        "f2f4"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: Paulsen Attack Variation"
+    },
+    {
+      "id": "b-1a12b0f98b84",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "b7b6",
+        "b1c3",
+        "c8b7",
+        "c1d2"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: Paulsen Attack Variation"
+    },
+    {
+      "id": "b-a6663c3adbe2",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "d7d6",
+        "c1e3"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6 — Center Game"
+    },
+    {
+      "id": "b-4bdb824a9f1e",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
         "e7e5",
         "d2d4",
         "b8c6",
-        "d4d5",
-        "c6e7",
+        "d4e5",
+        "c6e5",
         "g1f3",
-        "e7g6",
-        "h2h4",
-        "h7h5",
+        "e5f3",
+        "g2f3",
+        "f8c5",
+        "b1c3",
+        "d7d6",
+        "c3a4"
+      ],
+      "name": "Center Game → Scotch structures — Center Game: ...d6 — Nimzowitsch Defense: Kennedy Variation, Paulsen Attack"
+    },
+    {
+      "id": "b-01684f04a69a",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "b8c6",
+        "d4e5",
+        "c6e5",
+        "g1f3",
+        "e5f3",
+        "g2f3",
+        "d7d6",
+        "b1c3"
+      ],
+      "name": "Center Game → Scotch structures — Center Game: ...d6 — Nimzowitsch Defense: Kennedy Variation, Paulsen Attack"
+    },
+    {
+      "id": "b-7f6e96d2d83d",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "b8c6",
+        "d4e5",
+        "c6e5",
+        "g1f3",
+        "e5g6",
+        "b1c3",
+        "f8c5"
+      ],
+      "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Paulsen Attack"
+    },
+    {
+      "id": "b-b485507e1396",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "b8c6",
+        "d4e5",
+        "c6e5",
+        "g1f3",
+        "e5g6",
         "b1c3",
         "f8b4"
       ],
-      "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation"
+      "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Paulsen Attack"
     },
     {
-      "id": "mfdurj57-d",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "g1f3",
-        "e7g6",
-        "h2h4",
-        "d7d6",
-        "h4h5",
-        "g6e7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6 — Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation"
-    },
-    {
-      "id": "mfdurj57-9",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "g1f3",
-        "e7g6",
-        "h2h4",
-        "d7d6",
-        "h4h5",
-        "g6f4"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6 — Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation"
-    },
-    {
-      "id": "mfdurj59-9",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "g1f3",
-        "d7d6",
-        "c2c4",
-        "e7g6",
-        "b1c3",
-        "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6 — Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation"
-    },
-    {
-      "id": "mfdurj59-9",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "g1f3",
-        "d7d6",
-        "c2c4",
-        "e7g6",
-        "b1c3",
-        "f8e7"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6 — Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation"
-    },
-    {
-      "id": "mfdurj5a-9",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "g1f3",
-        "d7d6",
-        "c2c4",
-        "f7f5",
-        "b1c3",
-        "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6 — Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation"
-    },
-    {
-      "id": "mfdurj5b-9",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "g1f3",
-        "d7d6",
-        "c2c4",
-        "f7f5",
-        "f1d3",
-        "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6 — Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation"
-    },
-    {
-      "id": "mfdurj5d-6",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8c5",
-        "c1e3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Classical Variation"
-    },
-    {
-      "id": "mfdurj5g-b",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8c5",
-        "d4c6",
-        "b7c6",
-        "f1d3",
-        "d7d6",
-        "b1c3",
-        "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6 — Scotch Game: Classical Variation"
-    },
-    {
-      "id": "mfdurj5i-e",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8c5",
-        "d4c6",
-        "d8f6",
-        "d1f3",
-        "d7c6",
-        "b1c3",
-        "f6f3",
-        "g2f3",
-        "g8f6",
-        "c1e3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Classical Variation, Intermezzo Variation"
-    },
-    {
-      "id": "mfdurj5m-g",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8c5",
-        "d4c6",
-        "d8f6",
-        "d1f3",
-        "f6f3",
-        "g2f3",
-        "d7c6",
-        "c1e3",
-        "c5e3",
-        "f2e3",
-        "g8f6",
-        "b1c3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Classical Variation, Intermezzo Variation"
-    },
-    {
-      "id": "mfdurj60-c",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8c5",
-        "d4c6",
-        "d8f6",
-        "d1d2",
-        "d7c6",
-        "b1c3",
-        "c8d7",
-        "f1d3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Classical Variation, Intermezzo Variation"
-    },
-    {
-      "id": "mfdurj9a-c",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8c5",
-        "d4c6",
-        "d8f6",
-        "d1d2",
-        "f6c6",
-        "b1c3",
-        "g8f6",
-        "f1d3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Classical Variation, Intermezzo Variation"
-    },
-    {
-      "id": "mfdurj9j-g",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "d4c6",
-        "b7c6",
-        "e4e5",
-        "d8e7",
-        "d1e2",
-        "f6d5",
-        "c2c4",
-        "c8a6",
-        "b2b3",
-        "g7g6",
-        "c1b2"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Mieses Variation"
-    },
-    {
-      "id": "mfdurj9z-g",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "d4c6",
-        "b7c6",
-        "e4e5",
-        "f6d5",
-        "c2c4",
-        "d5b6",
-        "b1c3",
-        "d7d5",
-        "e5d6",
-        "c7d6",
-        "f1d3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d5 — Scotch Game: Mieses Variation"
-    },
-    {
-      "id": "mfdurjl2-6",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Schmidt Variation"
-    },
-    {
-      "id": "mfdurjl3-5",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f1c4",
-        "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Scotch Gambit"
-    },
-    {
-      "id": "mfdurjl3-5",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "g1f3",
-        "e5d4",
-        "f1c4",
-        "f8c5"
-      ],
-      "name": "Center Game → Scotch structures — Scotch Game: Scotch Gambit"
-    },
-    {
-      "id": "mfdurltq-8",
+      "id": "b-1ad07cb8a934",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -681,76 +359,15 @@
         "b8c6",
         "d4e5",
         "c6e5",
-        "f2f4",
-        "e5c6",
         "g1f3",
-        "f8c5",
-        "b1c3"
-      ],
-      "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Riemann Defense"
-    },
-    {
-      "id": "mfduroga-8",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "f2f4",
         "e5g6",
-        "g1f3",
-        "f8c5",
-        "b1c3"
-      ],
-      "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Main Line"
-    },
-    {
-      "id": "mfdurr36-9",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "f2f4",
-        "e5g6",
-        "g1f3",
-        "d7d6",
         "b1c3",
         "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6 — Nimzowitsch Defense: Kennedy Variation, Main Line"
-    },
-    {
-      "id": "mfdurzfr-d",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5f3",
-        "d1f3",
-        "d8f6",
-        "f1e2",
-        "f6f3",
-        "e2f3",
-        "f8c5",
-        "b1c3",
-        "g8e7"
       ],
       "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Paulsen Attack"
     },
     {
-      "id": "mfdus5aq-c",
+      "id": "b-229a02b16b5c",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -760,156 +377,95 @@
         "d4e5",
         "c6e5",
         "g1f3",
-        "e5f3",
-        "d1f3",
         "d8f6",
-        "f3f6",
-        "g8f6",
         "b1c3",
+        "f8b4"
+      ],
+      "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Paulsen Attack"
+    },
+    {
+      "id": "b-75cc2b7c796b",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "b8c6",
+        "d4e5",
+        "c6e5",
+        "g1f3",
+        "d8f6",
+        "b1c3",
+        "e5f3",
+        "g2f3",
         "f8b4",
-        "f1d3"
+        "d1d3"
       ],
       "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Paulsen Attack"
     },
     {
-      "id": "mfdus7a7-7",
+      "id": "b-666cb273f32f",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
         "e7e5",
         "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "f8e7"
-      ],
-      "name": "Center Game: ...d6 — Philidor Defense: Exchange Variation"
-    },
-    {
-      "id": "mfdus7sq-7",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "f1d3",
-        "f8e7"
-      ],
-      "name": "Center Game: ...d6 — Philidor Defense: Exchange Variation"
-    },
-    {
-      "id": "mfdus9y6-9",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "f1d3",
-        "g7g6",
-        "b1c3",
-        "f8g7"
-      ],
-      "name": "Center Game: ...d6 — Philidor Defense: Exchange Variation"
-    },
-    {
-      "id": "mfdusalm-7",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8e7",
-        "b1c3",
-        "g8f6"
-      ],
-      "name": "Center Game: ...d6 — Philidor Defense: Exchange Variation"
-    },
-    {
-      "id": "mfdusdjj-7",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "d1d4",
         "b8c6",
-        "f1b5",
-        "c8d7"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6 — Philidor Defense: Exchange Variation"
-    },
-    {
-      "id": "mfdusfzd-7",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "d1d4",
-        "g8f6",
-        "b1c3",
-        "f8e7"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6 — Philidor Defense: Exchange Variation"
-    },
-    {
-      "id": "mfdusfzd-7",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "d1d4",
-        "g8f6",
-        "b1c3",
-        "b8c6"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6 — Philidor Defense: Exchange Variation"
-    },
-    {
-      "id": "mfdusnca-9",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "f1c4",
-        "c7c6",
         "d4e5",
-        "d6e5",
-        "f3g5",
-        "g8h6"
+        "c6e5",
+        "g1f3",
+        "f7f6",
+        "f3e5",
+        "f6e5",
+        "d1h5",
+        "e8e7",
+        "h5e5",
+        "e7f7",
+        "f1c4",
+        "f7g6",
+        "e5f5"
       ],
-      "name": "Center Game: ...d6 — Philidor Defense: Hanham Variation"
+      "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Paulsen Attack"
+    },
+    {
+      "id": "b-93d0bcb29d79",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "b8c6",
+        "d4e5",
+        "c6e5",
+        "g1f3",
+        "f7f6",
+        "f3e5",
+        "f6e5",
+        "d1h5",
+        "g7g6",
+        "h5e5",
+        "d8e7",
+        "e5h8",
+        "e7e4",
+        "c1e3",
+        "g8e7",
+        "b1c3"
+      ],
+      "name": "Center Game → Scotch structures — Nimzowitsch Defense: Kennedy Variation, Paulsen Attack"
+    },
+    {
+      "id": "b-adb89407cd6b",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "b8c6",
+        "d4e5",
+        "c6e7",
+        "b1c3"
+      ],
+      "name": "Nimzowitsch Defense: Kennedy Variation"
     }
   ],
   "meta": {
