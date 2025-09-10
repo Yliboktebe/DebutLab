@@ -1,0 +1,258 @@
+{
+  "id": "sicilian-test",
+  "side": "black",
+  "branches": [
+    {
+      "id": "mf9spaj3-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "g1f3",
+        "b8c6",
+        "d2d4",
+        "c5d4"
+      ]
+    },
+    {
+      "id": "mf9spano-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "g7g6"
+      ]
+    },
+    {
+      "id": "mf9spano-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "g1f3",
+        "b8c6",
+        "f1b5",
+        "e7e6"
+      ]
+    },
+    {
+      "id": "mf9spanq-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "g1f3",
+        "d7d6",
+        "d2d4",
+        "c5d4"
+      ]
+    },
+    {
+      "id": "mf9spass-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "g1f3",
+        "d7d6",
+        "c2c3",
+        "g8f6"
+      ]
+    },
+    {
+      "id": "mf9spass-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "g1f3",
+        "d7d6",
+        "c2c3",
+        "b8c6"
+      ]
+    },
+    {
+      "id": "mf9spb5a-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "b1c3",
+        "b8c6",
+        "f2f4",
+        "g7g6"
+      ]
+    },
+    {
+      "id": "mf9spb5a-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "b1c3",
+        "b8c6",
+        "f2f4",
+        "e7e6"
+      ]
+    },
+    {
+      "id": "mf9spbeq-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "b1c3",
+        "b8c6",
+        "g2g3",
+        "g7g6"
+      ]
+    },
+    {
+      "id": "mf9spbeq-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "b1c3",
+        "b8c6",
+        "g2g3",
+        "e7e6"
+      ]
+    },
+    {
+      "id": "mf9spbv5-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "b1c3",
+        "d7d6",
+        "f2f4",
+        "b8c6"
+      ]
+    },
+    {
+      "id": "mf9spbv5-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "b1c3",
+        "d7d6",
+        "f2f4",
+        "g8f6"
+      ]
+    },
+    {
+      "id": "mf9spc8y-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "b1c3",
+        "d7d6",
+        "g2g3",
+        "g8f6"
+      ]
+    },
+    {
+      "id": "mf9spc8y-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "b1c3",
+        "d7d6",
+        "g2g3",
+        "b8c6"
+      ]
+    },
+    {
+      "id": "mf9spcn6-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "c2c3",
+        "d7d5",
+        "e4d5",
+        "d8d5"
+      ]
+    },
+    {
+      "id": "mf9spcz8-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "c2c3",
+        "d7d5",
+        "e4e5",
+        "b8c6"
+      ]
+    },
+    {
+      "id": "mf9spcz8-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "c2c3",
+        "d7d5",
+        "e4e5",
+        "d5d4"
+      ]
+    },
+    {
+      "id": "mf9spdcz-4",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "c7c5",
+        "c2c3",
+        "g8f6",
+        "e4e5",
+        "f6d5"
+      ]
+    }
+  ],
+  "meta": {
+    "source": "lichess",
+    "filters": {
+      "speeds": [
+        "rapid",
+        "classical"
+      ],
+      "ratings": [
+        2000,
+        2200,
+        2500
+      ],
+      "since": "2018-01",
+      "until": "3000-12",
+      "coverage": 0.85,
+      "minGamesByDepth": [
+        50,
+        30,
+        20,
+        10
+      ],
+      "topNByDepth": [
+        3,
+        2,
+        2,
+        2
+      ],
+      "engine": {
+        "useCloud": false,
+        "multiPv": 4,
+        "topN": 3,
+        "maxCpDrop": 120
+      }
+    },
+    "version": 1
+  }
+}

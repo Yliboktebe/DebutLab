@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "global": {
+    "speeds": ["rapid","classical"],
+    "ratings": [2000,2200,2500],
+    "since": "2018-01",
+    "until": "3000-12",
+    "maxPlies": 16,
+    "coverage": 0.85,
+    "minGamesByDepth": [100,80,60,50,40,30,25,20,15,10,8,6,5,4,3,3],
+    "topNByDepth":     [  4, 4, 3, 3, 3, 3, 3, 3, 2, 2,2,2,2,2,2,2],
+    "engine": { "useCloud": true, "multiPv": 4, "topN": 3, "maxCpDrop": 120 }
+  },
+  "openings": [
+    {
+      "id": "sicilian",
+      "name": "Сицилианская защита",
+      "side": "black",
+      "seed": { "startFen": "startpos", "ucis": ["e2e4","c7c5"] }
+    },
+    {
+      "id": "ruy-lopez",
+      "name": "Испанская партия",
+      "side": "black",
+      "seed": { "startFen": "startpos", "ucis": ["e2e4","e7e5","g1f3","b8c6","f1b5"] }
+    }
+  ]
+}

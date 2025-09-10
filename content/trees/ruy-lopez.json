@@ -1,0 +1,65 @@
+{
+  "id": "ruy-lopez",
+  "side": "black",
+  "branches": [],
+  "meta": {
+    "source": "lichess",
+    "filters": {
+      "speeds": [
+        "rapid",
+        "classical"
+      ],
+      "ratings": [
+        2000,
+        2200,
+        2500
+      ],
+      "since": "2018-01",
+      "until": "3000-12",
+      "coverage": 0.85,
+      "minGamesByDepth": [
+        100,
+        80,
+        60,
+        50,
+        40,
+        30,
+        25,
+        20,
+        15,
+        10,
+        8,
+        6,
+        5,
+        4,
+        3,
+        3
+      ],
+      "topNByDepth": [
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "engine": {
+        "useCloud": true,
+        "multiPv": 4,
+        "topN": 3,
+        "maxCpDrop": 120
+      }
+    },
+    "version": 1
+  }
+}

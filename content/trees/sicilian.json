@@ -1,20 +1,10 @@
 {
-  "schema": "debutlab.debut.v1",
   "id": "sicilian",
-  "name": "Сицилианская защита",
   "side": "black",
-  "tags": [
-    "black",
-    "popular",
-    "vs-e4",
-    "generated"
-  ],
   "branches": [
     {
-      "id": "sicilian-0001-e2e4c7c5",
-      "type": "main_line",
-      "name": "Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6...",
-      "startFen": "startpos",
+      "id": "mf9svsjv-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -34,14 +24,11 @@
         "b6b2",
         "a1b1",
         "b2a3"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0002-e2e4c7c5",
-      "type": "alternative",
-      "name": "Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6...",
-      "startFen": "startpos",
+      "id": "mf9svsk0-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -61,14 +48,11 @@
         "b8d7",
         "d1d2",
         "f8e7"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0003-e2e4c7c5",
-      "type": "alternative",
-      "name": "Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6...",
-      "startFen": "startpos",
+      "id": "mf9svsk1-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -88,14 +72,11 @@
         "b8d7",
         "g2g4",
         "f8e7"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0004-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 Nc6 Nxd4 Nf6 Nc3 e6...",
-      "startFen": "startpos",
+      "id": "mf9svskp-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -115,14 +96,11 @@
         "f6d5",
         "d4c6",
         "b7c6"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0005-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 Nc6 Nxd4 Nf6 Nc3 e6...",
-      "startFen": "startpos",
+      "id": "mf9svskr-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -142,14 +120,11 @@
         "b7c6",
         "e4e5",
         "d5d4"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0006-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 Nc6 Nxd4 Nf6 Nc3 e6...",
-      "startFen": "startpos",
+      "id": "mf9svskv-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -169,14 +144,11 @@
         "a7a6",
         "b5a3",
         "b7b5"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0007-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 Nc6 Nxd4 Nf6 Nc3 e6...",
-      "startFen": "startpos",
+      "id": "mf9svskv-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -196,14 +168,11 @@
         "a7a6",
         "b5a3",
         "f8e7"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0008-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 Nc6 Nxd4 e5 Nb5 d6...",
-      "startFen": "startpos",
+      "id": "mf9svsl0-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -223,14 +192,11 @@
         "f8e7",
         "g5f6",
         "e7f6"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0009-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 Nc6 Nxd4 e5 Nb5 d6...",
-      "startFen": "startpos",
+      "id": "mf9svsl2-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -250,14 +216,11 @@
         "c8e6",
         "c1e3",
         "f8e7"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0010-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 exd4...",
-      "startFen": "startpos",
+      "id": "mf9svsl7-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -277,14 +240,11 @@
         "b7c6",
         "f1d3",
         "d7d5"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0011-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 exd4...",
-      "startFen": "startpos",
+      "id": "mf9svsl9-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -304,14 +264,11 @@
         "f8b4",
         "f1d3",
         "d7d5"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0012-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 exd4...",
-      "startFen": "startpos",
+      "id": "mf9svsla-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -331,14 +288,11 @@
         "f8b4",
         "c1d2",
         "b4d2"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0013-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 exd4...",
-      "startFen": "startpos",
+      "id": "mf9svsla-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -358,14 +312,11 @@
         "f8b4",
         "c1d2",
         "d8a5"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0014-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 Bb4+...",
-      "startFen": "startpos",
+      "id": "mf9sw0ne-f",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -384,14 +335,11 @@
         "f3d4",
         "g8f6",
         "e4e5"
-      ],
-      "minPly": 17
+      ]
     },
     {
-      "id": "sicilian-0015-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 Bb4+...",
-      "startFen": "startpos",
+      "id": "mf9sw80z-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -411,14 +359,11 @@
         "d7c6",
         "b1c3",
         "g8f6"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0016-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 Bb4+...",
-      "startFen": "startpos",
+      "id": "mf9sw80z-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -438,14 +383,11 @@
         "d7c6",
         "b1c3",
         "c8e6"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0017-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 Bb4+...",
-      "startFen": "startpos",
+      "id": "mf9swajc-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -465,14 +407,11 @@
         "b4d2",
         "b1d2",
         "a5e5"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0018-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 Bb4+...",
-      "startFen": "startpos",
+      "id": "mf9swajc-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -492,14 +431,11 @@
         "b4d2",
         "b1d2",
         "a5b4"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0019-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 Bb4+...",
-      "startFen": "startpos",
+      "id": "mf9swc3v-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -519,14 +455,11 @@
         "b4d2",
         "d1d2",
         "a5d2"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0020-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 Bb4+...",
-      "startFen": "startpos",
+      "id": "mf9swc3v-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -546,14 +479,11 @@
         "b4d2",
         "d1d2",
         "a5e5"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0021-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 Bb4+...",
-      "startFen": "startpos",
+      "id": "mf9swdfn-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -573,14 +503,11 @@
         "a5e5",
         "d2b4",
         "e5e4"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0022-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 Bb4+...",
-      "startFen": "startpos",
+      "id": "mf9swdwg-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -600,14 +527,11 @@
         "a5e5",
         "f1d3",
         "e5b2"
-      ],
-      "minPly": 18
+      ]
     },
     {
-      "id": "sicilian-0023-e2e4c7c5",
-      "type": "alternative",
-      "name": "d4 cxd4 Nf3 e5 c3 Nc6 cxd4 Bb4+...",
-      "startFen": "startpos",
+      "id": "mf9swdwg-g",
+      "startFen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
       "ucis": [
         "e2e4",
         "c7c5",
@@ -627,8 +551,67 @@
         "a5e5",
         "f1d3",
         "g8f6"
-      ],
-      "minPly": 18
+      ]
     }
-  ]
+  ],
+  "meta": {
+    "source": "lichess",
+    "filters": {
+      "speeds": [
+        "rapid",
+        "classical"
+      ],
+      "ratings": [
+        2000,
+        2200,
+        2500
+      ],
+      "since": "2018-01",
+      "until": "3000-12",
+      "coverage": 0.85,
+      "minGamesByDepth": [
+        100,
+        80,
+        60,
+        50,
+        40,
+        30,
+        25,
+        20,
+        15,
+        10,
+        8,
+        6,
+        5,
+        4,
+        3,
+        3
+      ],
+      "topNByDepth": [
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "engine": {
+        "useCloud": true,
+        "multiPv": 4,
+        "topN": 3,
+        "maxCpDrop": 120
+      }
+    },
+    "version": 1
+  }
 }
