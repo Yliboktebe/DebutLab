@@ -12,7 +12,9 @@
     "generate-openings": "tsx tools/openings/build.ts",
     "generate-openings-test": "tsx tools/openings/build-test.ts",
     "convert-debut": "tsx tools/converter/convert.ts",
-    "convert-all-debuts": "tsx tools/converter/convert-all.ts"
+    "convert-all-debuts": "tsx tools/converter/convert-all.ts",
+    "openings:build": "tsx tools/openings/build.ts",
+    "openings:build:central": "tsx tools/openings/build.ts --only central"
   },
   "dependencies": {
     "@lichess-org/chessground": "^9.6.0",

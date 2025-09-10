@@ -1,7 +1,12 @@
 import { ExplorerMove } from "./types.js";
 
-export function pickByCoverage(moves: ExplorerMove[], coverage: number, minGames: number, topN?: number) {
-  // сортируем по частоте (сумма партий после хода)
+/** Отбор по покрытию/частоте (как было) */
+export function pickByCoverage(
+  moves: ExplorerMove[],
+  coverage: number,
+  minGames: number,
+  topN?: number
+) {
   const withTotal = moves
     .map(m => ({ m, total: m.white + m.draws + m.black }))
     .filter(x => x.total >= minGames)
@@ -20,13 +25,27 @@ export function pickByCoverage(moves: ExplorerMove[], coverage: number, minGames
   return picked;
 }
 
-export function engineIntersect(candidates: ExplorerMove[], engineSanList: string[], maxCpDrop?: number, pvMap?: Record<string, number>) {
-  // engineSanList — список SAN/или UCI из топ-N Cloud Eval.
-  // На практике удобнее сравнивать UCI; при необходимости подайте сюда UCI.
-  const set = new Set(engineSanList);
-  const filtered = candidates.filter(m => set.has(m.uci) || set.has(m.san));
-  if (filtered.length) return filtered;
+/** Пересечение с CloudEval: строго первый ход PV в UCI */
+export function engineIntersect(
+  candidates: ExplorerMove[],
+  engineFirstUci: string[]
+) {
+  const set = new Set(engineFirstUci);
+  const filtered = candidates.filter(m => set.has(m.uci));
+  return filtered.length ? filtered : candidates; // если пересечения нет — не рубим всё
+}
 
-  // если пересечение пустое — оставим data-driven (не режем всё)
-  return candidates;
+/** Motif guard: выкидываем ранние "мусорные" толчки, если не whitelisted */
+export function applyMotifGuard(
+  candidates: ExplorerMove[],
+  ply: number,
+  bannedUcIs: string[] = ["h2h4", "a2a4", "h7h5", "a7a5"],
+  bannedBeforePly = 6,
+  whitelist?: Set<string>
+) {
+  if (ply >= bannedBeforePly) return candidates;
+  return candidates.filter(m => {
+    if (whitelist?.has(m.uci)) return true;
+    return !bannedUcIs.includes(m.uci);
+  });
 }

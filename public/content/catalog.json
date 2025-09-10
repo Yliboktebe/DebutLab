@@ -1,6 +1,6 @@
 {
   "schema": "debutlab.catalog.v1",
-  "updatedAt": "2025-09-07T14:52:17.354Z",
+  "updatedAt": "2025-09-10T10:46:16.320Z",
   "debuts": [
     {
       "id": "sicilian",
@@ -44,6 +44,21 @@
       "hash": "sha256-demo",
       "branches": 2,
       "approxSizeKB": 2
+    },
+    {
+      "id": "central",
+      "name": "Центральный дебют",
+      "side": "white",
+      "tags": [
+        "white",
+        "classical",
+        "vs-e5",
+        "generated"
+      ],
+      "file": "demo/central.v1.json",
+      "hash": "sha256-1757501176320",
+      "branches": 46,
+      "approxSizeKB": 18
     }
   ]
 }

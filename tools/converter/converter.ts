@@ -26,7 +26,7 @@ export async function convertDebutFile(
       id: branchId,
       type: branchType,
       name: branchName,
-      startFen: branch.startFen === "startpos" ? "startpos" : branch.startFen,
+      startFen: "startpos", // Всегда используем startpos для UI
       ucis: branch.ucis,
       minPly: branch.ucis.length
     };
@@ -131,6 +131,10 @@ export function getDebutMetadata(debutId: string): { name: string; tags: string[
     "queens-gambit": {
       name: "Ферзевый гамбит",
       tags: ["white", "classical", "vs-d5", "generated"]
+    },
+    "central": {
+      name: "Центральный дебют",
+      tags: ["white", "classical", "vs-e5", "generated"]
     }
   };
   
