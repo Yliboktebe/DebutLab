@@ -1,6 +1,6 @@
 {
   "schema": "debutlab.catalog.v1",
-  "updatedAt": "2025-09-10T11:26:21.816Z",
+  "updatedAt": "2025-09-11T15:11:27.946Z",
   "debuts": [
     {
       "id": "sicilian",
@@ -56,9 +56,9 @@
         "generated"
       ],
       "file": "demo/central.v1.json",
-      "hash": "sha256-1757503581816",
-      "branches": 24,
-      "approxSizeKB": 9
+      "hash": "sha256-1757603487946",
+      "branches": 128,
+      "approxSizeKB": 50
     }
   ]
 }

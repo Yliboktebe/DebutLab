@@ -13,6 +13,7 @@ export interface GlobalParams {
   engine?: { useCloud: boolean; multiPv: number; topN: number; maxCpDrop: number };
   // === Новое ===
   post?: PostProcessParams;
+  tail?: TailExtendConfig;
 }
 
 export interface OpeningSeed {
@@ -27,10 +28,14 @@ export interface OpeningConfig {
   seed: OpeningSeed;
   /** Необязательные корзины на корне (или в других ключевых позициях — пока используем на корне) */
   buckets?: FamilyBucket[];
+  /** Если true, на корневом ходу берём ТОЛЬКО ходы из buckets, без добора до coverage */
+  bucketsStrict?: boolean;
   /** Предпочтения репертуара (наши ходы) */
   repertoire?: RepertoirePrefs;
   /** Новое: режим тренера */
   coach?: CoachMode;
+  /** Можно переопределить tail локально для дебюта */
+  tail?: Partial<TailExtendConfig>;
 }
 
 export interface RootConfig {
@@ -139,4 +144,54 @@ export interface PostProcessParams {
     useExplorerName?: boolean;
     enableCenterGameLabels?: boolean;
   };
+}
+
+// === Reporter API ===
+export type HttpKind = "explorer" | "cloud";
+
+export interface ProgressSnapshot {
+  openingId: string;
+  nodes: number;          // посещённые позиции (узлы DFS)
+  branches: number;       // сгенерированные ветки
+  maxDepth: number;       // максимальная достигнутая глубина (ply)
+  explorerRequests: number;
+  cloudRequests: number;
+  trapsAdded: number;
+  filteredByCoverage: number;
+  filteredByEngine: number;
+  skippedInvalidMoves: number;
+  startedAt: number;      // ms epoch
+  updatedAt: number;      // ms epoch
+}
+
+export interface Reporter {
+  onStart?(openingId: string): void;
+  onNode?(ply: number, fen: string): void;
+  onHttp?(kind: HttpKind, fen: string): void;
+  onBranch?(ucis: string[], ply: number): void;
+  onTrap?(): void;
+  onFiltered?(kind: "coverage" | "engine"): void;
+  onInvalidMove?(uci: string, ply: number, msg: string): void;
+  snapshot?(): ProgressSnapshot | undefined;
+  onFinish?(summary: ProgressSnapshot): void;
+  onError?(kind: string, msg: string): void;
+}
+
+// no-op reporter (по умолчанию)
+export const NoopReporter: Reporter = {};
+
+// === Tail Extend Config ===
+export interface TailExtendConfig {
+  /** Включить продление хвоста */
+  enable: boolean;
+  /** Минимальная целевая длина ветки в полуходах (ply). 30 = 15 ходов. */
+  minBranchPly: number;
+  /** Минимум партий для хода на хвосте (смягчённый порог) */
+  minGames: number;
+  /** Сколько лучших по частоте ходов рассматривать на хвосте */
+  topN: number;
+  /** Максимально допустимое ухудшение оценки для хвостового хода (cp). Если движка нет — игнорируется */
+  maxCpDrop: number;
+  /** Защита от "циклов": не возвращаться к FEN, встречавшемуся в последних N позициях ветки */
+  avoidRevisitFenWindow: number;
 }

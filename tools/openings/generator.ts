@@ -10,10 +10,27 @@ import {
   GlobalParams,
   FamilyBucket,
   RepertoirePrefs,
-  CoachMode
+  CoachMode,
+  Reporter,
+  NoopReporter,
+  TailExtendConfig
 } from "./types.js";
 
-type OpeningTrail = { name?: string; eco?: string };
+type OpeningTrail = { name?: string; eco?: string; fens: string[] };
+
+// Мягкий отбор "хвостовых" ходов: по частоте + topN.
+function pickTailCandidates(allMoves: ExplorerMove[], tail: TailExtendConfig): ExplorerMove[] {
+  const pool = (allMoves ?? []).filter(m => totalGames(m) >= tail.minGames);
+  // по убыванию частоты
+  pool.sort((a, b) => totalGames(b) - totalGames(a));
+  return pool.slice(0, Math.max(1, tail.topN));
+}
+
+function totalGames(m?: ExplorerMove): number {
+  if (!m) return 0;
+  const w = m.white ?? 0, b = m.black ?? 0, d = m.draws ?? 0;
+  return w + b + d;
+}
 
 interface Ctx {
   g: GlobalParams;
@@ -22,13 +39,22 @@ interface Ctx {
   seedFen: string;
   seedPath: string[];
   rootBuckets?: FamilyBucket[];
+  openingBucketsStrict?: boolean;
   repertoire?: RepertoirePrefs;
   coach?: CoachMode; // <— новое
+  reporter?: Reporter;
+  tail?: TailExtendConfig;
 }
 
 export async function generateBranches(ctx: Ctx): Promise<UiBranch[]> {
+  const reporter: Reporter = ctx.reporter ?? NoopReporter;
+  reporter.onStart?.(ctx.openingId);
   const out: UiBranch[] = [];
-  await dfs(ctx, ctx.seedFen, 0, [], out, {});
+  try {
+    await dfs(ctx, ctx.seedFen, 0, [], out, { fens: [] });
+  } finally {
+    reporter.onFinish?.(reporter.snapshot?.()!);
+  }
   const deduped = dedupeByPrefix(out, ctx.g.post?.dedupePrefixLen ?? 12);
   return deduped;
 }
@@ -41,11 +67,18 @@ async function dfs(
   out: UiBranch[],
   trail: OpeningTrail
 ) {
+  ctx.reporter?.onNode?.(ply, fen);
+  
+  // регистрируем текущий FEN в истории
+  trail.fens.push(fen);
+  
   if (ply >= ctx.g.maxPlies) {
     out.push(mkBranch(ctx, path, trail));
+    ctx.reporter?.onBranch?.(path, ply);
     return;
   }
 
+  ctx.reporter?.onHttp?.("explorer", fen);
   const data = await explorerQuery({
     fen,
     speeds: ctx.g.speeds,
@@ -58,6 +91,7 @@ async function dfs(
 
   if (!data.moves?.length) {
     out.push(mkBranch(ctx, path, trail));
+    ctx.reporter?.onBranch?.(path, ply);
     return;
   }
 
@@ -68,9 +102,18 @@ async function dfs(
   let candidates: ExplorerMove[];
   const isRoot = ply === 0 && ctx.rootBuckets?.length;
   if (isRoot) {
-    candidates = pickByBucketsAtRoot(data.moves, ctx.rootBuckets!, ctx.g.coverage, minGames);
+    const cov = ctx.openingBucketsStrict ? 0 : ctx.g.coverage; // ← строго: без добора
+    candidates = pickByBucketsAtRoot(data.moves, ctx.rootBuckets!, cov, minGames);
   } else {
     candidates = pickByCoverage(data.moves, ctx.g.coverage, minGames, topN);
+  }
+
+  // --- TAIL EXTEND: если ходы закончились, а нужной длины ещё нет --- //
+  const tail = ctx.tail ?? { enable: false } as TailExtendConfig;
+  if ((candidates == null || candidates.length === 0) && tail.enable && ply < tail.minBranchPly) {
+    // Берём мягкие хвостовые кандидаты
+    const tailMoves = pickTailCandidates(data.moves as any, tail);
+    candidates = tailMoves;
   }
 
   const sideToMove = fen.split(" ")[1] === "w" ? "white" : "black";
@@ -83,19 +126,35 @@ async function dfs(
       if (!picked) {
         // fallback: если вообще ничего — закрываем ветку
         out.push(mkBranch(ctx, path, trail));
+        ctx.reporter?.onBranch?.(path, ply);
         return;
       }
       try {
         const nextFen = applyMoves(fen, [picked.uci]);
+        
+        // Проверка на циклы
+        const tailCfg = ctx.tail ?? { enable: false } as TailExtendConfig;
+        const recent = tailCfg.avoidRevisitFenWindow && trail.fens.length
+          ? trail.fens.slice(-tailCfg.avoidRevisitFenWindow)
+          : [];
+        if (recent.includes(nextFen)) {
+          // пропускаем ход, чтобы не зациклиться
+          out.push(mkBranch(ctx, path, trail));
+          ctx.reporter?.onBranch?.(path, ply);
+          return;
+        }
+        
         const stopByTabiya = isTabiyaStop(nextFen, ctx.g.post?.tabiya);
         if (stopByTabiya) {
           out.push(mkBranch(ctx, [...path, picked.uci], trail));
+          ctx.reporter?.onBranch?.([...path, picked.uci], ply + 1);
         } else {
           await dfs(ctx, nextFen, ply + 1, [...path, picked.uci], out, trail);
         }
       } catch (error) {
-        console.warn(`Skipping invalid move ${picked.uci} at ply ${ply}: ${error}`);
+        ctx.reporter?.onInvalidMove?.(picked.uci, ply, error instanceof Error ? error.message : String(error));
         out.push(mkBranch(ctx, path, trail));
+        ctx.reporter?.onBranch?.(path, ply);
       }
       return; // ВАЖНО: у нас только один ход — выходим
     } else {
@@ -103,20 +162,33 @@ async function dfs(
       candidates = await pickOpponentResponses(ctx, fen, ply, data.moves);
       if (!candidates.length) {
         out.push(mkBranch(ctx, path, trail));
+        ctx.reporter?.onBranch?.(path, ply);
         return;
       }
       // спускаемся по каждому ответу соперника
       for (const mv of candidates) {
         try {
           const nextFen = applyMoves(fen, [mv.uci]);
+          
+          // Проверка на циклы
+          const tailCfg = ctx.tail ?? { enable: false } as TailExtendConfig;
+          const recent = tailCfg.avoidRevisitFenWindow && trail.fens.length
+            ? trail.fens.slice(-tailCfg.avoidRevisitFenWindow)
+            : [];
+          if (recent.includes(nextFen)) {
+            // пропускаем ход, чтобы не зациклиться
+            continue;
+          }
+          
           const stopByTabiya = isTabiyaStop(nextFen, ctx.g.post?.tabiya);
           if (stopByTabiya) {
             out.push(mkBranch(ctx, [...path, mv.uci], trail));
+            ctx.reporter?.onBranch?.([...path, mv.uci], ply + 1);
           } else {
             await dfs(ctx, nextFen, ply + 1, [...path, mv.uci], out, trail);
           }
         } catch (error) {
-          console.warn(`Skipping invalid move ${mv.uci} at ply ${ply}: ${error}`);
+          ctx.reporter?.onInvalidMove?.(mv.uci, ply, error instanceof Error ? error.message : String(error));
           // Продолжаем с другими ходами
         }
       }
@@ -127,13 +199,18 @@ async function dfs(
 
   // пересечение с CloudEval: только первые ходы PV
   if (ctx.g.engine?.useCloud) {
+    ctx.reporter?.onHttp?.("cloud", fen);
     const ce = await cloudEvalQuery(fen, ctx.g.engine.multiPv);
     if (ce?.pvs?.length) {
       const firstMovesUci = ce.pvs
         .slice(0, ctx.g.engine.topN)
         .map(pv => pv.moves.split(" ").filter(Boolean)[0])
         .filter(Boolean);
+      const beforeCount = candidates.length;
       candidates = engineIntersect(candidates, firstMovesUci);
+      if (candidates.length < beforeCount) {
+        ctx.reporter?.onFiltered?.("engine");
+      }
     }
   }
 
@@ -173,16 +250,27 @@ async function dfs(
     try {
       const nextFen = applyMoves(fen, [mv.uci]);
 
+      // Проверка на циклы
+      const tailCfg = ctx.tail ?? { enable: false } as TailExtendConfig;
+      const recent = tailCfg.avoidRevisitFenWindow && trail.fens.length
+        ? trail.fens.slice(-tailCfg.avoidRevisitFenWindow)
+        : [];
+      if (recent.includes(nextFen)) {
+        // пропускаем ход, чтобы не зациклиться
+        continue;
+      }
+
       // табия-стоп (после хода)
       const stopByTabiya = isTabiyaStop(nextFen, ctx.g.post?.tabiya);
       if (stopByTabiya) {
         out.push(mkBranch(ctx, [...path, mv.uci], trail));
+        ctx.reporter?.onBranch?.([...path, mv.uci], ply + 1);
         continue;
       }
 
       await dfs(ctx, nextFen, ply + 1, [...path, mv.uci], out, trail);
     } catch (error) {
-      console.warn(`Skipping invalid move ${mv.uci} at ply ${ply}: ${error}`);
+      ctx.reporter?.onInvalidMove?.(mv.uci, ply, error instanceof Error ? error.message : String(error));
       // Продолжаем с другими ходами
     }
   }
@@ -292,6 +380,7 @@ async function pickOurSingleMove(
   // 3) try engine best (CloudEval first move)
   const tryEngine = async () => {
     if (!ctx.g.engine?.useCloud) return null;
+    ctx.reporter?.onHttp?.("cloud", fen);
     const ce = await cloudEvalQuery(fen, ctx.g.engine.multiPv);
     if (!ce?.pvs?.length) return null;
     const firstMovesUci = ce.pvs.map(pv => pv.moves.split(" ").filter(Boolean)[0]).filter(Boolean);
@@ -352,10 +441,12 @@ async function pickOpponentResponses(
     for (const x of rest) {
       // оценка позиции после хода соперника (ход следующей стороны — наша)
       const nextFen = applyMoves(fen, [x.m.uci]);
+      ctx.reporter?.onHttp?.("cloud", nextFen);
       const ce = await cloudEvalQuery(nextFen, 1);
       const cp = ce?.pvs?.[0]?.cp;
       if (isBigBlunderCp(cp, threshold)) {
         picked.push(x.m); // маркировать как Trap будем в нейминге
+        ctx.reporter?.onTrap?.();
       }
     }
   }
@@ -366,4 +457,18 @@ async function pickOpponentResponses(
     picked = applyMotifGuard(picked, ply, gb.bannedUcIs, gb.bannedBeforePly);
   }
   return picked;
+}
+
+// helper: глобальные дефолты + локальные оверрайды
+function resolveTailConfig(globalTail?: TailExtendConfig, openingTail?: Partial<TailExtendConfig>): TailExtendConfig | undefined {
+  const base: TailExtendConfig = globalTail ?? {
+    enable: false,
+    minBranchPly: 0,
+    minGames: 0,
+    topN: 1,
+    maxCpDrop: 120,
+    avoidRevisitFenWindow: 8
+  };
+  if (!openingTail) return base;
+  return { ...base, ...openingTail };
 }

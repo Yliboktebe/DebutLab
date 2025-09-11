@@ -23,7 +23,7 @@ export function isTabiyaStop(fen: string, p?: PostProcessParams["tabiya"]): bool
                       (countDevelopedMinors(game, "b") >= (p.minDevelopedEachSide ?? 2));
 
   // эвристика "кто-то рокировал"
-  const stopOnCastle = p.stopOnAnyCastling && (isCastled(game, "w") || isCastled(game, "b"));
+  const stopOnCastle = p.stopOnAnyCastling ? (isCastled(game, "w") || isCastled(game, "b")) : false;
 
   return developedOK || stopOnCastle;
 }

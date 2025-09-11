@@ -5,15 +5,24 @@
     "ratings": [2000,2200,2500],
     "since": "2018-01",
     "until": "3000-12",
-    "maxPlies": 16,
+    "maxPlies": 24,
     "coverage": 0.90,
-    "minGamesByDepth": [140,120,100,80,60,50,40,30,25,20,15,12,10,8,6,5],
-    "topNByDepth":     [  3,  3,  3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,2,2,2],
+    "minGamesByDepth": [160,140,120,100,80,70,60,50,40,35,30,25,20,16,12,10,8,7,6,5,4,3,3,3],
+    "topNByDepth":     [  4,  4,  4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     "engine": { "useCloud": true, "multiPv": 4, "topN": 3, "maxCpDrop": 120 },
     "post": {
       "dedupePrefixLen": 12,
-      "tabiya": { "maxQuietCp": 60, "minDevelopedEachSide": 2, "stopOnAnyCastling": true },
-      "naming": { "useExplorerName": true, "enableCenterGameLabels": true }
+      "tabiya": { "maxQuietCp": 60, "minDevelopedEachSide": 3, "stopOnAnyCastling": false },
+      "moveGuards": { "bannedUcIs": ["h2h4","a2a4","h7h5","a7a5"], "bannedBeforePly": 6 },
+      "naming": { "useExplorerName": false, "enableCenterGameLabels": true }
+    },
+    "tail": {
+      "enable": true,
+      "minBranchPly": 30,
+      "minGames": 6,
+      "topN": 2,
+      "maxCpDrop": 180,
+      "avoidRevisitFenWindow": 8
     }
   },
   "openings": [
@@ -34,12 +43,12 @@
       "name": "Центральный дебют",
       "side": "white",
       "seed": { "startFen": "startpos", "ucis": ["e2e4","e7e5","d2d4"] },
+
       "buckets": [
-        { "label": "Accepted (…exd4)", "matchUcIs": ["e5d4"], "min": 1, "max": 1, "depthBonus": 2 },
-        { "label": "…Nc6",              "matchUcIs": ["b8c6"], "min": 1, "max": 1 },
-        { "label": "…d5",               "matchUcIs": ["d7d5"], "min": 1, "max": 1 },
-        { "label": "…d6",               "matchUcIs": ["d7d6"], "min": 1, "max": 1 }
+        { "label": "Accepted (…exd4)", "matchUcIs": ["e5d4"], "min": 1, "max": 1, "depthBonus": 2 }
       ],
+      "bucketsStrict": true,
+
       "coach": {
         "enabled": true,
         "side": "white",
@@ -48,13 +57,20 @@
           "preferByFen": {}
         },
         "opp": {
-          "coverage": 0.9,
-          "topN": 3,
-          "traps": { "enable": true, "blunderCp": 180, "minGames": 20 }
+          "coverage": 0.96,
+          "topN": 4,
+          "traps": { "enable": true, "blunderCp": 160, "minGames": 12 }
         }
       },
-      "repertoire": {
-        "allowedRepliesByFen": {}
+
+      "repertoire": { },
+      "tail": {
+        "enable": true,
+        "minBranchPly": 30,
+        "minGames": 5,
+        "topN": 2,
+        "maxCpDrop": 200,
+        "avoidRevisitFenWindow": 10
       }
     }
   ]
