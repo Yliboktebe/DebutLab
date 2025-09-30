@@ -1,0 +1,16 @@
+﻿\src\App.tsx:35 - default
+\src\board\black-replies.ts:6 - buildBlackRepliesFromBranch (used in module)
+\src\board\black-replies.ts:31 - buildBlackRepliesFromDebut
+\src\components\ChessBoard.tsx:6 - ChessBoardProps (used in module)
+\src\components\StudyPanel.tsx:13 - StudyPanel
+\src\content\types.ts:3 - Side (used in module)
+\src\content\types.ts:4 - BranchType (used in module)
+\src\content\types.ts:66 - StudyState
+\src\study\study-engine.ts:6 - StudyMode (used in module)
+\src\study\study-engine.ts:8 - ModeTransition (used in module)
+\src\study\utils.ts:25 - sanToUci
+\src\study\utils.ts:37 - getFenAfterMove
+\src\study\utils.ts:58 - isLegalMove
+\src\study\utils.ts:76 - getStartFen
+\src\study\utils.ts:84 - getStudentMoveIndices (used in module)
+\src\study\utils.ts:93 - isStudentTurn

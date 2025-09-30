@@ -1,0 +1,206 @@
+{
+  "scannedAt": "2025-09-30T12:30:20.024Z",
+  "totalFiles": 20,
+  "totalLoc": 2282,
+  "totalAnyCount": 1,
+  "totalLongFunctions": 5,
+  "files": [
+    {
+      "file": "src/study/study-engine.ts",
+      "loc": 573,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/board/chessground.ts",
+      "loc": 275,
+      "anyCount": 0,
+      "longFunctions": [
+        {
+          "name": "buildConfig",
+          "startLine": 144,
+          "endLine": 226,
+          "lines": 83,
+          "file": "src/board/chessground.ts"
+        }
+      ]
+    },
+    {
+      "file": "src/study/useStudyEngine.ts",
+      "loc": 267,
+      "anyCount": 0,
+      "longFunctions": [
+        {
+          "name": "useStudyEngine",
+          "startLine": 13,
+          "endLine": 266,
+          "lines": 254,
+          "file": "src/study/useStudyEngine.ts"
+        }
+      ]
+    },
+    {
+      "file": "src/study/progress-manager.ts",
+      "loc": 225,
+      "anyCount": 1,
+      "longFunctions": []
+    },
+    {
+      "file": "src/pages/StudyView.tsx",
+      "loc": 127,
+      "anyCount": 0,
+      "longFunctions": [
+        {
+          "name": "StudyContent",
+          "startLine": 38,
+          "endLine": 126,
+          "lines": 89,
+          "file": "src/pages/StudyView.tsx"
+        }
+      ]
+    },
+    {
+      "file": "src/study/utils.ts",
+      "loc": 97,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/components/StudyPanel.tsx",
+      "loc": 95,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/content/loader.ts",
+      "loc": 92,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/pages/DebutPage.tsx",
+      "loc": 92,
+      "anyCount": 0,
+      "longFunctions": [
+        {
+          "name": "DebutPage",
+          "startLine": 8,
+          "endLine": 91,
+          "lines": 84,
+          "file": "src/pages/DebutPage.tsx"
+        }
+      ]
+    },
+    {
+      "file": "src/content/types.ts",
+      "loc": 75,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/pages/HomePage.tsx",
+      "loc": 72,
+      "anyCount": 0,
+      "longFunctions": [
+        {
+          "name": "HomePage",
+          "startLine": 7,
+          "endLine": 71,
+          "lines": 65,
+          "file": "src/pages/HomePage.tsx"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ChessBoard.tsx",
+      "loc": 66,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/components/DebutCatalog.tsx",
+      "loc": 57,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/board/black-replies.ts",
+      "loc": 42,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/App.tsx",
+      "loc": 36,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/app/layout.tsx",
+      "loc": 30,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/app/router.tsx",
+      "loc": 22,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/main.tsx",
+      "loc": 18,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/study/srs.ts",
+      "loc": 13,
+      "anyCount": 0,
+      "longFunctions": []
+    },
+    {
+      "file": "src/board/uci.ts",
+      "loc": 8,
+      "anyCount": 0,
+      "longFunctions": []
+    }
+  ],
+  "longFunctionsList": [
+    {
+      "name": "useStudyEngine",
+      "startLine": 13,
+      "endLine": 266,
+      "lines": 254,
+      "file": "src/study/useStudyEngine.ts"
+    },
+    {
+      "name": "StudyContent",
+      "startLine": 38,
+      "endLine": 126,
+      "lines": 89,
+      "file": "src/pages/StudyView.tsx"
+    },
+    {
+      "name": "DebutPage",
+      "startLine": 8,
+      "endLine": 91,
+      "lines": 84,
+      "file": "src/pages/DebutPage.tsx"
+    },
+    {
+      "name": "buildConfig",
+      "startLine": 144,
+      "endLine": 226,
+      "lines": 83,
+      "file": "src/board/chessground.ts"
+    },
+    {
+      "name": "HomePage",
+      "startLine": 7,
+      "endLine": 71,
+      "lines": 65,
+      "file": "src/pages/HomePage.tsx"
+    }
+  ]
+}
