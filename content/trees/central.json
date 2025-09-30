@@ -3,6 +3,64 @@
   "side": "white",
   "branches": [
     {
+      "id": "b-c63aef1114b2",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "g8f6",
+        "b1c3",
+        "f8b4",
+        "a2a3",
+        "b4c3",
+        "e3c3",
+        "e8h8",
+        "f2f3",
+        "d7d5",
+        "c1g5",
+        "d5e4",
+        "g5f6",
+        "d8f6",
+        "c3f6",
+        "g7f6",
+        "f3e4",
+        "f8e8",
+        "e1a1"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d5"
+    },
+    {
+      "id": "b-86f90fe96684",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "g8f6",
+        "b1c3",
+        "d7d6",
+        "c1d2",
+        "f8e7",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
+    },
+    {
       "id": "b-514c0fead143",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
@@ -23,7 +81,7 @@
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-c327648435c0",
+      "id": "b-855187aa116a",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -37,12 +95,17 @@
         "b1c3",
         "d7d6",
         "c1d2",
-        "g7g6"
+        "g7g6",
+        "e1a1",
+        "f8g7",
+        "h2h4",
+        "h7h5",
+        "f2f3"
       ],
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-352a2c2067b5",
+      "id": "b-e87ba297354a",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -58,7 +121,10 @@
         "c1d2",
         "f6g4",
         "e3g3",
-        "f8e7"
+        "f8e7",
+        "h2h4",
+        "e7f6",
+        "e1a1"
       ],
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
@@ -103,6 +169,52 @@
       "name": "Center Game: Accepted (Qxd4)"
     },
     {
+      "id": "b-63d2d9633d2f",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "g8f6",
+        "b1c3",
+        "f8e7",
+        "f1c4",
+        "e8h8",
+        "g1f3"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures"
+    },
+    {
+      "id": "b-67c67e1cecb9",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "d7d6",
+        "b1c3",
+        "g8f6",
+        "c1d2",
+        "f8e7",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
+    },
+    {
       "id": "b-45e61e7641c9",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
@@ -123,7 +235,7 @@
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-0b737a077df7",
+      "id": "b-bd0adfbbcbff",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -137,12 +249,17 @@
         "b1c3",
         "g8f6",
         "c1d2",
-        "g7g6"
+        "g7g6",
+        "e1a1",
+        "f8g7",
+        "h2h4",
+        "h7h5",
+        "f2f3"
       ],
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-389164b63bce",
+      "id": "b-beffc1ffd622",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -158,7 +275,10 @@
         "c1d2",
         "f6g4",
         "e3g3",
-        "f8e7"
+        "f8e7",
+        "h2h4",
+        "e7f6",
+        "e1a1"
       ],
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
@@ -181,7 +301,7 @@
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-e79f177f0d85",
+      "id": "b-38a0d501d869",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -195,12 +315,19 @@
         "b1c3",
         "f8e7",
         "c1d2",
-        "c8e6"
+        "g8f6",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
       ],
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-fdbab3f8a5d6",
+      "id": "b-528ef6bbd4c6",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -214,7 +341,36 @@
         "b1c3",
         "f8e7",
         "c1d2",
-        "h7h6"
+        "c8e6",
+        "e1a1",
+        "g8f6",
+        "d2e1",
+        "e8h8",
+        "f2f4",
+        "e6g4",
+        "g1f3"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6"
+    },
+    {
+      "id": "b-ea15ee67b7a4",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "d7d6",
+        "b1c3",
+        "f8e7",
+        "c1d2",
+        "h7h6",
+        "e1a1",
+        "e7g5",
+        "f2f4"
       ],
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
@@ -253,7 +409,33 @@
       "name": "Center Game: Accepted (Qxd4)"
     },
     {
-      "id": "b-cff788ebee4d",
+      "id": "b-09266207bc69",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "f8b4",
+        "c1d2",
+        "b4d2",
+        "e3d2",
+        "g8f6",
+        "b1c3",
+        "e8h8",
+        "e1a1",
+        "d7d6",
+        "f2f3",
+        "c8e6",
+        "g2g4"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
+    },
+    {
+      "id": "b-d8670a728e3a",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -269,12 +451,14 @@
         "e3d2",
         "d7d6",
         "b1c3",
-        "g8f6"
+        "g8f6",
+        "e1a1",
+        "e8h8"
       ],
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-94449a292f06",
+      "id": "b-8a23784c6d93",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -288,9 +472,38 @@
         "c1d2",
         "d8e7",
         "b1c3",
-        "g8f6"
+        "g8f6",
+        "e1a1",
+        "e8h8",
+        "g1e2"
       ],
       "name": "Center Game: Accepted (Qxd4)"
+    },
+    {
+      "id": "b-e206b165c82b",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "f8b4",
+        "c1d2",
+        "g8f6",
+        "a2a3",
+        "b4d2",
+        "b1d2",
+        "e8h8",
+        "e1a1",
+        "f8e8",
+        "f2f4",
+        "d7d6",
+        "f1d3"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
       "id": "b-bcd8bbe04c42",
@@ -343,7 +556,33 @@
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-7ea559059c58",
+      "id": "b-79308557295a",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "g8f6",
+        "c1d2",
+        "b8c6",
+        "d4e3",
+        "f8e7",
+        "b1c3",
+        "e8h8",
+        "e1a1",
+        "d7d6",
+        "e3g3",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
+    },
+    {
+      "id": "b-f3c424d2465c",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -363,13 +602,15 @@
         "e4d5",
         "d8d5",
         "g1e2",
-        "c8f5",
-        "e2c3"
+        "e8h8",
+        "e2f4",
+        "d5e5",
+        "e1a1"
       ],
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d5"
     },
     {
-      "id": "b-c5bac36b1608",
+      "id": "b-e72b0d8f9493",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -381,14 +622,21 @@
         "c1d2",
         "b8c6",
         "d4e3",
-        "b7b6",
+        "f8e7",
         "b1c3",
-        "f8c5"
+        "d7d6",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
       ],
-      "name": "Center Game: Accepted (Qxd4)"
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-c52c81664b6c",
+      "id": "b-d4e2d91ba698",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -402,13 +650,17 @@
         "d4e3",
         "b7b6",
         "b1c3",
-        "c8b7",
-        "e4e5"
+        "f8c5",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "d7d6",
+        "h2h4"
       ],
-      "name": "Center Game: Accepted (Qxd4)"
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-90b338c06d28",
+      "id": "b-de15ca7d35a3",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -420,12 +672,44 @@
         "c1d2",
         "b8c6",
         "d4e3",
-        "b7b6",
-        "b1c3",
-        "f6g4",
-        "e3g3"
+        "f8b4",
+        "a2a3",
+        "b4d2",
+        "b1d2",
+        "e8h8",
+        "e1a1",
+        "f8e8",
+        "f2f4",
+        "d7d6",
+        "f1d3"
       ],
-      "name": "Center Game: Accepted (Qxd4)"
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
+    },
+    {
+      "id": "b-a725bef39eeb",
+      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "g8f6",
+        "c1d2",
+        "b8c6",
+        "d4e3",
+        "d7d6",
+        "b1c3",
+        "f8e7",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
+      ],
+      "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
       "id": "b-2b14a5cefb53",
@@ -448,7 +732,7 @@
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-af606729dd51",
+      "id": "b-fe01220f78cb",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -462,12 +746,17 @@
         "d4e3",
         "d7d6",
         "b1c3",
-        "g7g6"
+        "g7g6",
+        "e1a1",
+        "f8g7",
+        "h2h4",
+        "h7h5",
+        "f2f3"
       ],
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-bb16e772dc1c",
+      "id": "b-be8f30fb225c",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -483,12 +772,15 @@
         "b1c3",
         "f6g4",
         "e3g3",
-        "f8e7"
+        "f8e7",
+        "h2h4",
+        "e7f6",
+        "e1a1"
       ],
       "name": "Center Game: Accepted (Qxd4) — Center Game: ...d6"
     },
     {
-      "id": "b-983dfc64f617",
+      "id": "b-6a4b402af42f",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -498,31 +790,12 @@
         "d1d4",
         "c7c5",
         "d4e5",
-        "d8e7",
-        "e5e7",
-        "f8e7",
-        "b1c3"
+        "d8e7"
       ],
       "name": "Center Game: Accepted (Qxd4)"
     },
     {
-      "id": "b-12b21bc537e5",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "d1d4",
-        "c7c5",
-        "d4e5",
-        "f8e7",
-        "e5g7"
-      ],
-      "name": "Center Game: Accepted (Qxd4)"
-    },
-    {
-      "id": "b-2695e8b49106",
+      "id": "b-6b6b0c95cb9b",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -530,338 +803,11 @@
         "d2d4",
         "b8c6",
         "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5f3",
-        "g2f3",
-        "f8c5",
-        "b1c3"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-d53a2f579343",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5g6",
-        "b1c3",
-        "f8c5",
-        "d1e2"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-b485507e1396",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5g6",
-        "b1c3",
-        "f8b4"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-a930f4a2822c",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "d8f6",
-        "b1c3",
-        "f8b4",
-        "c1d2",
-        "e5f3",
-        "g2f3",
-        "g8e7",
-        "h1g1"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-a2e0acdc3eac",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "d8f6",
-        "b1c3",
-        "f8b4",
-        "c1d2",
-        "g8e7"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-06c6075343ed",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "d8f6",
-        "b1c3",
-        "f8b4",
-        "c1d2",
-        "d7d6",
-        "c3d5"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-9c0f7654d845",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "d8f6",
-        "b1c3",
-        "e5f3"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-f83403ead816",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "d8f6",
-        "b1c3",
-        "f8c5",
-        "c3d5",
-        "e5f3",
-        "g2f3",
-        "f6h4",
-        "d1e2"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-749cd22b27cf",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5c6"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-666cb273f32f",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "f7f6",
-        "f3e5",
-        "f6e5",
-        "d1h5",
-        "e8e7",
-        "h5e5",
-        "e7f7",
-        "f1c4",
-        "f7g6",
-        "e5f5"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-b5a7f7d43bdb",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "f7f6",
-        "f3e5",
-        "f6e5",
-        "d1h5",
-        "g7g6",
-        "h5e5",
-        "d8e7",
-        "e5h8",
-        "e7e4",
-        "c1e3",
-        "g8e7",
-        "b1c3",
-        "e4c2",
-        "e3h6"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-e206b678d3ab",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5g4"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-f01921ee33d2",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "g8f6",
-        "f3e5",
-        "d8e7",
-        "e5f3",
-        "f6e4",
-        "f1e2"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-3104b34a0a16",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "g8f6",
-        "f3e5",
-        "f6e4",
-        "d1d5"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-c77047be39d8",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "g8f6",
-        "f3e5",
-        "f8c5",
-        "e5d3"
-      ],
-      "name": "Center Game → Scotch structures"
-    },
-    {
-      "id": "b-79a53aeb103b",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "g8f6",
-        "f3e5",
-        "d7d6",
-        "f1b5"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-140d98ad384c",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "d7d6",
-        "e5d6",
-        "f8d6"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-6325a9e527d6",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "d8e7",
-        "b1c3",
-        "c6e5",
-        "f1e2"
+        "c6e5"
       ]
     },
     {
-      "id": "b-0e78f7990000",
+      "id": "b-b341e26241a2",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
@@ -869,1664 +815,19 @@
         "d2d4",
         "b8c6",
         "d4e5",
-        "d8e7",
-        "b1c3",
-        "e7e5"
+        "c6e7"
       ]
     },
     {
-      "id": "b-adb89407cd6b",
+      "id": "b-dec305a52feb",
       "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
       "ucis": [
         "e2e4",
         "e7e5",
         "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e7",
-        "b1c3"
-      ]
-    },
-    {
-      "id": "b-ba757ebe4b71",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "f8e7",
-        "c1f4",
-        "b8c6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-2641e435cf22",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "f8e7",
-        "c1f4",
-        "c8d7"
+        "d7d6"
       ],
       "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-9d13584741fe",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "f8e7",
-        "c1f4",
-        "c7c5",
-        "d4b5",
-        "a7a6",
-        "b5d6",
-        "e7d6",
-        "d1d6"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-71ab50cfe4f5",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "c7c6",
-        "c1f4",
-        "b8d7",
-        "d1e2"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-483a67bde4dc",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "c7c6",
-        "c1f4",
-        "c8g4",
-        "f1e2"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-241a1b782fe5",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "c7c6",
-        "c1f4",
-        "h7h6",
-        "d1d2",
-        "f8e7"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-8b99655f03b1",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "g7g6",
-        "c1e3",
-        "f8g7",
-        "d1d2",
-        "f6g4",
-        "e3g5"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-8c3101ac0bb3",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8e7",
-        "f1d3",
-        "g8f6"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-8644ab6442b0",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8e7",
-        "f1d3",
-        "e7f6",
-        "b1c3"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-1cfe2e0cc9dd",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "b8c6",
-        "c1f4"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-5287f3437836",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "g8f6",
-        "b1c3",
-        "f8e7",
-        "c1f4",
-        "b8c6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-994380815735",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "g8f6",
-        "b1c3",
-        "b8c6",
-        "c1f4",
-        "f8e7"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-33a59c97d0ab",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "g8f6",
-        "b1c3",
-        "a7a6",
-        "c1f4"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-a23c497d9d41",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "g8f6",
-        "b1c3",
-        "c8e6",
-        "c1f4"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-39c5e9bd403c",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "c8e6",
-        "c1f4"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-01f97957f1e0",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "a7a6",
-        "c1f4"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-08802a085818",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "f7f5",
-        "f1c4"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-e406aa9a2ce2",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "g8f6",
-        "f1b5",
-        "c8d7"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-17dd7b036aea",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "g8f6",
-        "f1b5",
-        "f8e7"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-dd1ce0e6addb",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "g8f6",
-        "f1b5",
-        "a7a6",
-        "d4c6",
-        "b7c6",
-        "b5c6",
-        "c8d7",
-        "c6a8",
-        "d8a8"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-2b2e0dbdd414",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "g8f6",
-        "f1b5",
-        "c8g4"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-4fb381208da3",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "g8f6",
-        "c1f4",
-        "f8e7",
-        "f2f3",
-        "c8e6"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-5644816e7a2c",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "c8e6"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-a8b1f639b425",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "d8f6",
-        "d4a4",
-        "c8d7",
-        "a4b3",
-        "d7c6",
-        "f1c4"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-8bf8abcec17e",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "c7c6",
-        "c1f4",
-        "c8e6"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-53642616ee04",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "c7c5",
-        "d4a4",
-        "c8d7",
-        "a4b3",
-        "b7b6",
-        "c1f4"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-53491eeed0f2",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "f8e7",
-        "d4g7",
-        "e7f6",
-        "g7g3",
-        "c8e6",
-        "c1f4",
-        "g8e7"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-69a8be1ac32d",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "f7f6",
-        "f1c4",
-        "g8e7",
-        "c1e3",
-        "e7c6",
-        "d4d2"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-594238b738c5",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "b7b6",
-        "c1f4"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-924a03c07f83",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-1ee1be2771fc",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "f8e7"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-01cbfd8b6211",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "g7g6",
-        "d1d2",
-        "f8g7"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-d888d7503cd9",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "c6d4",
-        "d1d4",
-        "g8f6",
-        "f2f3",
-        "f8e7"
-      ],
-      "name": "Center Game: Accepted (Qxd4) — Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-1fe26c4dab02",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "c6e5",
-        "d1d2"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-b1c398e72e71",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "d8e7",
-        "f2f3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-b569b81e9d39",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "d8f6",
-        "d1d2"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-b1fa8aa2d744",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "f8e7",
-        "d4c6",
-        "b7c6",
-        "f1d3",
-        "e7f6",
-        "c1e3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-23d5ded4062b",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "d8f6",
-        "d4b5"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-898d2f5993e9",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "f7f5",
-        "f1b5",
-        "c8d7",
-        "d4f5",
-        "g8f6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-d6211aa6a538",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "f7f5",
-        "f1b5",
-        "g8e7",
-        "c1g5"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-dbf4b8beeb46",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "d6e5",
-        "f3b3",
-        "b7b6",
-        "b1c3",
-        "g8f6",
-        "f1c4",
-        "d8d7",
-        "c1g5",
-        "f8e7",
-        "a1d1",
-        "e7d6",
-        "g5f6",
-        "g7f6",
-        "c3d5",
-        "d7d8",
-        "b3f3",
-        "b8d7",
-        "c4b5"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-b729fe8dbf75",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "d6e5",
-        "f3b3",
-        "d8c8",
-        "f1c4"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-a054ae9b5561",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "d6e5",
-        "f3b3",
-        "g8f6",
-        "f1c4",
-        "d8d7"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-d13fa96df896",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "d6e5",
-        "f3b3",
-        "b8c6",
-        "b3b7"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-6f34cc3d3855",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "b8c6",
-        "f3b3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-991e938ce375",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "b8d7",
-        "e5d6",
-        "f8d6",
-        "b1c3",
-        "d7e5",
-        "f3g3"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-505e167d85d6",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "f8d6",
-        "f1b5",
-        "d8e7",
-        "b5c6",
-        "b7c6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-f4d74d2f4b7a",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "f8d6",
-        "f1b5",
-        "g8e7",
-        "h2h3",
-        "g4h5",
-        "c1e3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-7e337b6c4056",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "f8d6",
-        "f1b5",
-        "d8d7",
-        "b1c3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-baa19aa534fc",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "f8d6",
-        "f1b5",
-        "g8f6",
-        "b5c6",
-        "b7c6",
-        "h2h3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-7a4fff2d8497",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "f8d6",
-        "f1b5",
-        "g4f3",
-        "d1f3",
-        "g8e7"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-5bd5dfc8ee1d",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "g4f3",
-        "d1f3",
-        "f8d6",
-        "b1c3",
-        "g8f6",
-        "c1d2"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-b0644515ceff",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "g4f3",
-        "d1f3",
-        "d8d6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-bcb5e0b80de7",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "g4f3",
-        "d1f3",
-        "c6e5",
-        "f3b3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-21b9c5e1e260",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "g4f3",
-        "d1f3",
-        "c7d6",
-        "b1c3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-8d7b39980a52",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "c7d6"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-f47d7f47f374",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "c6e5",
-        "d1d5"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-aeafb9c5f72f",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8d7",
-        "e5d6",
-        "f8d6"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-7e79ea52db44",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "d6e5",
-        "d1d8",
-        "e8d8",
-        "f3e5",
-        "g4e6",
-        "b1c3",
-        "f8d6",
-        "e5c4",
-        "d6b4",
-        "c1d2"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-1ce69e3360a0",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "d6e5",
-        "d1d8",
-        "e8d8",
-        "f3e5",
-        "g4h5",
-        "f1c4",
-        "f7f6",
-        "e5d3"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-d99f4ffeff1a",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "d6e5",
-        "d1d8",
-        "e8d8",
-        "f3e5",
-        "g8f6"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-c82bf4758f5b",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "d6e5",
-        "d1d8",
-        "e8d8",
-        "f3e5",
-        "d8e7",
-        "e5g4"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-b6e4cba3422a",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "f8e7",
-        "c1f4"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-3ae4cdc951a8",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "f7f6",
-        "h2h3"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-67019efaff39",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "g8f6",
-        "d1c2"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-2529def01f06",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "f8e7",
-        "b1c3",
-        "g8f6",
-        "f1e2"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-4f6931145e43",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "f8e7",
-        "b1c3",
-        "c7c6",
-        "h2h3"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-0a6e78567b93",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "c7c6",
-        "f1e2",
-        "g8f6",
-        "b1c3",
-        "f8e7"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-fbc93ec6fa2d",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "c7c6",
-        "f1e2",
-        "g8f6",
-        "b1c3",
-        "d8c7"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-5400003714ff",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "c7c6",
-        "f1e2",
-        "g8f6",
-        "b1c3",
-        "g7g6",
-        "c1e3"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-0c91df935c28",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "c7c6",
-        "f1e2",
-        "g8f6",
-        "b1c3",
-        "h7h6"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-9c31185a5926",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "c7c6",
-        "c1e3",
-        "g8f6"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-3e0697bb84ed",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "c7c6",
-        "c1e3",
-        "d8f6",
-        "d1c2"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-34236a22e761",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "c7c6",
-        "c1e3",
-        "f8e7",
-        "d1c2"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-ad6fd8b71c7c",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "c7c6",
-        "c1e3",
-        "a7a6",
-        "d1c2"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-68d05dc103c5",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "g8f6",
-        "h2h3"
-      ],
-      "name": "Center Game: ...d6"
-    },
-    {
-      "id": "b-a3bdd98aeef2",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "c2c4",
-        "e7g6",
-        "h2h4",
-        "h7h5",
-        "f1e2"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-d203162f0026",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "c2c4",
-        "f7f5",
-        "b1c3",
-        "g8f6",
-        "e4f5",
-        "c8f5",
-        "h2h3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-453327a3c029",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "c2c4",
-        "f7f5",
-        "b1c3",
-        "f5f4"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-43e8671c74b3",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "c2c4",
-        "f7f5",
-        "b1c3",
-        "f5e4",
-        "c3e4",
-        "c8f5",
-        "e4g3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
-    },
-    {
-      "id": "b-4b742d303cc6",
-      "startFen": "rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "c2c4",
-        "g8f6",
-        "b1c3",
-        "e7g6",
-        "h2h4",
-        "h7h5",
-        "g2g3"
-      ],
-      "name": "Center Game → Scotch structures — Center Game: ...d6"
     }
   ],
   "meta": {

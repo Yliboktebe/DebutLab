@@ -63,3 +63,4 @@ When uncertain:
 ## Current Audit Cycle
 
 This is a **safe cleanup cycle** only. Future improvements (architectural refactoring, new patterns, optimizations) will be separate, targeted PRs after this audit is complete.
+

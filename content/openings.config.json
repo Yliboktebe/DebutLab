@@ -49,6 +49,8 @@
       ],
       "bucketsStrict": true,
 
+      "engine": { "useCloud": true },
+
       "coach": {
         "enabled": true,
         "side": "white",
@@ -64,6 +66,34 @@
       },
 
       "repertoire": { },
+      "selection": {
+        "whiteSingleBest": true,
+        "topNBlackByDepth": [3,3,3,2,2,2,2,2,2,2,2,2,2,2,2],
+        "traps": {
+          "enable": true,
+          "budgetByDepth": [0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
+          "minSharePercent": 3,
+          "minGames": 6,
+          "maxCpDrop": 120
+        }
+      },
+      "milestones": {
+        "enable": true,
+        "order": ["castle","develop_minors"],
+        "maxExtraTailPlies": 4,
+        "minLeafPlies": 30,
+        "relaxAfterMilestone": { "minGamesFactor": 0.7, "ignoreCoveragePlies": 2 },
+        "antiCycleWindow": 8
+      },
+      "scenario": {
+        "enable": true,
+        "forceUciPath": ["e2e4","e7e5","d2d4","e5d4","d1d4","b8c6","d4e3"],
+        "sidelineMaxPlies": 18
+      },
+      "api": {
+        "concurrency": { "explorer": 2, "cloudEval": 1 },
+        "retry": { "retries": 6, "baseDelayMs": 750, "maxDelayMs": 10000 }
+      },
       "tail": {
         "enable": true,
         "minBranchPly": 30,

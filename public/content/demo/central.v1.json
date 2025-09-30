@@ -13,6 +13,68 @@
     {
       "id": "central-0001-e2e4e7e5",
       "type": "main_line",
+      "name": "25 moves from position",
+      "startFen": "startpos",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "g8f6",
+        "b1c3",
+        "f8b4",
+        "a2a3",
+        "b4c3",
+        "e3c3",
+        "e8h8",
+        "f2f3",
+        "d7d5",
+        "c1g5",
+        "d5e4",
+        "g5f6",
+        "d8f6",
+        "c3f6",
+        "g7f6",
+        "f3e4",
+        "f8e8",
+        "e1a1"
+      ],
+      "minPly": 25
+    },
+    {
+      "id": "central-0002-e2e4e7e5",
+      "type": "alternative",
+      "name": "19 moves from position",
+      "startFen": "startpos",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "g8f6",
+        "b1c3",
+        "d7d6",
+        "c1d2",
+        "f8e7",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
+      ],
+      "minPly": 19
+    },
+    {
+      "id": "central-0003-e2e4e7e5",
+      "type": "alternative",
       "name": "13 moves from position",
       "startFen": "startpos",
       "ucis": [
@@ -33,9 +95,9 @@
       "minPly": 13
     },
     {
-      "id": "central-0002-e2e4e7e5",
+      "id": "central-0004-e2e4e7e5",
       "type": "alternative",
-      "name": "12 moves from position",
+      "name": "17 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -49,14 +111,19 @@
         "b1c3",
         "d7d6",
         "c1d2",
-        "g7g6"
+        "g7g6",
+        "e1a1",
+        "f8g7",
+        "h2h4",
+        "h7h5",
+        "f2f3"
       ],
-      "minPly": 12
+      "minPly": 17
     },
     {
-      "id": "central-0003-e2e4e7e5",
+      "id": "central-0005-e2e4e7e5",
       "type": "alternative",
-      "name": "14 moves from position",
+      "name": "17 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -72,12 +139,15 @@
         "c1d2",
         "f6g4",
         "e3g3",
-        "f8e7"
+        "f8e7",
+        "h2h4",
+        "e7f6",
+        "e1a1"
       ],
-      "minPly": 14
+      "minPly": 17
     },
     {
-      "id": "central-0004-e2e4e7e5",
+      "id": "central-0006-e2e4e7e5",
       "type": "alternative",
       "name": "13 moves from position",
       "startFen": "startpos",
@@ -99,7 +169,7 @@
       "minPly": 13
     },
     {
-      "id": "central-0005-e2e4e7e5",
+      "id": "central-0007-e2e4e7e5",
       "type": "alternative",
       "name": "13 moves from position",
       "startFen": "startpos",
@@ -121,7 +191,57 @@
       "minPly": 13
     },
     {
-      "id": "central-0006-e2e4e7e5",
+      "id": "central-0008-e2e4e7e5",
+      "type": "alternative",
+      "name": "13 moves from position",
+      "startFen": "startpos",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "g8f6",
+        "b1c3",
+        "f8e7",
+        "f1c4",
+        "e8h8",
+        "g1f3"
+      ],
+      "minPly": 13
+    },
+    {
+      "id": "central-0009-e2e4e7e5",
+      "type": "alternative",
+      "name": "19 moves from position",
+      "startFen": "startpos",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "d7d6",
+        "b1c3",
+        "g8f6",
+        "c1d2",
+        "f8e7",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
+      ],
+      "minPly": 19
+    },
+    {
+      "id": "central-0010-e2e4e7e5",
       "type": "alternative",
       "name": "13 moves from position",
       "startFen": "startpos",
@@ -143,9 +263,9 @@
       "minPly": 13
     },
     {
-      "id": "central-0007-e2e4e7e5",
+      "id": "central-0011-e2e4e7e5",
       "type": "alternative",
-      "name": "12 moves from position",
+      "name": "17 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -159,14 +279,19 @@
         "b1c3",
         "g8f6",
         "c1d2",
-        "g7g6"
+        "g7g6",
+        "e1a1",
+        "f8g7",
+        "h2h4",
+        "h7h5",
+        "f2f3"
       ],
-      "minPly": 12
+      "minPly": 17
     },
     {
-      "id": "central-0008-e2e4e7e5",
+      "id": "central-0012-e2e4e7e5",
       "type": "alternative",
-      "name": "14 moves from position",
+      "name": "17 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -182,12 +307,15 @@
         "c1d2",
         "f6g4",
         "e3g3",
-        "f8e7"
+        "f8e7",
+        "h2h4",
+        "e7f6",
+        "e1a1"
       ],
-      "minPly": 14
+      "minPly": 17
     },
     {
-      "id": "central-0009-e2e4e7e5",
+      "id": "central-0013-e2e4e7e5",
       "type": "alternative",
       "name": "11 moves from position",
       "startFen": "startpos",
@@ -207,9 +335,9 @@
       "minPly": 11
     },
     {
-      "id": "central-0010-e2e4e7e5",
+      "id": "central-0014-e2e4e7e5",
       "type": "alternative",
-      "name": "12 moves from position",
+      "name": "19 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -223,14 +351,21 @@
         "b1c3",
         "f8e7",
         "c1d2",
-        "c8e6"
+        "g8f6",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
       ],
-      "minPly": 12
+      "minPly": 19
     },
     {
-      "id": "central-0011-e2e4e7e5",
+      "id": "central-0015-e2e4e7e5",
       "type": "alternative",
-      "name": "12 moves from position",
+      "name": "19 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -244,12 +379,43 @@
         "b1c3",
         "f8e7",
         "c1d2",
-        "h7h6"
+        "c8e6",
+        "e1a1",
+        "g8f6",
+        "d2e1",
+        "e8h8",
+        "f2f4",
+        "e6g4",
+        "g1f3"
       ],
-      "minPly": 12
+      "minPly": 19
     },
     {
-      "id": "central-0012-e2e4e7e5",
+      "id": "central-0016-e2e4e7e5",
+      "type": "alternative",
+      "name": "15 moves from position",
+      "startFen": "startpos",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "d7d6",
+        "b1c3",
+        "f8e7",
+        "c1d2",
+        "h7h6",
+        "e1a1",
+        "e7g5",
+        "f2f4"
+      ],
+      "minPly": 15
+    },
+    {
+      "id": "central-0017-e2e4e7e5",
       "type": "alternative",
       "name": "11 moves from position",
       "startFen": "startpos",
@@ -269,7 +435,7 @@
       "minPly": 11
     },
     {
-      "id": "central-0013-e2e4e7e5",
+      "id": "central-0018-e2e4e7e5",
       "type": "alternative",
       "name": "9 moves from position",
       "startFen": "startpos",
@@ -287,9 +453,37 @@
       "minPly": 9
     },
     {
-      "id": "central-0014-e2e4e7e5",
+      "id": "central-0019-e2e4e7e5",
       "type": "alternative",
-      "name": "14 moves from position",
+      "name": "19 moves from position",
+      "startFen": "startpos",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "f8b4",
+        "c1d2",
+        "b4d2",
+        "e3d2",
+        "g8f6",
+        "b1c3",
+        "e8h8",
+        "e1a1",
+        "d7d6",
+        "f2f3",
+        "c8e6",
+        "g2g4"
+      ],
+      "minPly": 19
+    },
+    {
+      "id": "central-0020-e2e4e7e5",
+      "type": "alternative",
+      "name": "16 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -305,14 +499,16 @@
         "e3d2",
         "d7d6",
         "b1c3",
-        "g8f6"
+        "g8f6",
+        "e1a1",
+        "e8h8"
       ],
-      "minPly": 14
+      "minPly": 16
     },
     {
-      "id": "central-0015-e2e4e7e5",
+      "id": "central-0021-e2e4e7e5",
       "type": "alternative",
-      "name": "12 moves from position",
+      "name": "15 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -326,12 +522,43 @@
         "c1d2",
         "d8e7",
         "b1c3",
-        "g8f6"
+        "g8f6",
+        "e1a1",
+        "e8h8",
+        "g1e2"
       ],
-      "minPly": 12
+      "minPly": 15
     },
     {
-      "id": "central-0016-e2e4e7e5",
+      "id": "central-0022-e2e4e7e5",
+      "type": "alternative",
+      "name": "19 moves from position",
+      "startFen": "startpos",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "b8c6",
+        "d4e3",
+        "f8b4",
+        "c1d2",
+        "g8f6",
+        "a2a3",
+        "b4d2",
+        "b1d2",
+        "e8h8",
+        "e1a1",
+        "f8e8",
+        "f2f4",
+        "d7d6",
+        "f1d3"
+      ],
+      "minPly": 19
+    },
+    {
+      "id": "central-0023-e2e4e7e5",
       "type": "alternative",
       "name": "11 moves from position",
       "startFen": "startpos",
@@ -351,7 +578,7 @@
       "minPly": 11
     },
     {
-      "id": "central-0017-e2e4e7e5",
+      "id": "central-0024-e2e4e7e5",
       "type": "alternative",
       "name": "11 moves from position",
       "startFen": "startpos",
@@ -371,7 +598,7 @@
       "minPly": 11
     },
     {
-      "id": "central-0018-e2e4e7e5",
+      "id": "central-0025-e2e4e7e5",
       "type": "alternative",
       "name": "7 moves from position",
       "startFen": "startpos",
@@ -387,9 +614,37 @@
       "minPly": 7
     },
     {
-      "id": "central-0019-e2e4e7e5",
+      "id": "central-0026-e2e4e7e5",
       "type": "alternative",
       "name": "19 moves from position",
+      "startFen": "startpos",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "g8f6",
+        "c1d2",
+        "b8c6",
+        "d4e3",
+        "f8e7",
+        "b1c3",
+        "e8h8",
+        "e1a1",
+        "d7d6",
+        "e3g3",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
+      ],
+      "minPly": 19
+    },
+    {
+      "id": "central-0027-e2e4e7e5",
+      "type": "alternative",
+      "name": "21 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -409,15 +664,45 @@
         "e4d5",
         "d8d5",
         "g1e2",
-        "c8f5",
-        "e2c3"
+        "e8h8",
+        "e2f4",
+        "d5e5",
+        "e1a1"
+      ],
+      "minPly": 21
+    },
+    {
+      "id": "central-0028-e2e4e7e5",
+      "type": "alternative",
+      "name": "19 moves from position",
+      "startFen": "startpos",
+      "ucis": [
+        "e2e4",
+        "e7e5",
+        "d2d4",
+        "e5d4",
+        "d1d4",
+        "g8f6",
+        "c1d2",
+        "b8c6",
+        "d4e3",
+        "f8e7",
+        "b1c3",
+        "d7d6",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
       ],
       "minPly": 19
     },
     {
-      "id": "central-0020-e2e4e7e5",
+      "id": "central-0029-e2e4e7e5",
       "type": "alternative",
-      "name": "12 moves from position",
+      "name": "17 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -431,14 +716,19 @@
         "d4e3",
         "b7b6",
         "b1c3",
-        "f8c5"
+        "f8c5",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "d7d6",
+        "h2h4"
       ],
-      "minPly": 12
+      "minPly": 17
     },
     {
-      "id": "central-0021-e2e4e7e5",
+      "id": "central-0030-e2e4e7e5",
       "type": "alternative",
-      "name": "13 moves from position",
+      "name": "19 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -450,17 +740,23 @@
         "c1d2",
         "b8c6",
         "d4e3",
-        "b7b6",
-        "b1c3",
-        "c8b7",
-        "e4e5"
+        "f8b4",
+        "a2a3",
+        "b4d2",
+        "b1d2",
+        "e8h8",
+        "e1a1",
+        "f8e8",
+        "f2f4",
+        "d7d6",
+        "f1d3"
       ],
-      "minPly": 13
+      "minPly": 19
     },
     {
-      "id": "central-0022-e2e4e7e5",
+      "id": "central-0031-e2e4e7e5",
       "type": "alternative",
-      "name": "13 moves from position",
+      "name": "19 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -472,15 +768,21 @@
         "c1d2",
         "b8c6",
         "d4e3",
-        "b7b6",
+        "d7d6",
         "b1c3",
-        "f6g4",
-        "e3g3"
+        "f8e7",
+        "e3g3",
+        "e8h8",
+        "e1a1",
+        "c6e5",
+        "f2f4",
+        "e5g6",
+        "f4f5"
       ],
-      "minPly": 13
+      "minPly": 19
     },
     {
-      "id": "central-0023-e2e4e7e5",
+      "id": "central-0032-e2e4e7e5",
       "type": "alternative",
       "name": "13 moves from position",
       "startFen": "startpos",
@@ -502,9 +804,9 @@
       "minPly": 13
     },
     {
-      "id": "central-0024-e2e4e7e5",
+      "id": "central-0033-e2e4e7e5",
       "type": "alternative",
-      "name": "12 moves from position",
+      "name": "17 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -518,14 +820,19 @@
         "d4e3",
         "d7d6",
         "b1c3",
-        "g7g6"
+        "g7g6",
+        "e1a1",
+        "f8g7",
+        "h2h4",
+        "h7h5",
+        "f2f3"
       ],
-      "minPly": 12
+      "minPly": 17
     },
     {
-      "id": "central-0025-e2e4e7e5",
+      "id": "central-0034-e2e4e7e5",
       "type": "alternative",
-      "name": "14 moves from position",
+      "name": "17 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -541,221 +848,34 @@
         "b1c3",
         "f6g4",
         "e3g3",
-        "f8e7"
-      ],
-      "minPly": 14
-    },
-    {
-      "id": "central-0026-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "d1d4",
-        "c7c5",
-        "d4e5",
-        "d8e7",
-        "e5e7",
         "f8e7",
-        "b1c3"
+        "h2h4",
+        "e7f6",
+        "e1a1"
       ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0027-e2e4e7e5",
-      "type": "alternative",
-      "name": "9 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "e5d4",
-        "d1d4",
-        "c7c5",
-        "d4e5",
-        "f8e7",
-        "e5g7"
-      ],
-      "minPly": 9
-    },
-    {
-      "id": "central-0028-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5f3",
-        "g2f3",
-        "f8c5",
-        "b1c3"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0029-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5g6",
-        "b1c3",
-        "f8c5",
-        "d1e2"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0030-e2e4e7e5",
-      "type": "alternative",
-      "name": "10 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5g6",
-        "b1c3",
-        "f8b4"
-      ],
-      "minPly": 10
-    },
-    {
-      "id": "central-0031-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "d8f6",
-        "b1c3",
-        "f8b4",
-        "c1d2",
-        "e5f3",
-        "g2f3",
-        "g8e7",
-        "h1g1"
-      ],
-      "minPly": 15
-    },
-    {
-      "id": "central-0032-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "d8f6",
-        "b1c3",
-        "f8b4",
-        "c1d2",
-        "g8e7"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0033-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "d8f6",
-        "b1c3",
-        "f8b4",
-        "c1d2",
-        "d7d6",
-        "c3d5"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0034-e2e4e7e5",
-      "type": "alternative",
-      "name": "10 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "d8f6",
-        "b1c3",
-        "e5f3"
-      ],
-      "minPly": 10
+      "minPly": 17
     },
     {
       "id": "central-0035-e2e4e7e5",
       "type": "alternative",
-      "name": "15 moves from position",
+      "name": "8 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
         "e7e5",
         "d2d4",
-        "b8c6",
+        "e5d4",
+        "d1d4",
+        "c7c5",
         "d4e5",
-        "c6e5",
-        "g1f3",
-        "d8f6",
-        "b1c3",
-        "f8c5",
-        "c3d5",
-        "e5f3",
-        "g2f3",
-        "f6h4",
-        "d1e2"
+        "d8e7"
       ],
-      "minPly": 15
+      "minPly": 8
     },
     {
       "id": "central-0036-e2e4e7e5",
       "type": "alternative",
-      "name": "8 moves from position",
+      "name": "6 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -763,16 +883,14 @@
         "d2d4",
         "b8c6",
         "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5c6"
+        "c6e5"
       ],
-      "minPly": 8
+      "minPly": 6
     },
     {
       "id": "central-0037-e2e4e7e5",
       "type": "alternative",
-      "name": "17 moves from position",
+      "name": "6 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
@@ -780,2020 +898,22 @@
         "d2d4",
         "b8c6",
         "d4e5",
-        "c6e5",
-        "g1f3",
-        "f7f6",
-        "f3e5",
-        "f6e5",
-        "d1h5",
-        "e8e7",
-        "h5e5",
-        "e7f7",
-        "f1c4",
-        "f7g6",
-        "e5f5"
+        "c6e7"
       ],
-      "minPly": 17
+      "minPly": 6
     },
     {
       "id": "central-0038-e2e4e7e5",
       "type": "alternative",
-      "name": "21 moves from position",
+      "name": "4 moves from position",
       "startFen": "startpos",
       "ucis": [
         "e2e4",
         "e7e5",
         "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "f7f6",
-        "f3e5",
-        "f6e5",
-        "d1h5",
-        "g7g6",
-        "h5e5",
-        "d8e7",
-        "e5h8",
-        "e7e4",
-        "c1e3",
-        "g8e7",
-        "b1c3",
-        "e4c2",
-        "e3h6"
+        "d7d6"
       ],
-      "minPly": 21
-    },
-    {
-      "id": "central-0039-e2e4e7e5",
-      "type": "alternative",
-      "name": "8 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "e5g4"
-      ],
-      "minPly": 8
-    },
-    {
-      "id": "central-0040-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "g8f6",
-        "f3e5",
-        "d8e7",
-        "e5f3",
-        "f6e4",
-        "f1e2"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0041-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "g8f6",
-        "f3e5",
-        "f6e4",
-        "d1d5"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0042-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "g8f6",
-        "f3e5",
-        "f8c5",
-        "e5d3"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0043-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e5",
-        "g1f3",
-        "g8f6",
-        "f3e5",
-        "d7d6",
-        "f1b5"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0044-e2e4e7e5",
-      "type": "alternative",
-      "name": "8 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "d7d6",
-        "e5d6",
-        "f8d6"
-      ],
-      "minPly": 8
-    },
-    {
-      "id": "central-0045-e2e4e7e5",
-      "type": "alternative",
-      "name": "9 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "d8e7",
-        "b1c3",
-        "c6e5",
-        "f1e2"
-      ],
-      "minPly": 9
-    },
-    {
-      "id": "central-0046-e2e4e7e5",
-      "type": "alternative",
-      "name": "8 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "d8e7",
-        "b1c3",
-        "e7e5"
-      ],
-      "minPly": 8
-    },
-    {
-      "id": "central-0047-e2e4e7e5",
-      "type": "alternative",
-      "name": "7 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "b8c6",
-        "d4e5",
-        "c6e7",
-        "b1c3"
-      ],
-      "minPly": 7
-    },
-    {
-      "id": "central-0048-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "f8e7",
-        "c1f4",
-        "b8c6"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0049-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "f8e7",
-        "c1f4",
-        "c8d7"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0050-e2e4e7e5",
-      "type": "alternative",
-      "name": "17 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "f8e7",
-        "c1f4",
-        "c7c5",
-        "d4b5",
-        "a7a6",
-        "b5d6",
-        "e7d6",
-        "d1d6"
-      ],
-      "minPly": 17
-    },
-    {
-      "id": "central-0051-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "c7c6",
-        "c1f4",
-        "b8d7",
-        "d1e2"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0052-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "c7c6",
-        "c1f4",
-        "c8g4",
-        "f1e2"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0053-e2e4e7e5",
-      "type": "alternative",
-      "name": "14 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "c7c6",
-        "c1f4",
-        "h7h6",
-        "d1d2",
-        "f8e7"
-      ],
-      "minPly": 14
-    },
-    {
-      "id": "central-0054-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "g8f6",
-        "b1c3",
-        "g7g6",
-        "c1e3",
-        "f8g7",
-        "d1d2",
-        "f6g4",
-        "e3g5"
-      ],
-      "minPly": 15
-    },
-    {
-      "id": "central-0055-e2e4e7e5",
-      "type": "alternative",
-      "name": "10 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8e7",
-        "f1d3",
-        "g8f6"
-      ],
-      "minPly": 10
-    },
-    {
-      "id": "central-0056-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "f8e7",
-        "f1d3",
-        "e7f6",
-        "b1c3"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0057-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "b8c6",
-        "c1f4"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0058-e2e4e7e5",
-      "type": "alternative",
-      "name": "14 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "g8f6",
-        "b1c3",
-        "f8e7",
-        "c1f4",
-        "b8c6"
-      ],
-      "minPly": 14
-    },
-    {
-      "id": "central-0059-e2e4e7e5",
-      "type": "alternative",
-      "name": "14 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "g8f6",
-        "b1c3",
-        "b8c6",
-        "c1f4",
-        "f8e7"
-      ],
-      "minPly": 14
-    },
-    {
-      "id": "central-0060-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "g8f6",
-        "b1c3",
-        "a7a6",
-        "c1f4"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0061-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "g8f6",
-        "b1c3",
-        "c8e6",
-        "c1f4"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0062-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "c8e6",
-        "c1f4"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0063-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "a7a6",
-        "c1f4"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0064-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "c7c5",
-        "d4b3",
-        "f7f5",
-        "f1c4"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0065-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "g8f6",
-        "f1b5",
-        "c8d7"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0066-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "g8f6",
-        "f1b5",
-        "f8e7"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0067-e2e4e7e5",
-      "type": "alternative",
-      "name": "18 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "g8f6",
-        "f1b5",
-        "a7a6",
-        "d4c6",
-        "b7c6",
-        "b5c6",
-        "c8d7",
-        "c6a8",
-        "d8a8"
-      ],
-      "minPly": 18
-    },
-    {
-      "id": "central-0068-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "g8f6",
-        "f1b5",
-        "c8g4"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0069-e2e4e7e5",
-      "type": "alternative",
-      "name": "16 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "g8f6",
-        "c1f4",
-        "f8e7",
-        "f2f3",
-        "c8e6"
-      ],
-      "minPly": 16
-    },
-    {
-      "id": "central-0070-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "c8e6"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0071-e2e4e7e5",
-      "type": "alternative",
-      "name": "17 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "d8f6",
-        "d4a4",
-        "c8d7",
-        "a4b3",
-        "d7c6",
-        "f1c4"
-      ],
-      "minPly": 17
-    },
-    {
-      "id": "central-0072-e2e4e7e5",
-      "type": "alternative",
-      "name": "14 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "c7c6",
-        "c1f4",
-        "c8e6"
-      ],
-      "minPly": 14
-    },
-    {
-      "id": "central-0073-e2e4e7e5",
-      "type": "alternative",
-      "name": "17 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "c7c5",
-        "d4a4",
-        "c8d7",
-        "a4b3",
-        "b7b6",
-        "c1f4"
-      ],
-      "minPly": 17
-    },
-    {
-      "id": "central-0074-e2e4e7e5",
-      "type": "alternative",
-      "name": "18 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "f8e7",
-        "d4g7",
-        "e7f6",
-        "g7g3",
-        "c8e6",
-        "c1f4",
-        "g8e7"
-      ],
-      "minPly": 18
-    },
-    {
-      "id": "central-0075-e2e4e7e5",
-      "type": "alternative",
-      "name": "17 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "f7f6",
-        "f1c4",
-        "g8e7",
-        "c1e3",
-        "e7c6",
-        "d4d2"
-      ],
-      "minPly": 17
-    },
-    {
-      "id": "central-0076-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c6d4",
-        "d1d4",
-        "b7b6",
-        "c1f4"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0077-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "g8f6"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0078-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "f8e7"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0079-e2e4e7e5",
-      "type": "alternative",
-      "name": "14 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "g7g6",
-        "d1d2",
-        "f8g7"
-      ],
-      "minPly": 14
-    },
-    {
-      "id": "central-0080-e2e4e7e5",
-      "type": "alternative",
-      "name": "16 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "c6d4",
-        "d1d4",
-        "g8f6",
-        "f2f3",
-        "f8e7"
-      ],
-      "minPly": 16
-    },
-    {
-      "id": "central-0081-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "c6e5",
-        "d1d2"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0082-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "d8e7",
-        "f2f3"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0083-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "c8d7",
-        "c1e3",
-        "d8f6",
-        "d1d2"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0084-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "f8e7",
-        "d4c6",
-        "b7c6",
-        "f1d3",
-        "e7f6",
-        "c1e3"
-      ],
-      "minPly": 15
-    },
-    {
-      "id": "central-0085-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "d8f6",
-        "d4b5"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0086-e2e4e7e5",
-      "type": "alternative",
-      "name": "14 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "f7f5",
-        "f1b5",
-        "c8d7",
-        "d4f5",
-        "g8f6"
-      ],
-      "minPly": 14
-    },
-    {
-      "id": "central-0087-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "e5d4",
-        "f3d4",
-        "b8c6",
-        "b1c3",
-        "f7f5",
-        "f1b5",
-        "g8e7",
-        "c1g5"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0088-e2e4e7e5",
-      "type": "alternative",
-      "name": "27 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "d6e5",
-        "f3b3",
-        "b7b6",
-        "b1c3",
-        "g8f6",
-        "f1c4",
-        "d8d7",
-        "c1g5",
-        "f8e7",
-        "a1d1",
-        "e7d6",
-        "g5f6",
-        "g7f6",
-        "c3d5",
-        "d7d8",
-        "b3f3",
-        "b8d7",
-        "c4b5"
-      ],
-      "minPly": 27
-    },
-    {
-      "id": "central-0089-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "d6e5",
-        "f3b3",
-        "d8c8",
-        "f1c4"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0090-e2e4e7e5",
-      "type": "alternative",
-      "name": "14 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "d6e5",
-        "f3b3",
-        "g8f6",
-        "f1c4",
-        "d8d7"
-      ],
-      "minPly": 14
-    },
-    {
-      "id": "central-0091-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "d6e5",
-        "f3b3",
-        "b8c6",
-        "b3b7"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0092-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "b8c6",
-        "f3b3"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0093-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "g4f3",
-        "d1f3",
-        "b8d7",
-        "e5d6",
-        "f8d6",
-        "b1c3",
-        "d7e5",
-        "f3g3"
-      ],
-      "minPly": 15
-    },
-    {
-      "id": "central-0094-e2e4e7e5",
-      "type": "alternative",
-      "name": "14 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "f8d6",
-        "f1b5",
-        "d8e7",
-        "b5c6",
-        "b7c6"
-      ],
-      "minPly": 14
-    },
-    {
-      "id": "central-0095-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "f8d6",
-        "f1b5",
-        "g8e7",
-        "h2h3",
-        "g4h5",
-        "c1e3"
-      ],
-      "minPly": 15
-    },
-    {
-      "id": "central-0096-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "f8d6",
-        "f1b5",
-        "d8d7",
-        "b1c3"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0097-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "f8d6",
-        "f1b5",
-        "g8f6",
-        "b5c6",
-        "b7c6",
-        "h2h3"
-      ],
-      "minPly": 15
-    },
-    {
-      "id": "central-0098-e2e4e7e5",
-      "type": "alternative",
-      "name": "14 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "f8d6",
-        "f1b5",
-        "g4f3",
-        "d1f3",
-        "g8e7"
-      ],
-      "minPly": 14
-    },
-    {
-      "id": "central-0099-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "g4f3",
-        "d1f3",
-        "f8d6",
-        "b1c3",
-        "g8f6",
-        "c1d2"
-      ],
-      "minPly": 15
-    },
-    {
-      "id": "central-0100-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "g4f3",
-        "d1f3",
-        "d8d6"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0101-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "g4f3",
-        "d1f3",
-        "c6e5",
-        "f3b3"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0102-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "g4f3",
-        "d1f3",
-        "c7d6",
-        "b1c3"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0103-e2e4e7e5",
-      "type": "alternative",
-      "name": "10 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "c7d6"
-      ],
-      "minPly": 10
-    },
-    {
-      "id": "central-0104-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8c6",
-        "e5d6",
-        "c6e5",
-        "d1d5"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0105-e2e4e7e5",
-      "type": "alternative",
-      "name": "10 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "b8d7",
-        "e5d6",
-        "f8d6"
-      ],
-      "minPly": 10
-    },
-    {
-      "id": "central-0106-e2e4e7e5",
-      "type": "alternative",
-      "name": "17 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "d6e5",
-        "d1d8",
-        "e8d8",
-        "f3e5",
-        "g4e6",
-        "b1c3",
-        "f8d6",
-        "e5c4",
-        "d6b4",
-        "c1d2"
-      ],
-      "minPly": 17
-    },
-    {
-      "id": "central-0107-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "d6e5",
-        "d1d8",
-        "e8d8",
-        "f3e5",
-        "g4h5",
-        "f1c4",
-        "f7f6",
-        "e5d3"
-      ],
-      "minPly": 15
-    },
-    {
-      "id": "central-0108-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "d6e5",
-        "d1d8",
-        "e8d8",
-        "f3e5",
-        "g8f6"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0109-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "d6e5",
-        "d1d8",
-        "e8d8",
-        "f3e5",
-        "d8e7",
-        "e5g4"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0110-e2e4e7e5",
-      "type": "alternative",
-      "name": "9 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "f8e7",
-        "c1f4"
-      ],
-      "minPly": 9
-    },
-    {
-      "id": "central-0111-e2e4e7e5",
-      "type": "alternative",
-      "name": "9 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "c8g4",
-        "d4e5",
-        "f7f6",
-        "h2h3"
-      ],
-      "minPly": 9
-    },
-    {
-      "id": "central-0112-e2e4e7e5",
-      "type": "alternative",
-      "name": "9 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "g8f6",
-        "d1c2"
-      ],
-      "minPly": 9
-    },
-    {
-      "id": "central-0113-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "f8e7",
-        "b1c3",
-        "g8f6",
-        "f1e2"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0114-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "f8e7",
-        "b1c3",
-        "c7c6",
-        "h2h3"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0115-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "c7c6",
-        "f1e2",
-        "g8f6",
-        "b1c3",
-        "f8e7"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0116-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "c7c6",
-        "f1e2",
-        "g8f6",
-        "b1c3",
-        "d8c7"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0117-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "c7c6",
-        "f1e2",
-        "g8f6",
-        "b1c3",
-        "g7g6",
-        "c1e3"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0118-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "c7c6",
-        "f1e2",
-        "g8f6",
-        "b1c3",
-        "h7h6"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0119-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "c7c6",
-        "c1e3",
-        "g8f6"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0120-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "c7c6",
-        "c1e3",
-        "d8f6",
-        "d1c2"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0121-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "c7c6",
-        "c1e3",
-        "f8e7",
-        "d1c2"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0122-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "c7c6",
-        "c1e3",
-        "a7a6",
-        "d1c2"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0123-e2e4e7e5",
-      "type": "alternative",
-      "name": "11 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8d7",
-        "c2c4",
-        "h7h6",
-        "b1c3",
-        "g8f6",
-        "h2h3"
-      ],
-      "minPly": 11
-    },
-    {
-      "id": "central-0124-e2e4e7e5",
-      "type": "alternative",
-      "name": "13 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "c2c4",
-        "e7g6",
-        "h2h4",
-        "h7h5",
-        "f1e2"
-      ],
-      "minPly": 13
-    },
-    {
-      "id": "central-0125-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "c2c4",
-        "f7f5",
-        "b1c3",
-        "g8f6",
-        "e4f5",
-        "c8f5",
-        "h2h3"
-      ],
-      "minPly": 15
-    },
-    {
-      "id": "central-0126-e2e4e7e5",
-      "type": "alternative",
-      "name": "12 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "c2c4",
-        "f7f5",
-        "b1c3",
-        "f5f4"
-      ],
-      "minPly": 12
-    },
-    {
-      "id": "central-0127-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "c2c4",
-        "f7f5",
-        "b1c3",
-        "f5e4",
-        "c3e4",
-        "c8f5",
-        "e4g3"
-      ],
-      "minPly": 15
-    },
-    {
-      "id": "central-0128-e2e4e7e5",
-      "type": "alternative",
-      "name": "15 moves from position",
-      "startFen": "startpos",
-      "ucis": [
-        "e2e4",
-        "e7e5",
-        "d2d4",
-        "d7d6",
-        "g1f3",
-        "b8c6",
-        "d4d5",
-        "c6e7",
-        "c2c4",
-        "g8f6",
-        "b1c3",
-        "e7g6",
-        "h2h4",
-        "h7h5",
-        "g2g3"
-      ],
-      "minPly": 15
+      "minPly": 4
     }
   ]
 }

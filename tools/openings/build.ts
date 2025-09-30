@@ -17,13 +17,23 @@ const only = process.argv.includes("--only")
 //   --progress=quiet|normal|verbose
 //   --no-errors  (сворачивать ошибки; по умолчанию ошибки свёрнуты)
 //   --json-progress=path/to/file.json
+//   --white-single-best (принудительно selection.whiteSingleBest=true)
+//   --milestones=castle (включает milestones.enable=true)
 function parseFlags(argv: string[]) {
-  const flags = { progress: "normal" as "quiet"|"normal"|"verbose", showErrors: false, jsonPath: undefined as string|undefined };
+  const flags = { 
+    progress: "normal" as "quiet"|"normal"|"verbose", 
+    showErrors: false, 
+    jsonPath: undefined as string|undefined,
+    whiteSingleBest: false,
+    milestones: undefined as string|undefined
+  };
   for (const a of argv) {
     if (a.startsWith("--progress=")) flags.progress = a.split("=")[1] as any;
     else if (a === "--no-errors") flags.showErrors = false;
     else if (a === "--show-errors") flags.showErrors = true;
     else if (a.startsWith("--json-progress=")) flags.jsonPath = a.split("=")[1];
+    else if (a === "--white-single-best") flags.whiteSingleBest = true;
+    else if (a.startsWith("--milestones=")) flags.milestones = a.split("=")[1];
   }
   return flags;
 }
@@ -111,6 +121,22 @@ async function main() {
     // Сохраняем репортёр для обработчика SIGINT
     (global as any).currentReporter = reporter;
 
+    // Применяем CLI флаги к конфигурации
+    const openingConfig = { ...op };
+    if (flags.whiteSingleBest) {
+      openingConfig.selection = {
+        ...openingConfig.selection,
+        whiteSingleBest: true
+      };
+    }
+    if (flags.milestones) {
+      openingConfig.milestones = {
+        ...openingConfig.milestones,
+        enable: true,
+        order: flags.milestones === "castle" ? ["castle"] : ["castle", "develop_minors"]
+      };
+    }
+
     const branches = await generateBranches({
       g: cfg.global,
       side: op.side,
@@ -122,7 +148,8 @@ async function main() {
       repertoire: op.repertoire,
       coach: op.coach, // <— добавлено
       reporter,
-      tail: resolveTailConfig(cfg.global.tail, op.tail)
+      tail: resolveTailConfig(cfg.global.tail, op.tail),
+      opening: openingConfig
     });
 
     await writeUiFile(OUT, op.id, op.side, branches, cfg.global, {

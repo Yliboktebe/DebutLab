@@ -195,3 +195,72 @@ export interface TailExtendConfig {
   /** Защита от "циклов": не возвращаться к FEN, встречавшемуся в последних N позициях ветки */
   avoidRevisitFenWindow: number;
 }
+
+// === МИНИ-ДОБАВКИ К ТИПАМ ===
+export type Milestone = 'castle' | 'develop_minors' | 'connect_rooks';
+
+export interface MilestoneConfig {
+  enable: boolean;
+  order: Milestone[];
+  maxExtraTailPlies: number;      // мягкая доклейка полуходов до ближайшей вехи
+  relaxAfterMilestone: {
+    minGamesFactor: number;       // 0.6 = -40% к minGames на 2–4 полухода
+    ignoreCoveragePlies: number;  // игнорировать coverage-стоп на N полуходов
+  };
+  antiCycleWindow: number;        // защитное окно от зацикливаний (по FEN)
+  minLeafPlies: number;           // целевая минимальная глубина листа
+}
+
+export interface TrapPolicy {
+  enable: boolean;
+  budgetByDepth: number[];        // квота ловушек (шт) на глубину
+  minSharePercent: number;        // мин. доля встречаемости, чтобы не мусорить (например, 3%)
+  minGames: number;               // мин. кол-во партий для хода-ловушки
+  maxCpDrop: number;              // падение оценки соперника (в центропешках), чтобы считать ловушкой
+}
+
+export interface SelectionPolicy {
+  whiteSingleBest: boolean;       // у ученика ровно один ход
+  topNBlackByDepth: number[];     // у соперника top-N по глубине
+  traps?: TrapPolicy;
+}
+
+export interface ScenarioConfig {
+  enable: boolean;
+  /**
+   * Жёсткий сценарий: последовательность UCI, которую мы поддерживаем как главный ствол.
+   * Пример для центра: ["e2e4","e7e5","d2d4","e5d4","d1d4","b8c6","d4e3"]
+   */
+  forceUciPath: string[];
+  /**
+   * Максимальная глубина «сайдлайнов», если противник ушёл с сценария слишком рано.
+   * 0 = не ограничивать.
+   */
+  sidelineMaxPlies: number;
+}
+
+export interface GlobalConfig extends GlobalParams {
+  // ... уже существующие поля
+  milestones?: MilestoneConfig;
+  selection?: SelectionPolicy;
+  scenario?: ScenarioConfig;
+  api?: {
+    concurrency?: {
+      explorer?: number;   // по умолчанию 4
+      cloudEval?: number;  // по умолчанию 2
+    };
+    retry?: {
+      retries?: number;    // по умолчанию 4
+      baseDelayMs?: number;// по умолчанию 250
+      maxDelayMs?: number; // по умолчанию 4000
+    };
+  };
+}
+
+// Обновляем OpeningConfig для поддержки новых полей
+export interface OpeningConfigExtended extends OpeningConfig {
+  // ... уже существующие поля
+  milestones?: Partial<MilestoneConfig>;
+  selection?: Partial<SelectionPolicy>;
+  scenario?: Partial<ScenarioConfig>;
+}

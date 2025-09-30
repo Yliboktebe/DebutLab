@@ -200,6 +200,8 @@ export function createChessgroundBoard(opts: {
         castle: true,
         events: {
           // можно логировать set/unset, если нужно
+          set: () => { /* premove set */ },
+          unset: () => { /* premove unset */ }
         }
       },
 
@@ -216,8 +218,8 @@ export function createChessgroundBoard(opts: {
       // Глобальные события (произвольные хуки)
       events: {
         change: () => { /* каждый апдейт стейта */ },
-        move:   (_from: Key, _to: Key) => { /* каждый «переезд» фигуры */ },
-        select: (_sq: Key) => { /* выбор клетки tap-tap */ },
+        move:   () => { /* каждый «переезд» фигуры */ },
+        select: () => { /* выбор клетки tap-tap */ },
       }
     };
     

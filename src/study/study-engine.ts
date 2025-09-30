@@ -461,7 +461,7 @@ export class StudyEngine {
       const whiteUci = first.ucis[0]; // белый первый ход
       const from = whiteUci.slice(0, 2);
       const to = whiteUci.slice(2, 4);
-      let promotion = whiteUci.length > 4 ? whiteUci[4] as any : undefined;
+      const promotion = whiteUci.length > 4 ? whiteUci[4] as any : undefined;
       this.chess.move({ from, to, promotion });
       // У ученика теперь первый шаг (0) ещё впереди, индекс шага НЕ меняем
     }
@@ -519,12 +519,6 @@ export class StudyEngine {
       return fen;
     }
   }
-
-  // НОВЫЙ: найти индекс UCI в массиве ветки
-  private uciIndexOf(uci: string): number {
-    return this.state.currentBranch?.ucis.indexOf(uci) ?? -1;
-  }
-
 
   // НОВЫЙ: проверка, изучен ли ход
   isMoveLearned(uci: string): boolean {

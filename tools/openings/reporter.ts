@@ -18,6 +18,10 @@ export class ConsoleReporter implements Reporter {
   private stats: ProgressSnapshot;
   private errBuckets = new Map<string, { count: number; sample: string }>();
   private lastRender = 0;
+  private leafPlySum = 0;
+  private leafCount = 0;
+  private branchesWithCastle = 0;
+  private dupesPruned = 0;
 
   constructor(opts: Partial<ConsoleReporterOptions>) {
     const openingId = opts.openingId ?? "opening";
@@ -73,9 +77,22 @@ export class ConsoleReporter implements Reporter {
     this.touch();
   };
 
-  onFiltered = (kind: "coverage" | "engine") => {
+  onFiltered = (kind: "coverage" | "engine" | "dedupe") => {
     if (kind === "coverage") this.stats.filteredByCoverage++;
-    else this.stats.filteredByEngine++;
+    else if (kind === "engine") this.stats.filteredByEngine++;
+    else if (kind === "dedupe") this.dupesPruned++;
+    this.touch();
+  };
+
+  onDedupe = (pruned: number) => {
+    this.dupesPruned += pruned;
+    this.touch();
+  };
+
+  onLeafBranch = (ply: number, hasCastle: boolean) => {
+    this.leafPlySum += ply;
+    this.leafCount++;
+    if (hasCastle) this.branchesWithCastle++;
     this.touch();
   };
 
@@ -110,11 +127,17 @@ export class ConsoleReporter implements Reporter {
     this.render(true, true);
     if (this.opts.mode !== "quiet") {
       const dur = ((Date.now() - this.stats.startedAt) / 1000).toFixed(1);
+      const avgLeafPly = this.leafCount > 0 ? (this.leafPlySum / this.leafCount).toFixed(1) : "0.0";
+      const castlePercent = this.leafCount > 0 ? ((this.branchesWithCastle / this.leafCount) * 100).toFixed(1) : "0.0";
+      
       process.stdout.write(
         `\n\n=== Build summary: ${this.stats.openingId} ===\n` +
         `Nodes: ${this.stats.nodes}\n` +
         `Branches: ${this.stats.branches}\n` +
         `Max depth (ply): ${this.stats.maxDepth}\n` +
+        `Avg leaf ply: ${avgLeafPly}\n` +
+        `Branches with O-O/O-O-O: ${this.branchesWithCastle} / ${castlePercent}%\n` +
+        `Dedupe pruned: ${this.dupesPruned}\n` +
         `Explorer requests: ${this.stats.explorerRequests}\n` +
         `Cloud requests:    ${this.stats.cloudRequests}\n` +
         `Traps added:       ${this.stats.trapsAdded}\n` +
@@ -136,7 +159,7 @@ export class ConsoleReporter implements Reporter {
   private touch() {
     this.stats.updatedAt = Date.now();
     if (this.opts.jsonProgressPath) {
-      try { fs.writeFileSync(this.opts.jsonProgressPath, JSON.stringify(this.stats)); } catch {}
+      try { fs.writeFileSync(this.opts.jsonProgressPath, JSON.stringify(this.stats)); } catch { /* ignore */ }
     }
   }
 

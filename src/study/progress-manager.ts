@@ -122,14 +122,14 @@ export class ProgressManager {
     const now = Date.now();
     
     return Object.entries(debutProgress)
-      .filter(([_, progress]) => {
+      .filter(([, progress]) => {
         if (progress.status === 'New') return true;
         if (progress.status === 'Review' || progress.status === 'Relearn') {
           return progress.nextReviewAt && progress.nextReviewAt <= now;
         }
         return false;
       })
-      .map(([branchId, _]) => branchId);
+      .map(([branchId]) => branchId);
   }
 
   getBranchStatus(debutId: string, branchId: string): BranchStatus {

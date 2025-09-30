@@ -1,11 +1,14 @@
-import { applyMoves } from "./chess.js";
+// import { applyMoves } from "./chess.js";
 import { explorerQuery, cloudEvalQuery } from "./lichess.js";
 import { isBigBlunderCp, pickByCoverage, engineIntersect, applyMotifGuard } from "./filters.js";
 import { dedupeByPrefix, isTabiyaStop } from "./post.js";
 import { branchId } from "./id.js";
+import { nextFenAfterUci } from './lib/board.js';
+import { parseUci, materializeCastle, normalizeUci } from './lib/uci.js';
+import { LichessApi } from './api/lichess.js';
 import {
   ExplorerMove,
-  ExplorerResponse,
+  // ExplorerResponse,
   UiBranch,
   GlobalParams,
   FamilyBucket,
@@ -13,7 +16,13 @@ import {
   CoachMode,
   Reporter,
   NoopReporter,
-  TailExtendConfig
+  TailExtendConfig,
+  Milestone,
+  MilestoneConfig,
+  SelectionPolicy,
+  ScenarioConfig,
+  GlobalConfig,
+  OpeningConfigExtended
 } from "./types.js";
 
 type OpeningTrail = { name?: string; eco?: string; fens: string[] };
@@ -32,6 +41,251 @@ function totalGames(m?: ExplorerMove): number {
   return w + b + d;
 }
 
+// === Новые функции для milestones и selection ===
+
+function resolveMilestones(g: GlobalConfig, op?: OpeningConfigExtended): MilestoneConfig {
+  const base: MilestoneConfig = {
+    enable: false,
+    order: ['castle','develop_minors'],
+    maxExtraTailPlies: 4,
+    relaxAfterMilestone: { minGamesFactor: 0.7, ignoreCoveragePlies: 2 },
+    antiCycleWindow: 8,
+    minLeafPlies: 30
+  };
+  const patch = { ...(g.milestones||{}), ...(op?.milestones||{}) };
+  return { ...base, ...patch };
+}
+
+function resolveSelection(g: GlobalConfig, op?: OpeningConfigExtended): SelectionPolicy {
+  const base: SelectionPolicy = {
+    whiteSingleBest: false,
+    topNBlackByDepth: [],
+    traps: { enable:false, budgetByDepth:[], minSharePercent:3, minGames:6, maxCpDrop:120 }
+  };
+  const patch = { ...(g.selection||{}), ...(op?.selection||{}) };
+  const traps = { 
+    enable: patch.traps?.enable ?? base.traps!.enable,
+    budgetByDepth: patch.traps?.budgetByDepth ?? base.traps!.budgetByDepth,
+    minSharePercent: patch.traps?.minSharePercent ?? base.traps!.minSharePercent,
+    minGames: patch.traps?.minGames ?? base.traps!.minGames,
+    maxCpDrop: patch.traps?.maxCpDrop ?? base.traps!.maxCpDrop
+  };
+  return { ...base, ...patch, traps };
+}
+
+function resolveScenario(g: GlobalConfig, op?: OpeningConfigExtended): ScenarioConfig {
+  const base: ScenarioConfig = {
+    enable: false,
+    forceUciPath: [],
+    sidelineMaxPlies: 18
+  };
+  const patch = { ...(g.scenario||{}), ...(op?.scenario||{}) };
+  return { ...base, ...patch };
+}
+
+function makeApi(g: GlobalConfig): LichessApi {
+  return new LichessApi({
+    explorerConcurrency: g.api?.concurrency?.explorer,
+    cloudConcurrency:    g.api?.concurrency?.cloudEval,
+    retries:             g.api?.retry?.retries,
+    baseDelayMs:         g.api?.retry?.baseDelayMs,
+    maxDelayMs:          g.api?.retry?.maxDelayMs
+  });
+}
+
+function sideCastled(fen: string, side: 'w'|'b'): boolean {
+  const [board] = fen.split(' ');
+  // быстрая проверка: король на g/c и ладья на f/d, но надёжнее дернуть chess.js при желании
+  if (side === 'w') return board.includes('K') && (board.includes('R') && (board.indexOf('K') < board.indexOf('R'))); // упрощённо
+  return board.includes('k') && (board.includes('r') && (board.indexOf('k') < board.indexOf('r')));
+}
+
+function reached(fen: string, m: Milestone): boolean {
+  const [board, side, castling] = fen.split(' ');
+  switch (m) {
+    case 'castle': 
+      return castling.indexOf('K') === -1 && castling.indexOf('Q') === -1 && castling.indexOf('k') === -1 && castling.indexOf('q') === -1; // очень грубо: прав на рокировку больше нет
+    case 'develop_minors': 
+      return !/b1|g1|c1|f1/.test(board) || !/b8|g8|c8|f8/.test(board);
+    case 'connect_rooks':
+      return !/[BNQ]1/.test(board); // упрощённо: на 1-й линии нет фигур между ладьями
+    default: return false;
+  }
+}
+
+const moveGames = (m: ExplorerMove) => (m.white||0)+(m.black||0)+(m.draws||0);
+
+function rankByFrequency(moves: ExplorerMove[]): ExplorerMove[] {
+  return [...moves].sort((a,b) => moveGames(b) - moveGames(a));
+}
+
+function pickWhite(ms: ExplorerMove[], whiteSingleBest: boolean) {
+  return whiteSingleBest ? rankByFrequency(ms).slice(0,1) : rankByFrequency(ms);
+}
+
+function pickBlack(ms: ExplorerMove[], depth: number, sel: SelectionPolicy) {
+  const main = rankByFrequency(ms).slice(0, Math.max(1, sel.topNBlackByDepth[depth] ?? 2));
+  // ловушки — опционально, если есть CloudEval
+  return main; // упрощенно: ловушки уже есть в проекте, не дублируем здесь
+}
+
+function pathPrefixOk(played: string[], force: string[]): boolean {
+  for (let i=0;i<played.length;i++) if (force[i] && force[i] !== played[i]) return false;
+  return true;
+}
+
+function forceNextIfNeeded(played: string[], sideToMove: 'w'|'b', moves: ExplorerMove[], scenario: ScenarioConfig) {
+  if (!scenario.enable || scenario.forceUciPath.length === 0) return null;
+  // если уже ушли с пути — не форсим
+  if (!pathPrefixOk(played, scenario.forceUciPath)) return null;
+  const nextIdx = played.length;
+  const forced = scenario.forceUciPath[nextIdx];
+  if (!forced) return null; // путь закончился
+  // форсируем только ход ученика (в центральном — белых) и только если он сейчас на ходу
+  if (sideToMove !== 'w') return null;
+  const hit = moves.find(m => m.uci === forced);
+  return hit ? [hit] : null;
+}
+
+async function pickTraps(all: ExplorerMove[], depth: number, sel: SelectionPolicy, evalCp?: (uci: string)=>Promise<number|undefined>|undefined): Promise<ExplorerMove[]> {
+  const tp = sel.traps;
+  if (!tp?.enable) return [];
+  const budget = tp.budgetByDepth[depth] ?? 0;
+  if (budget <= 0) return [];
+  const total = all.reduce((s,m)=>s+moveGames(m),0)||1;
+  const cand = all.filter(m => {
+    const share = (moveGames(m)/total)*100;
+    if (share < tp.minSharePercent) return false;
+    if (moveGames(m) < tp.minGames) return false;
+    if (!evalCp) return false; // нет оценки — не рискуем
+    const cp = evalCp(m.uci);
+    return typeof cp === 'number' && cp <= -tp.maxCpDrop; // «их ход» ухудшает их оценку (в нашу пользу)
+  });
+  return rankByFrequency(cand).slice(0, budget);
+}
+
+// основной селектор
+async function selectCandidates(
+  fen: string,
+  depth: number,
+  sideToMove: 'w'|'b',
+  moves: ExplorerMove[],
+  sel: SelectionPolicy,
+  evalCp?: (uci: string)=>Promise<number|undefined>|undefined
+): Promise<ExplorerMove[]> {
+  const ranked = rankByFrequency(moves);
+  if (sideToMove === 'w' && sel.whiteSingleBest) {
+    return ranked.slice(0,1);
+  }
+  // black (или white без режима singleBest) — берём topNBlackByDepth
+  const topN = sel.topNBlackByDepth[depth] ?? 2;
+  const main = ranked.slice(0, Math.max(1, topN));
+  const traps = sideToMove === 'b' ? await pickTraps(ranked, depth, sel, evalCp) : [];
+  // dedup по uci
+  const seen = new Set<string>();
+  return [...main, ...traps].filter(m => (seen.has(m.uci) ? false : (seen.add(m.uci), true)));
+}
+
+async function softExtendToMilestone(ctx: Ctx, fen: string, depth: number): Promise<string|undefined> {
+  const ms = ctx.milestones;
+  if (!ms?.enable) return undefined;
+
+  // если уже достигли первой цели — не доклеиваем
+  const need = ms.order.find(m => !reached(fen, m));
+  if (!need) return undefined;
+
+  try {
+    // достаём самый частый ход из explorer
+    const data = await explorerQuery({
+      fen,
+      speeds: ctx.g.speeds,
+      ratings: ctx.g.ratings,
+      since: ctx.g.since,
+      until: ctx.g.until
+    });
+    const ranked = rankByFrequency(data.moves || []);
+    const best = ranked[0];
+    if (!best) return undefined;
+
+    const next = nextFenAfterUci(fen, best.uci);
+    if (!next.fen) return undefined;
+
+    // возвращаем следующий fen — вызывающая сторона сама добавит его в текущую ветку (без форка)
+    return next.fen;
+  } catch (error) {
+    // Игнорируем ошибки API
+    return undefined;
+  }
+}
+
+async function softExtend(ctx: any, fen: string, pliesDone: number) {
+  const { milestones } = ctx;
+  if (!milestones.enable) return fen;
+
+  // 1) «дотяни до ближайшей вехи»
+  const need = milestones.order.find(m => !reached(fen, m));
+  let cur = fen, extra = 0;
+  while (need && extra < milestones.maxExtraTailPlies) {
+    const data = await ctx.api.explorer({ variant:'standard', fen:cur, speeds:'rapid,classical', ratings:'2000,2200,2500' });
+    const best = rankByFrequency(data.moves || [])[0];
+    if (!best) break;
+    const next = nextFenAfterUci(cur, best.uci);
+    if (!next.fen) break;
+    cur = next.fen;
+    extra++;
+    if (reached(cur, need)) break;
+  }
+
+  // 2) «дотяни минимум глубины листа»
+  const minLeaf = milestones.minLeafPlies;
+  while (pliesDone + extra < minLeaf) {
+    const data = await ctx.api.explorer({ variant:'standard', fen:cur, speeds:'rapid,classical', ratings:'2000,2200,2500' });
+    const best = rankByFrequency(data.moves || [])[0];
+    if (!best) break;
+    const next = nextFenAfterUci(cur, best.uci);
+    if (!next.fen) break;
+    cur = next.fen;
+    extra++;
+  }
+  return cur;
+}
+
+function leafFenOf(startFen: string, ucis: string[]): string | undefined {
+  try {
+    const { Chess } = require('chess.js');
+    const ch = new Chess(startFen);
+    for (const raw of ucis) {
+      const u = materializeCastle(normalizeUci(raw), ch.fen());
+      const m = parseUci(u);
+      if (!m) return undefined;
+      const r = ch.move(m);
+      if (!r) return undefined;
+    }
+    return ch.fen();
+  } catch { return undefined; }
+}
+
+export function postProcessDedupe(startFen: string, branches: UiBranch[]): { pruned: number; result: UiBranch[] } {
+  const buckets = new Map<string, UiBranch[]>();
+  for (const b of branches) {
+    const leaf = leafFenOf(startFen, b.ucis);
+    const key = leaf || `__no_fen__:${b.id}`;
+    const arr = buckets.get(key) || [];
+    arr.push(b);
+    buckets.set(key, arr);
+  }
+  let pruned = 0;
+  const result: UiBranch[] = [];
+  for (const [, arr] of buckets) {
+    if (arr.length === 1) { result.push(arr[0]); continue; }
+    // оставляем самую длинную
+    arr.sort((a,b) => b.ucis.length - a.ucis.length);
+    result.push(arr[0]);
+    pruned += (arr.length - 1);
+  }
+  return { pruned, result };
+}
+
 interface Ctx {
   g: GlobalParams;
   side: "white"|"black";
@@ -44,18 +298,53 @@ interface Ctx {
   coach?: CoachMode; // <— новое
   reporter?: Reporter;
   tail?: TailExtendConfig;
+  milestones?: MilestoneConfig;
+  selection?: SelectionPolicy;
+  scenario?: ScenarioConfig;
+  api?: LichessApi;
 }
 
-export async function generateBranches(ctx: Ctx): Promise<UiBranch[]> {
-  const reporter: Reporter = ctx.reporter ?? NoopReporter;
-  reporter.onStart?.(ctx.openingId);
+export async function generateBranches(ctxIn: { g: GlobalConfig; side: "white"|"black"; openingId: string; seedFen: string; seedPath: string[]; rootBuckets?: FamilyBucket[]; openingBucketsStrict?: boolean; repertoire?: RepertoirePrefs; coach?: CoachMode; reporter?: Reporter; tail?: TailExtendConfig; opening?: OpeningConfigExtended }): Promise<UiBranch[]> {
+  const reporter: Reporter = ctxIn.reporter ?? NoopReporter;
+  reporter.onStart?.(ctxIn.openingId);
+  
+  const milestones = resolveMilestones(ctxIn.g, ctxIn.opening);
+  const selection  = resolveSelection(ctxIn.g, ctxIn.opening);
+  const scenario   = resolveScenario(ctxIn.g, ctxIn.opening);
+  const api        = makeApi(ctxIn.g);
+
+  const ctx: Ctx = {
+    g: ctxIn.g,
+    side: ctxIn.side,
+    openingId: ctxIn.openingId,
+    seedFen: ctxIn.seedFen,
+    seedPath: ctxIn.seedPath,
+    rootBuckets: ctxIn.rootBuckets,
+    openingBucketsStrict: ctxIn.openingBucketsStrict,
+    repertoire: ctxIn.repertoire,
+    coach: ctxIn.coach,
+    reporter: ctxIn.reporter,
+    tail: ctxIn.tail,
+    milestones,
+    selection,
+    scenario,
+    api
+  };
+  
   const out: UiBranch[] = [];
   try {
     await dfs(ctx, ctx.seedFen, 0, [], out, { fens: [] });
   } finally {
     reporter.onFinish?.(reporter.snapshot?.()!);
   }
-  const deduped = dedupeByPrefix(out, ctx.g.post?.dedupePrefixLen ?? 12);
+  
+  // Применяем дедупликацию по leaf-FEN
+  const { pruned, result } = postProcessDedupe(ctx.seedFen, out);
+  if (pruned > 0) {
+    console.info(`Dedupe pruned: ${pruned} branches`);
+  }
+  
+  const deduped = dedupeByPrefix(result, ctx.g.post?.dedupePrefixLen ?? 12);
   return deduped;
 }
 
@@ -69,7 +358,16 @@ async function dfs(
 ) {
   ctx.reporter?.onNode?.(ply, fen);
   
-  // регистрируем текущий FEN в истории
+  // хранение последних FEN для антициклов
+  trail.fens = trail.fens || [];
+  const { milestones } = ctx;
+  if (milestones?.enable && milestones.antiCycleWindow > 0) {
+    const recent = trail.fens.slice(-milestones.antiCycleWindow);
+    if (recent.includes(fen)) {
+      // просто возвращаемся — без логов/ошибок
+      return;
+    }
+  }
   trail.fens.push(fen);
   
   if (ply >= ctx.g.maxPlies) {
@@ -95,7 +393,13 @@ async function dfs(
     return;
   }
 
-  const minGames = ctx.g.minGamesByDepth[Math.min(ply, ctx.g.minGamesByDepth.length - 1)] ?? 10;
+  // Ослабление фильтров после вехи
+  const firstNeed = ctx.milestones?.enable ? ctx.milestones.order.find(m => !reached(fen, m)) : 'none';
+  const afterMilestone = ctx.milestones?.enable && firstNeed !== ctx.milestones.order[0]; // первую веху прошли
+  const minGamesBase = ctx.g.minGamesByDepth[Math.min(ply, ctx.g.minGamesByDepth.length - 1)] ?? 10;
+  const minGames = afterMilestone
+    ? Math.max(3, Math.floor(minGamesBase * (ctx.milestones!.relaxAfterMilestone.minGamesFactor ?? 1)))
+    : minGamesBase;
   const topN = ctx.g.topNByDepth[Math.min(ply, ctx.g.topNByDepth.length - 1)] ?? 2;
 
   // кандидаты: либо корзинами на корне, либо обычным отбором
@@ -108,6 +412,18 @@ async function dfs(
     candidates = pickByCoverage(data.moves, ctx.g.coverage, minGames, topN);
   }
 
+  // сценарий: если мы идём по главному пути — форсируем следующий белый ход
+  const sideToMove: 'w'|'b' = fen.split(' ')[1] as any;
+  const forced = forceNextIfNeeded(path, sideToMove, candidates, ctx.scenario!);
+  if (forced) {
+    candidates = forced;
+  } else if (ctx.selection) {
+    // обычный селектор
+    candidates = sideToMove === 'w'
+      ? pickWhite(candidates, ctx.selection.whiteSingleBest)
+      : pickBlack(candidates, ply, ctx.selection);
+  }
+
   // --- TAIL EXTEND: если ходы закончились, а нужной длины ещё нет --- //
   const tail = ctx.tail ?? { enable: false } as TailExtendConfig;
   if ((candidates == null || candidates.length === 0) && tail.enable && ply < tail.minBranchPly) {
@@ -116,8 +432,35 @@ async function dfs(
     candidates = tailMoves;
   }
 
-  const sideToMove = fen.split(" ")[1] === "w" ? "white" : "black";
-  const weMove = sideToMove === (ctx.coach?.enabled ? ctx.coach.side : ctx.side);
+  // Если есть selection policy, используем её
+  if (ctx.selection) {
+    const sideToMove = fen.split(" ")[1] === "w" ? "w" : "b";
+    const evalCp = ctx.g.engine?.useCloud ? async (uci: string) => {
+      try {
+        const nextFen = nextFenAfterUci(fen, uci);
+        if (!nextFen.fen) return undefined;
+        const ce = await cloudEvalQuery(nextFen.fen, 1);
+        return ce?.pvs?.[0]?.cp;
+      } catch (error) {
+        // Игнорируем ошибки CloudEval (429, etc.)
+        return undefined;
+      }
+    } : undefined;
+    
+    candidates = await selectCandidates(fen, ply, sideToMove, data.moves || [], ctx.selection, evalCp);
+  }
+
+  // если на глубине кандидатов нет, попробуем мягко продлить до вех/минимума
+  if (!candidates || candidates.length === 0) {
+    const extendedFen = await softExtend(ctx, fen, path.length);
+    if (extendedFen && extendedFen !== fen) {
+      return await dfs(ctx, extendedFen, ply, path, out, trail);
+    }
+    return; // нечего добавить
+  }
+
+  const sideToMoveCoach = fen.split(" ")[1] === "w" ? "white" : "black";
+  const weMove = sideToMoveCoach === (ctx.coach?.enabled ? ctx.coach.side : ctx.side);
 
   if (ctx.coach?.enabled) {
     if (weMove) {
@@ -130,7 +473,14 @@ async function dfs(
         return;
       }
       try {
-        const nextFen = applyMoves(fen, [picked.uci]);
+        const r = nextFenAfterUci(fen, picked.uci);
+        if (!r.fen) {
+          ctx.reporter?.onInvalidMove?.(picked.uci, ply, r.error || 'invalid');
+          out.push(mkBranch(ctx, path, trail));
+          ctx.reporter?.onBranch?.(path, ply);
+          return;
+        }
+        const nextFen = r.fen;
         
         // Проверка на циклы
         const tailCfg = ctx.tail ?? { enable: false } as TailExtendConfig;
@@ -168,7 +518,12 @@ async function dfs(
       // спускаемся по каждому ответу соперника
       for (const mv of candidates) {
         try {
-          const nextFen = applyMoves(fen, [mv.uci]);
+          const r = nextFenAfterUci(fen, mv.uci);
+          if (!r.fen) {
+            ctx.reporter?.onInvalidMove?.(mv.uci, ply, r.error || 'invalid');
+            continue;
+          }
+          const nextFen = r.fen;
           
           // Проверка на циклы
           const tailCfg = ctx.tail ?? { enable: false } as TailExtendConfig;
@@ -248,7 +603,23 @@ async function dfs(
 
   for (const mv of candidates) {
     try {
-      const nextFen = applyMoves(fen, [mv.uci]);
+      const r = nextFenAfterUci(fen, mv.uci);
+      if (!r.fen) {
+        ctx.reporter?.onInvalidMove?.(mv.uci, ply, r.error || 'invalid');
+        continue;
+      }
+      const nextFen = r.fen;
+
+      // если мы ушли с форс-пути достаточно рано и включён «короткий сайдлайн» — ограничим глубину
+      if (ctx.scenario?.enable && !pathPrefixOk([...path, mv.uci], ctx.scenario.forceUciPath)) {
+        const cap = ctx.scenario.sidelineMaxPlies || 0;
+        if (cap > 0 && (path.length+1) >= cap) {
+          // финализируем как короткий сайдлайн
+          out.push(mkBranch(ctx, [...path, mv.uci], trail));
+          ctx.reporter?.onBranch?.([...path, mv.uci], ply + 1);
+          continue;
+        }
+      }
 
       // Проверка на циклы
       const tailCfg = ctx.tail ?? { enable: false } as TailExtendConfig;
@@ -439,14 +810,21 @@ async function pickOpponentResponses(
       .sort((a, b) => b.total - a.total);
 
     for (const x of rest) {
-      // оценка позиции после хода соперника (ход следующей стороны — наша)
-      const nextFen = applyMoves(fen, [x.m.uci]);
-      ctx.reporter?.onHttp?.("cloud", nextFen);
-      const ce = await cloudEvalQuery(nextFen, 1);
-      const cp = ce?.pvs?.[0]?.cp;
-      if (isBigBlunderCp(cp, threshold)) {
-        picked.push(x.m); // маркировать как Trap будем в нейминге
-        ctx.reporter?.onTrap?.();
+      try {
+        // оценка позиции после хода соперника (ход следующей стороны — наша)
+        const r = nextFenAfterUci(fen, x.m.uci);
+        if (!r.fen) continue;
+        const nextFen = r.fen;
+        ctx.reporter?.onHttp?.("cloud", nextFen);
+        const ce = await cloudEvalQuery(nextFen, 1);
+        const cp = ce?.pvs?.[0]?.cp;
+        if (isBigBlunderCp(cp, threshold)) {
+          picked.push(x.m); // маркировать как Trap будем в нейминге
+          ctx.reporter?.onTrap?.();
+        }
+      } catch (error) {
+        // Игнорируем ошибки CloudEval (429, etc.)
+        continue;
       }
     }
   }

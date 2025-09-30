@@ -1,5 +1,5 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { join, resolve } from "node:path";
+import { join } from "node:path";
 import { GeneratedDebutFile, UiDebutFile, UiBranch, CatalogItem } from "./types.js";
 import { createBranchName, getBranchType, createBranchId } from "./chess-utils.js";
 

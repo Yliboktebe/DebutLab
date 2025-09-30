@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useStudyEngine } from '@/study/useStudyEngine';
-import { studyEngine } from '@/study/study-engine';
 import { ContentLoader } from '@/content/loader';
 import type { Debut } from '@/content/types';
 import ChessBoard from '@/components/ChessBoard';
@@ -45,15 +44,15 @@ function StudyContent({ debut }: { debut: Debut }) {
     // expectedUci,       // ← стрелка управляется через boardApi
     onMove,                 // НОВЫЙ: добавляем onMove
     setBoardApi,            // НОВЫЙ: для установки ссылки на API доски
-    updateArrowAndDests,    // НОВЫЙ: для принудительного обновления
     uiMsg,                  // НОВЫЙ: для отображения временных сообщений
     resetCurrentDebut       // НОВЫЙ: для сброса прогресса текущего дебюта
   } = useStudyEngine(debut);
 
   const handleMove = useCallback((uci: string): boolean => {
     console.log('StudyView: handleMove called with uci:', uci);
-    // Вызываем onMove из useStudyEngine
-    return onMove(uci);
+    // Вызываем onMove из useStudyEngine (асинхронно, но возвращаем true сразу)
+    onMove(uci);
+    return true;
   }, [onMove]);
 
   const onResetClick = () => {

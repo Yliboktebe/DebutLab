@@ -1,4 +1,4 @@
-import { setTimeout as sleep } from "node:timers/promises";
+// import { setTimeout as sleep } from "node:timers/promises";
 import { createHash } from "node:crypto";
 import { ExplorerResponse, CloudEvalResponse, Speed, RatingBucket } from "./types.js";
 import Bottleneck from "bottleneck";
