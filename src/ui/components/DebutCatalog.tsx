@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { DebutCatalogItem } from '@/content/types';
+import { DebutCatalogItem } from '@/data/content/types';
 import './DebutCatalog.css';
 
 interface DebutCatalogProps {

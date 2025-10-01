@@ -1,5 +1,5 @@
 import { Chess } from 'chess.js';
-import type { Branch, Debut } from '@/content/types';
+import type { Branch, Debut } from '@/data/content/types';
 import { ProgressManager } from './progress-manager';
 import { nextReviewAt, type SrsStage } from './srs';
 

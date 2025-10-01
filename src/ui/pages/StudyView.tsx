@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useStudyEngine } from '@/study/useStudyEngine';
-import { ContentLoader } from '@/content/loader';
-import type { Debut } from '@/content/types';
-import ChessBoard from '@/components/ChessBoard';
-import type { ChessBoardApi } from '@/board/chessground';
+import { useStudyEngine } from '@/core/study/useStudyEngine';
+import { ContentLoader } from '@/data/content/loader';
+import type { Debut } from '@/data/content/types';
+import ChessBoard from '@/ui/components/ChessBoard';
+import type { ChessBoardApi } from '@/core/chess/chessground';
 
 import './StudyView.css';
 

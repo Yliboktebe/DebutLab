@@ -1,4 +1,4 @@
-import type { Branch } from '@/content/types';
+import type { Branch } from '@/data/content/types';
 import { Chess } from 'chess.js';
 
 // Функция для построения словаря автоответов черных по ветке дебюта

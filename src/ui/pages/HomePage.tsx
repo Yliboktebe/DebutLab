@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { contentLoader } from '@/content/loader';
-import { Catalog } from '@/content/types';
-import { DebutCatalog } from '@/components/DebutCatalog';
+import { contentLoader } from '@/data/content/loader';
+import { Catalog } from '@/data/content/types';
+import { DebutCatalog } from '@/ui/components/DebutCatalog';
 import './HomePage.css';
 
 export function HomePage() {

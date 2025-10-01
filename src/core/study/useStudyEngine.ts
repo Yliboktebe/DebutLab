@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Debut } from '@/content/types';
+import { Debut } from '@/data/content/types';
 import { studyEngine, StudyState, ApplyResult } from './study-engine';
 import { progressManager, ProgressManager } from './progress-manager';
-import type { ChessBoardApi } from '@/board/chessground';
+import type { ChessBoardApi } from '@/core/chess/chessground';
 
 type UiMsg = { text: string; kind: "success" | "info"; until: number } | null;
 

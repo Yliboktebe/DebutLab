@@ -1,4 +1,4 @@
-import { Branch, BranchStatus, BranchProgress, DebutProgress, UserProgress } from '@/content/types';
+import { Branch, BranchStatus, BranchProgress, DebutProgress, UserProgress } from '@/data/content/types';
 
 const STORAGE_KEY = 'debutlab.v1';
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { createChessgroundBoard } from '@/board/chessground';
-import type { ChessBoardApi } from '@/board/chessground';
+import { createChessgroundBoard } from '@/core/chess/chessground';
+import type { ChessBoardApi } from '@/core/chess/chessground';
 import './ChessBoard.css';
 
 export interface ChessBoardProps {

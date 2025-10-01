@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { contentLoader } from '@/content/loader';
-import { Debut } from '@/content/types';
+import { contentLoader } from '@/data/content/loader';
+import { Debut } from '@/data/content/types';
 import StudyView from './StudyView';
 import './DebutPage.css';
 
