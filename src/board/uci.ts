@@ -1,7 +1,7 @@
-// Единая функция для формирования UCI без промоушена для не-пешек
-export function toUci(orig: string, dest: string, pieceRole?: 'pawn'|'knight'|'bishop'|'rook'|'queen'|'king') {
-  const isPawn = pieceRole === 'pawn';
-  const destRank = dest[1];
-  const needPromo = isPawn && (destRank === '8' || destRank === '1');
-  return `${orig}${dest}${needPromo ? 'q' : ''}`;
+// old-path shim — TEMP, will be removed per TTL policy
+export * from "@/core/chess/uci";
+if (process.env.NODE_ENV !== "production") {
+  // eslint-disable-next-line no-console
+  console.warn("[DEPRECATED] Import from '@/board/uci' → use '@/core/chess/uci'");
 }
+
