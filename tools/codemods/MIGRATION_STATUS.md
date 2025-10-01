@@ -16,11 +16,11 @@
 | **3** | ✅ DONE | 4 | 🟡 Medium | Build ✅ Test ✅ (37/37) |
 | **4** | ✅ DONE | 4 | 🟢 Low | Build ✅ Test ✅ (37/37) |
 | **5** | ✅ DONE | 6 | 🟡 Medium | Build ✅ Test ✅ (37/37) |
-| **6** | ⏳ PENDING | 2 | 🟢 Low | - |
+| **6** | ✅ DONE | 2 | 🟢 Low | Build ✅ Test ✅ (37/37) |
 | **7** | ⏳ PENDING | 1 | 🟢 Low | - |
 
-**Completed**: 5/7 batches (71.4%)  
-**Files migrated**: 18/21 (85.7%)  
+**Completed**: 6/7 batches (85.7%)  
+**Files migrated**: 20/21 (95.2%)  
 **Shims created**: 13/13 (100%)
 
 ---
@@ -154,17 +154,28 @@
 
 ---
 
-## Batch 6: Styles ⏳
+## Batch 6: Styles ✅
 
-### Plan
-- `src/styles/app.css` → `src/ui/styles/app.css`
-- `src/index.css` → `src/ui/styles/index.css`
+### Migrated Files
+- ✅ `src/styles/app.css` → `src/ui/styles/app.css`
+- ✅ `src/index.css` → `src/ui/styles/index.css`
 
-### Shims Needed
-- 0 (CSS files, no shims per COMPAT_POLICY)
+### Shims Created
+- ℹ️ CSS files: no shims needed (per COMPAT_POLICY)
 
 ### Special Handling
-- Update import in `src/main.tsx`: `./styles/app.css` → `./ui/styles/app.css`
+- ✅ Updated import in `src/main.tsx`: `./styles/app.css` → `./ui/styles/app.css`
+
+### Verification
+- ✅ Build: SUCCESS (697ms)
+- ✅ Tests: 37/37 passing
+- ✅ Protected dirs: Not touched
+- ⚠️ Depcruise: SKIPPED (no config file)
+
+### Commit
+`92067c1` - refactor(structure): apply batch 6 per STRUCTURE_PLAN (CSS only, no shims)
+
+**Status**: Complete
 
 ---
 
@@ -185,7 +196,7 @@
 
 **Files to migrate**: 21  
 **Shims to create**: 13 (13 done, 0 remaining)  
-**Test files to update**: 2 (done for batches 1-5)  
+**Test files to update**: 2 (done for batches 1-6)  
 
 **Current structure**:
 ```
@@ -209,13 +220,16 @@ src/
 │   │   ├── ChessBoard.css
 │   │   ├── DebutCatalog.tsx
 │   │   └── DebutCatalog.css
-│   └── pages/            ✅ NEW (batch 5)
-│       ├── HomePage.tsx
-│       ├── HomePage.css
-│       ├── DebutPage.tsx
-│       ├── DebutPage.css
-│       ├── StudyView.tsx
-│       └── StudyView.css
+│   ├── pages/            ✅ NEW (batch 5)
+│   │   ├── HomePage.tsx
+│   │   ├── HomePage.css
+│   │   ├── DebutPage.tsx
+│   │   ├── DebutPage.css
+│   │   ├── StudyView.tsx
+│   │   └── StudyView.css
+│   └── styles/           ✅ NEW (batch 6)
+│       ├── app.css
+│       └── index.css
 ├── content/              ⚠️ SHIMS ONLY
 │   ├── loader.ts         (→ @/data/content/loader)
 │   └── types.ts          (→ @/data/content/types)
@@ -234,7 +248,6 @@ src/
 │   ├── HomePage.tsx      (→ @/ui/pages/HomePage)
 │   ├── DebutPage.tsx     (→ @/ui/pages/DebutPage)
 │   └── StudyView.tsx     (→ @/ui/pages/StudyView)
-├── styles/               ⏳ TO MIGRATE (batch 6)
 └── vite-env.d.ts         ⏳ TO MIGRATE (batch 7)
 ```
 
@@ -246,7 +259,7 @@ src/
 2. ✅ Execute Batch 3 (Study Logic) - DONE
 3. ✅ Execute Batch 4 (UI Components) - DONE
 4. ✅ Execute Batch 5 (Pages) - DONE
-5. ⏳ Execute Batch 6 (Styles)
+5. ✅ Execute Batch 6 (Styles) - DONE
 6. ⏳ Execute Batch 7 (Types)
 7. ⏳ Create final MIGRATION_REPORT.md
 
@@ -269,8 +282,9 @@ npx depcruise src --validate
 2025-10-01 13:36  | Batch 3 | moved:4 | shims:4 | build:OK | tests:OK (37/37) | depcruise:SKIPPED
 2025-10-01 13:43  | Batch 4 | moved:4 | shims:2 | build:OK | tests:OK (37/37) | depcruise:SKIPPED (no config)
 2025-10-01 13:50  | Batch 5 | moved:6 | shims:3 | build:OK | tests:OK (37/37) | depcruise:SKIPPED
+2025-10-01 13:57  | Batch 6 | moved:2 | shims:0 | build:OK | tests:OK (37/37) | depcruise:SKIPPED (no config)
 
 ---
 
-**Last Updated**: 2025-10-01 13:50 (after Batch 5)
+**Last Updated**: 2025-10-01 13:57 (after Batch 6)
 
