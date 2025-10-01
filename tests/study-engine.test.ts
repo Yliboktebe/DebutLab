@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { StudyEngine } from '../src/study/study-engine';
+import { StudyEngine } from '../src/core/study/study-engine';
 import { Debut, Branch } from '../src/data/content/types';
 
 // Mock chess.js (version 1.4.0 has different API)
@@ -54,7 +54,7 @@ vi.mock('chess.js', () => {
 });
 
 // Mock progress manager with proper class export
-vi.mock('../src/study/progress-manager', () => {
+vi.mock('../src/core/study/progress-manager', () => {
   const mockProgressManagerInstance = {
     getLearnedMoves: vi.fn(() => []),
     getDueBranches: vi.fn(() => []),
@@ -76,7 +76,7 @@ vi.mock('../src/study/progress-manager', () => {
 });
 
 // Mock SRS module
-vi.mock('../src/study/srs', () => ({
+vi.mock('../src/core/study/srs', () => ({
   nextReviewAt: vi.fn((_errors: number, stage: number) => ({
     dueAt: Date.now() + 86400000, // +1 day
     nextStage: Math.min(stage + 1, 5),
