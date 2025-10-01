@@ -18,15 +18,10 @@
   },
   "dependencies": {
     "@lichess-org/chessground": "^9.6.0",
-    "bottleneck": "^2.19.5",
     "chess.js": "^1.4.0",
-    "p-limit": "^7.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.1",
-    "undici": "^7.15.0",
-    "zod": "^4.1.5",
-    "zustand": "^4.4.7"
+    "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
@@ -37,6 +32,7 @@
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^4.1.1",
+    "bottleneck": "^2.19.5",
     "dependency-cruiser": "^17.0.1",
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -49,6 +45,7 @@
     "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.45.0",
+    "undici": "^7.15.0",
     "vite": "^5.0.0",
     "vitest": "^1.0.0"
   }
