@@ -15,13 +15,13 @@
 | **2** | ✅ DONE | 2 | 🟢 Low | Build ✅ Test ✅ (37/37) |
 | **3** | ✅ DONE | 4 | 🟡 Medium | Build ✅ Test ✅ (37/37) |
 | **4** | ✅ DONE | 4 | 🟢 Low | Build ✅ Test ✅ (37/37) |
-| **5** | ⏳ PENDING | 6 | 🟡 Medium | - |
+| **5** | ✅ DONE | 6 | 🟡 Medium | Build ✅ Test ✅ (37/37) |
 | **6** | ⏳ PENDING | 2 | 🟢 Low | - |
 | **7** | ⏳ PENDING | 1 | 🟢 Low | - |
 
-**Completed**: 4/7 batches (57.1%)  
-**Files migrated**: 12/21 (57.1%)  
-**Shims created**: 10/13 (76.9%)
+**Completed**: 5/7 batches (71.4%)  
+**Files migrated**: 18/21 (85.7%)  
+**Shims created**: 13/13 (100%)
 
 ---
 
@@ -126,17 +126,31 @@
 
 ---
 
-## Batch 5: Pages ⏳
+## Batch 5: Pages ✅
 
-### Plan
-- `src/pages/HomePage.tsx` + `.css` → `src/ui/pages/`
-- `src/pages/DebutPage.tsx` + `.css` → `src/ui/pages/`
-- `src/pages/StudyView.tsx` + `.css` → `src/ui/pages/`
+### Migrated Files
+- ✅ `src/pages/HomePage.tsx` → `src/ui/pages/HomePage.tsx`
+- ✅ `src/pages/HomePage.css` → `src/ui/pages/HomePage.css`
+- ✅ `src/pages/DebutPage.tsx` → `src/ui/pages/DebutPage.tsx`
+- ✅ `src/pages/DebutPage.css` → `src/ui/pages/DebutPage.css`
+- ✅ `src/pages/StudyView.tsx` → `src/ui/pages/StudyView.tsx`
+- ✅ `src/pages/StudyView.css` → `src/ui/pages/StudyView.css`
 
-### Shims Needed
-- 3 shims (TS/TSX only, CSS no shims)
+### Shims Created
+- ✅ `src/pages/HomePage.tsx` (re-exports from @/ui/pages/HomePage)
+- ✅ `src/pages/DebutPage.tsx` (re-exports from @/ui/pages/DebutPage)
+- ✅ `src/pages/StudyView.tsx` (re-exports from @/ui/pages/StudyView)
+- ℹ️ CSS files: no shims (per COMPAT_POLICY)
 
-**Risk**: 🟡 Medium (orchestration layer)
+### Verification
+- ✅ Build: SUCCESS (702ms)
+- ✅ Tests: 37/37 passing
+- ✅ Protected dirs: Not touched
+
+### Commit
+`17e6e7d` - refactor(structure): apply batch 5 per STRUCTURE_PLAN (with shims)
+
+**Status**: Complete
 
 ---
 
@@ -170,8 +184,8 @@
 ## Overall Stats
 
 **Files to migrate**: 21  
-**Shims to create**: 13 (10 done, 3 remaining)  
-**Test files to update**: 2 (done for batches 1-4)  
+**Shims to create**: 13 (13 done, 0 remaining)  
+**Test files to update**: 2 (done for batches 1-5)  
 
 **Current structure**:
 ```
@@ -190,11 +204,18 @@ src/
 │       ├── srs.ts
 │       └── useStudyEngine.ts
 ├── ui/
-│   └── components/       ✅ NEW (batch 4)
-│       ├── ChessBoard.tsx
-│       ├── ChessBoard.css
-│       ├── DebutCatalog.tsx
-│       └── DebutCatalog.css
+│   ├── components/       ✅ NEW (batch 4)
+│   │   ├── ChessBoard.tsx
+│   │   ├── ChessBoard.css
+│   │   ├── DebutCatalog.tsx
+│   │   └── DebutCatalog.css
+│   └── pages/            ✅ NEW (batch 5)
+│       ├── HomePage.tsx
+│       ├── HomePage.css
+│       ├── DebutPage.tsx
+│       ├── DebutPage.css
+│       ├── StudyView.tsx
+│       └── StudyView.css
 ├── content/              ⚠️ SHIMS ONLY
 │   ├── loader.ts         (→ @/data/content/loader)
 │   └── types.ts          (→ @/data/content/types)
@@ -209,7 +230,10 @@ src/
 ├── components/           ⚠️ SHIMS ONLY
 │   ├── ChessBoard.tsx    (→ @/ui/components/ChessBoard)
 │   └── DebutCatalog.tsx  (→ @/ui/components/DebutCatalog)
-├── pages/                ⏳ TO MIGRATE (batch 5)
+├── pages/                ⚠️ SHIMS ONLY
+│   ├── HomePage.tsx      (→ @/ui/pages/HomePage)
+│   ├── DebutPage.tsx     (→ @/ui/pages/DebutPage)
+│   └── StudyView.tsx     (→ @/ui/pages/StudyView)
 ├── styles/               ⏳ TO MIGRATE (batch 6)
 └── vite-env.d.ts         ⏳ TO MIGRATE (batch 7)
 ```
@@ -221,7 +245,7 @@ src/
 1. ✅ Execute Batch 2 (Chess Integration) - DONE
 2. ✅ Execute Batch 3 (Study Logic) - DONE
 3. ✅ Execute Batch 4 (UI Components) - DONE
-4. ⏳ Execute Batch 5 (Pages)
+4. ✅ Execute Batch 5 (Pages) - DONE
 5. ⏳ Execute Batch 6 (Styles)
 6. ⏳ Execute Batch 7 (Types)
 7. ⏳ Create final MIGRATION_REPORT.md
@@ -244,8 +268,9 @@ npx depcruise src --validate
 2025-10-01 13:29  | Batch 2 | moved:2 | shims:2 | build:OK | tests:OK (37/37) | depcruise:SKIPPED (no config)
 2025-10-01 13:36  | Batch 3 | moved:4 | shims:4 | build:OK | tests:OK (37/37) | depcruise:SKIPPED
 2025-10-01 13:43  | Batch 4 | moved:4 | shims:2 | build:OK | tests:OK (37/37) | depcruise:SKIPPED (no config)
+2025-10-01 13:50  | Batch 5 | moved:6 | shims:3 | build:OK | tests:OK (37/37) | depcruise:SKIPPED
 
 ---
 
-**Last Updated**: 2025-10-01 13:43 (after Batch 4)
+**Last Updated**: 2025-10-01 13:50 (after Batch 5)
 
