@@ -13,15 +13,15 @@
 |-------|--------|-------|------|--------------|
 | **1** | ✅ DONE | 2 | 🟢 Low | Build ✅ Test ✅ (37/37) |
 | **2** | ✅ DONE | 2 | 🟢 Low | Build ✅ Test ✅ (37/37) |
-| **3** | ⏳ PENDING | 4 | 🟡 Medium | - |
+| **3** | ✅ DONE | 4 | 🟡 Medium | Build ✅ Test ✅ (37/37) |
 | **4** | ⏳ PENDING | 4 | 🟢 Low | - |
 | **5** | ⏳ PENDING | 6 | 🟡 Medium | - |
 | **6** | ⏳ PENDING | 2 | 🟢 Low | - |
 | **7** | ⏳ PENDING | 1 | 🟢 Low | - |
 
-**Completed**: 2/7 batches (28.6%)  
-**Files migrated**: 4/21 (19.0%)  
-**Shims created**: 4/13 (30.8%)
+**Completed**: 3/7 batches (42.9%)  
+**Files migrated**: 8/21 (38.1%)  
+**Shims created**: 8/13 (61.5%)
 
 ---
 
@@ -70,21 +70,33 @@
 
 ---
 
-## Batch 3: Study Logic ⏳
+## Batch 3: Study Logic ✅
 
-### Plan
-- `src/study/study-engine.ts` → `src/core/study/study-engine.ts`
-- `src/study/progress-manager.ts` → `src/core/study/progress-manager.ts`
-- `src/study/srs.ts` → `src/core/study/srs.ts`
-- `src/study/useStudyEngine.ts` → `src/core/study/useStudyEngine.ts`
+### Migrated Files
+- ✅ `src/study/study-engine.ts` → `src/core/study/study-engine.ts`
+- ✅ `src/study/progress-manager.ts` → `src/core/study/progress-manager.ts`
+- ✅ `src/study/srs.ts` → `src/core/study/srs.ts`
+- ✅ `src/study/useStudyEngine.ts` → `src/core/study/useStudyEngine.ts`
 
-### Shims Needed
-- 4 shims for study modules
+### Shims Created
+- ✅ `src/study/study-engine.ts` (re-exports from @/core/study/study-engine)
+- ✅ `src/study/progress-manager.ts` (re-exports from @/core/study/progress-manager)
+- ✅ `src/study/srs.ts` (re-exports from @/core/study/srs)
+- ✅ `src/study/useStudyEngine.ts` (re-exports from @/core/study/useStudyEngine)
 
-### Test Mocks to Update
-- `tests/study-engine.test.ts` - already has mocks for progress-manager, srs
+### Test Mocks Updated
+- ✅ `tests/study-engine.test.ts` - updated mocks for progress-manager, srs
 
-**Risk**: 🟡 Medium (complex domain logic)
+### Verification
+- ✅ Build: SUCCESS (712ms)
+- ✅ Tests: 37/37 passing
+- ✅ Protected dirs: Not touched
+
+### Commits
+`dafe8d0` - refactor(structure): apply batch 3 per STRUCTURE_PLAN (with shims)
+`4720ad3` - test: adjust mocks for batch 3 path changes
+
+**Status**: Complete
 
 ---
 
@@ -143,8 +155,8 @@
 ## Overall Stats
 
 **Files to migrate**: 21  
-**Shims to create**: 13 (4 done, 9 remaining)  
-**Test files to update**: 2 (done for batches 1-2)  
+**Shims to create**: 13 (8 done, 5 remaining)  
+**Test files to update**: 2 (done for batches 1-3)  
 
 **Current structure**:
 ```
@@ -154,16 +166,25 @@ src/
 │       ├── loader.ts
 │       └── types.ts
 ├── core/
-│   └── chess/            ✅ NEW (batch 2)
-│       ├── chessground.ts
-│       └── uci.ts
+│   ├── chess/            ✅ NEW (batch 2)
+│   │   ├── chessground.ts
+│   │   └── uci.ts
+│   └── study/            ✅ NEW (batch 3)
+│       ├── study-engine.ts
+│       ├── progress-manager.ts
+│       ├── srs.ts
+│       └── useStudyEngine.ts
 ├── content/              ⚠️ SHIMS ONLY
 │   ├── loader.ts         (→ @/data/content/loader)
 │   └── types.ts          (→ @/data/content/types)
 ├── board/                ⚠️ SHIMS ONLY
 │   ├── chessground.ts    (→ @/core/chess/chessground)
 │   └── uci.ts            (→ @/core/chess/uci)
-├── study/                ⏳ TO MIGRATE (batch 3)
+├── study/                ⚠️ SHIMS ONLY
+│   ├── study-engine.ts   (→ @/core/study/study-engine)
+│   ├── progress-manager.ts (→ @/core/study/progress-manager)
+│   ├── srs.ts            (→ @/core/study/srs)
+│   └── useStudyEngine.ts (→ @/core/study/useStudyEngine)
 ├── components/           ⏳ TO MIGRATE (batch 4)
 ├── pages/                ⏳ TO MIGRATE (batch 5)
 ├── styles/               ⏳ TO MIGRATE (batch 6)
@@ -175,7 +196,7 @@ src/
 ## Next Actions
 
 1. ✅ Execute Batch 2 (Chess Integration) - DONE
-2. ⏳ Execute Batch 3 (Study Logic)
+2. ✅ Execute Batch 3 (Study Logic) - DONE
 3. ⏳ Execute Batch 4 (UI Components)
 4. ⏳ Execute Batch 5 (Pages)
 5. ⏳ Execute Batch 6 (Styles)
@@ -198,8 +219,9 @@ npx depcruise src --validate
 ## Execution Log
 
 2025-10-01 13:29  | Batch 2 | moved:2 | shims:2 | build:OK | tests:OK (37/37) | depcruise:SKIPPED (no config)
+2025-10-01 13:36  | Batch 3 | moved:4 | shims:4 | build:OK | tests:OK (37/37) | depcruise:SKIPPED
 
 ---
 
-**Last Updated**: 2025-10-01 13:29 (after Batch 2)
+**Last Updated**: 2025-10-01 13:36 (after Batch 3)
 
