@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { ContentLoader } from '../src/content/loader';
+import { ContentLoader } from '../src/data/content/loader';
 
 describe('ContentLoader', () => {
   let loader: ContentLoader;

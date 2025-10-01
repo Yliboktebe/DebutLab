@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { StudyEngine } from '../src/study/study-engine';
-import { Debut, Branch } from '../src/content/types';
+import { Debut, Branch } from '../src/data/content/types';
 
 // Mock chess.js (version 1.4.0 has different API)
 vi.mock('chess.js', () => {
