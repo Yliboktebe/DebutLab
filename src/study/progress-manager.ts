@@ -1,4 +1,4 @@
-import { BranchStatus, BranchProgress, DebutProgress, UserProgress } from '@/content/types';
+import { Branch, BranchStatus, BranchProgress, DebutProgress, UserProgress } from '@/content/types';
 
 const STORAGE_KEY = 'debutlab.v1';
 
@@ -163,7 +163,7 @@ export class ProgressManager {
   }
 
   // НОВЫЙ: получить ID следующей ветки для изучения
-  getNextBranchId(debutId: string, branches: any[], now = Date.now()): string {
+  getNextBranchId(debutId: string, branches: Branch[], now = Date.now()): string {
     const debutProgress = this.getDebutProgress(debutId);
     
     // 1. Собрать due ветки (status in ["Review","Relearn","Mastered"] и nextReviewAt <= now)
