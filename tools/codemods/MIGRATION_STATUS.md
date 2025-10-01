@@ -14,14 +14,14 @@
 | **1** | ✅ DONE | 2 | 🟢 Low | Build ✅ Test ✅ (37/37) |
 | **2** | ✅ DONE | 2 | 🟢 Low | Build ✅ Test ✅ (37/37) |
 | **3** | ✅ DONE | 4 | 🟡 Medium | Build ✅ Test ✅ (37/37) |
-| **4** | ⏳ PENDING | 4 | 🟢 Low | - |
+| **4** | ✅ DONE | 4 | 🟢 Low | Build ✅ Test ✅ (37/37) |
 | **5** | ⏳ PENDING | 6 | 🟡 Medium | - |
 | **6** | ⏳ PENDING | 2 | 🟢 Low | - |
 | **7** | ⏳ PENDING | 1 | 🟢 Low | - |
 
-**Completed**: 3/7 batches (42.9%)  
-**Files migrated**: 8/21 (38.1%)  
-**Shims created**: 8/13 (61.5%)
+**Completed**: 4/7 batches (57.1%)  
+**Files migrated**: 12/21 (57.1%)  
+**Shims created**: 10/13 (76.9%)
 
 ---
 
@@ -100,14 +100,29 @@
 
 ---
 
-## Batch 4: UI Components ⏳
+## Batch 4: UI Components ✅
 
-### Plan
-- `src/components/ChessBoard.tsx` + `.css` → `src/ui/components/`
-- `src/components/DebutCatalog.tsx` + `.css` → `src/ui/components/`
+### Migrated Files
+- ✅ `src/components/ChessBoard.tsx` → `src/ui/components/ChessBoard.tsx`
+- ✅ `src/components/ChessBoard.css` → `src/ui/components/ChessBoard.css`
+- ✅ `src/components/DebutCatalog.tsx` → `src/ui/components/DebutCatalog.tsx`
+- ✅ `src/components/DebutCatalog.css` → `src/ui/components/DebutCatalog.css`
 
-### Shims Needed
-- 2 shims (TS/TSX only, CSS no shims)
+### Shims Created
+- ✅ `src/components/ChessBoard.tsx` (re-exports from @/ui/components/ChessBoard)
+- ✅ `src/components/DebutCatalog.tsx` (re-exports from @/ui/components/DebutCatalog)
+- ℹ️ CSS files: no shims (per COMPAT_POLICY)
+
+### Verification
+- ✅ Build: SUCCESS (708ms)
+- ✅ Tests: 37/37 passing
+- ✅ Protected dirs: Not touched
+- ⚠️ Depcruise: SKIPPED (no config file)
+
+### Commit
+`c44e33b` - refactor(structure): apply batch 4 per STRUCTURE_PLAN (with shims)
+
+**Status**: Complete
 
 ---
 
@@ -155,8 +170,8 @@
 ## Overall Stats
 
 **Files to migrate**: 21  
-**Shims to create**: 13 (8 done, 5 remaining)  
-**Test files to update**: 2 (done for batches 1-3)  
+**Shims to create**: 13 (10 done, 3 remaining)  
+**Test files to update**: 2 (done for batches 1-4)  
 
 **Current structure**:
 ```
@@ -174,6 +189,12 @@ src/
 │       ├── progress-manager.ts
 │       ├── srs.ts
 │       └── useStudyEngine.ts
+├── ui/
+│   └── components/       ✅ NEW (batch 4)
+│       ├── ChessBoard.tsx
+│       ├── ChessBoard.css
+│       ├── DebutCatalog.tsx
+│       └── DebutCatalog.css
 ├── content/              ⚠️ SHIMS ONLY
 │   ├── loader.ts         (→ @/data/content/loader)
 │   └── types.ts          (→ @/data/content/types)
@@ -185,7 +206,9 @@ src/
 │   ├── progress-manager.ts (→ @/core/study/progress-manager)
 │   ├── srs.ts            (→ @/core/study/srs)
 │   └── useStudyEngine.ts (→ @/core/study/useStudyEngine)
-├── components/           ⏳ TO MIGRATE (batch 4)
+├── components/           ⚠️ SHIMS ONLY
+│   ├── ChessBoard.tsx    (→ @/ui/components/ChessBoard)
+│   └── DebutCatalog.tsx  (→ @/ui/components/DebutCatalog)
 ├── pages/                ⏳ TO MIGRATE (batch 5)
 ├── styles/               ⏳ TO MIGRATE (batch 6)
 └── vite-env.d.ts         ⏳ TO MIGRATE (batch 7)
@@ -197,7 +220,7 @@ src/
 
 1. ✅ Execute Batch 2 (Chess Integration) - DONE
 2. ✅ Execute Batch 3 (Study Logic) - DONE
-3. ⏳ Execute Batch 4 (UI Components)
+3. ✅ Execute Batch 4 (UI Components) - DONE
 4. ⏳ Execute Batch 5 (Pages)
 5. ⏳ Execute Batch 6 (Styles)
 6. ⏳ Execute Batch 7 (Types)
@@ -220,8 +243,9 @@ npx depcruise src --validate
 
 2025-10-01 13:29  | Batch 2 | moved:2 | shims:2 | build:OK | tests:OK (37/37) | depcruise:SKIPPED (no config)
 2025-10-01 13:36  | Batch 3 | moved:4 | shims:4 | build:OK | tests:OK (37/37) | depcruise:SKIPPED
+2025-10-01 13:43  | Batch 4 | moved:4 | shims:2 | build:OK | tests:OK (37/37) | depcruise:SKIPPED (no config)
 
 ---
 
-**Last Updated**: 2025-10-01 13:36 (after Batch 3)
+**Last Updated**: 2025-10-01 13:43 (after Batch 4)
 
