@@ -8,7 +8,7 @@ import '@lichess-org/chessground/assets/chessground.base.css';     // базов
 import '@lichess-org/chessground/assets/chessground.cburnett.css'; // набор фигур «cburnett»
 import '@lichess-org/chessground/assets/chessground.brown.css';    // тема клеток
 
-import './styles/app.css'
+import './ui/styles/app.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
