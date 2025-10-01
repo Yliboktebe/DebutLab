@@ -12,16 +12,16 @@
 | Batch | Status | Files | Risk | Verification |
 |-------|--------|-------|------|--------------|
 | **1** | ✅ DONE | 2 | 🟢 Low | Build ✅ Test ✅ (37/37) |
-| **2** | ⏳ PENDING | 2 | 🟢 Low | - |
+| **2** | ✅ DONE | 2 | 🟢 Low | Build ✅ Test ✅ (37/37) |
 | **3** | ⏳ PENDING | 4 | 🟡 Medium | - |
 | **4** | ⏳ PENDING | 4 | 🟢 Low | - |
 | **5** | ⏳ PENDING | 6 | 🟡 Medium | - |
 | **6** | ⏳ PENDING | 2 | 🟢 Low | - |
 | **7** | ⏳ PENDING | 1 | 🟢 Low | - |
 
-**Completed**: 1/7 batches (14.3%)  
-**Files migrated**: 2/21 (9.5%)  
-**Shims created**: 2/13 (15.4%)
+**Completed**: 2/7 batches (28.6%)  
+**Files migrated**: 4/21 (19.0%)  
+**Shims created**: 4/13 (30.8%)
 
 ---
 
@@ -47,20 +47,26 @@
 
 ---
 
-## Batch 2: Chess Integration ⏳
+## Batch 2: Chess Integration ✅
 
-### Plan
-- `src/board/chessground.ts` → `src/core/chess/chessground.ts`
-- `src/board/uci.ts` → `src/core/chess/uci.ts`
+### Migrated Files
+- ✅ `src/board/chessground.ts` → `src/core/chess/chessground.ts`
+- ✅ `src/board/uci.ts` → `src/core/chess/uci.ts`
 
-### Shims Needed
-- `src/board/chessground.ts` (re-export)
-- `src/board/uci.ts` (re-export)
+### Shims Created
+- ✅ `src/board/chessground.ts` (re-exports from @/core/chess/chessground)
+- ✅ `src/board/uci.ts` (re-exports from @/core/chess/uci)
 
-### Test Mocks to Update
-- Check tests/ for any mocks referencing src/board/*
+### Verification
+- ✅ Build: SUCCESS (704ms)
+- ✅ Tests: 37/37 passing
+- ✅ Protected dirs: Not touched
+- ⚠️ Depcruise: SKIPPED (no config file)
 
-**Status**: Ready to execute
+### Commit
+`8096795` - refactor(structure): apply batch 2 per STRUCTURE_PLAN (with shims)
+
+**Status**: Complete
 
 ---
 
@@ -137,8 +143,8 @@
 ## Overall Stats
 
 **Files to migrate**: 21  
-**Shims to create**: 13 (2 done, 11 remaining)  
-**Test files to update**: 2 (done for batch 1)  
+**Shims to create**: 13 (4 done, 9 remaining)  
+**Test files to update**: 2 (done for batches 1-2)  
 
 **Current structure**:
 ```
@@ -147,10 +153,16 @@ src/
 │   └── content/          ✅ NEW (batch 1)
 │       ├── loader.ts
 │       └── types.ts
+├── core/
+│   └── chess/            ✅ NEW (batch 2)
+│       ├── chessground.ts
+│       └── uci.ts
 ├── content/              ⚠️ SHIMS ONLY
 │   ├── loader.ts         (→ @/data/content/loader)
 │   └── types.ts          (→ @/data/content/types)
-├── board/                ⏳ TO MIGRATE (batch 2)
+├── board/                ⚠️ SHIMS ONLY
+│   ├── chessground.ts    (→ @/core/chess/chessground)
+│   └── uci.ts            (→ @/core/chess/uci)
 ├── study/                ⏳ TO MIGRATE (batch 3)
 ├── components/           ⏳ TO MIGRATE (batch 4)
 ├── pages/                ⏳ TO MIGRATE (batch 5)
@@ -162,7 +174,7 @@ src/
 
 ## Next Actions
 
-1. ⏳ Execute Batch 2 (Chess Integration)
+1. ✅ Execute Batch 2 (Chess Integration) - DONE
 2. ⏳ Execute Batch 3 (Study Logic)
 3. ⏳ Execute Batch 4 (UI Components)
 4. ⏳ Execute Batch 5 (Pages)
@@ -183,5 +195,11 @@ npx depcruise src --validate
 
 ---
 
-**Last Updated**: 2025-10-01 13:05 (after Batch 1)
+## Execution Log
+
+2025-10-01 13:29  | Batch 2 | moved:2 | shims:2 | build:OK | tests:OK (37/37) | depcruise:SKIPPED (no config)
+
+---
+
+**Last Updated**: 2025-10-01 13:29 (after Batch 2)
 
