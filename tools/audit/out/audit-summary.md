@@ -113,12 +113,49 @@ Safe codebase cleanup and audit completed successfully without changing applicat
 2. **Add performance monitoring**
 3. **Implement code quality gates**
 
+## Post-Audit: Restructure Preparation (2025-09-30)
+
+### ✅ Stage 6: Dependency Graph Regeneration
+- **Branch**: `prep/restructure-20250930`
+- **Artifact**: `tools/audit/out/dependency-graph.json` (regenerated)
+- **Artifact**: `tools/audit/out/orphans.md` (new)
+- **Status**: Complete
+- **Findings**:
+  - 5 orphan modules identified by dependency-cruiser
+  - 2 true orphans: `src/board/black-replies.ts`, `src/study/utils.ts`
+  - 3 false positives due to `@/*` path alias not tracked
+  - Ambient types: `src/types/chessground.d.ts`, `src/vite-env.d.ts`
+
+### ✅ Stage 7: Dependencies Cleanup
+- **Artifact**: `tools/audit/out/deps-cleanup-summary.md`
+- **Status**: Complete
+- **Changes**:
+  - Removed unused: `p-limit`, `zod`, `zustand` (3 packages)
+  - Moved to devDependencies: `bottleneck`, `undici` (build-time only)
+  - Verified: All tooling deps retained (knip, ts-prune, dependency-cruiser, etc.)
+- **Impact**: No behavior change, reduced production bundle size
+
+### ✅ Stage 8: Type Safety Improvements
+- **Artifact**: `tools/audit/out/types-cleanup-summary.md`
+- **Status**: Complete
+- **Changes**:
+  - Fixed `any` type in `src/study/progress-manager.ts:166`
+  - Changed `branches: any[]` → `branches: Branch[]`
+- **Result**: **0 remaining `any` types** (from 1)
+
 ## Conclusion
 
-✅ **Audit completed successfully**
-- No behavior changes
-- Cleaner codebase
-- Comprehensive documentation
-- Clear next steps identified
+✅ **Audit and preparation completed successfully**
+- No behavior changes across all stages
+- Cleaner codebase with improved type safety
+- Comprehensive documentation and reports
+- Repository ready for safe structural refactoring
 
-The codebase is now in a cleaner state with documented risks and clear improvement paths for future development cycles.
+**Current State**:
+- ✅ Dependency graph regenerated and current
+- ✅ All unused dependencies removed or relocated
+- ✅ Type safety achieved (0 `any` types)
+- ✅ Orphan modules documented for future action
+- ✅ All builds and tests passing (same baseline as before)
+
+**Next Cycle**: Safe structural refactoring using rename maps and migration shims (per preparation plan).
