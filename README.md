@@ -67,11 +67,18 @@ npm run lint
 ```
 src/
 ├── app/                 # Роутинг и макет
-├── components/          # React компоненты
-├── content/            # Типы и загрузчики данных
-├── pages/              # Страницы приложения
-├── study/              # Логика изучения и SRS
-└── styles/             # CSS стили
+├── assets/              # Статические ресурсы
+├── core/               # Основная бизнес-логика
+│   ├── chess/          # Шахматная логика (chessground, UCI)
+│   └── study/          # Логика изучения и SRS
+├── data/               # Управление данными
+│   └── content/        # Типы и загрузчики контента
+├── types/              # TypeScript типы
+├── ui/                 # Пользовательский интерфейс
+│   ├── components/     # React компоненты
+│   ├── pages/          # Страницы приложения
+│   └── styles/         # CSS стили
+└── main.tsx            # Точка входа
 
 public/
 └── content/            # JSON файлы с данными дебютов
@@ -79,6 +86,9 @@ public/
     └── demo/           # Демо-дебюты для тестирования
 
 tests/                  # Тесты
+tools/                  # Инструменты разработки
+├── converter/          # Конвертеры данных
+└── openings/           # Генераторы дебютов
 ```
 
 ## Схема данных
@@ -157,10 +167,10 @@ tests/                  # Тесты
 3. Убедитесь в корректности схемы данных
 
 ### Архитектура
-- **ChessBoard** - обёртка над chessground с контролируемым API
-- **StudyEngine** - машина состояний для логики изучения
-- **ProgressManager** - управление прогрессом и SRS
-- **ContentLoader** - загрузка и валидация данных
+- **ChessBoard** (`src/ui/components/`) - обёртка над chessground с контролируемым API
+- **StudyEngine** (`src/core/study/`) - машина состояний для логики изучения
+- **ProgressManager** (`src/core/study/`) - управление прогрессом и SRS
+- **ContentLoader** (`src/data/content/`) - загрузка и валидация данных
 
 ### Тестирование
 ```bash
