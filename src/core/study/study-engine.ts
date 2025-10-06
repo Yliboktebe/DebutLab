@@ -270,6 +270,9 @@ export class StudyEngine {
     // ВАЖНО: если учимся за чёрных — прокрутить белые ходы до первого хода ученика
     this.prerollToStudentTurn();  // вернёт массив uci, уже применённых в this.chess
     
+    // ОБНОВЛЯЕМ currentFen после prerollToStudentTurn
+    this.state.currentFen = this.chess.fen();
+    
     this.updateState();
   }
 

@@ -167,7 +167,7 @@ export function createChessgroundBoard(opts: {
           free: false,                                         // НОВЫЙ: ограничиваем DnD только стороной ученика
           dests: opts.allowedMoves || computeDests(),         // Используем разрешенные ходы из ветки или все легальные
           showDests: true,
-          rookCastle: true,
+          rookCastle: true,                                    // Включаем рокировку
                                                                                events: {
               after: (orig: Key, dest: Key) => {
                 // НОВЫЙ ПОДХОД: не применяем ход автоматически, спрашиваем UI
@@ -197,7 +197,7 @@ export function createChessgroundBoard(opts: {
       premovable: {
         enabled: true,
         showDests: true,
-        castle: true,
+        castle: true,                                        // Включаем рокировку в премувах
         events: {
           // можно логировать set/unset, если нужно
           set: () => { /* premove set */ },
